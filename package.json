@@ -1,6 +1,9 @@
 {
   "name": "look_back",
   "private": true,
+  "scripts": {
+    "build": "tailwindcss -i app/assets/stylesheets/tailwind.css -o app/assets/stylesheets/output.css"
+  },
   "dependencies": {
     "@rails/actioncable": "^6.0.0-alpha",
     "@rails/activestorage": "^6.0.0-alpha",
