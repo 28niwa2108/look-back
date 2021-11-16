@@ -1,6 +1,11 @@
 {
   "name": "look_back",
   "private": true,
+  "scripts": {
+    "dev": "tailwindcss -i app/assets/stylesheets/tailwind.css -o app/assets/stylesheets/output.css",
+    "pro": "tailwindcss -i app/assets/stylesheets/tailwind.css -o app/assets/stylesheets/output.css --minify",
+    "watch": "tailwindcss -i app/assets/stylesheets/tailwind.css -o app/assets/stylesheets/output.css --watch"
+  },
   "dependencies": {
     "@rails/actioncable": "^6.0.0-alpha",
     "@rails/activestorage": "^6.0.0-alpha",
