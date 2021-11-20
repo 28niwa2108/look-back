@@ -1,6 +1,12 @@
 <h2>Log in</h2>
 
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+  <%# エラーメッセージ  %>
+  <div class='login-flash-message'>
+    <%= flash[:notice] %>
+    <%= flash[:alert] %>
+  </div>
+  <%# エラーメッセージ  %>
   <div class="field">
     <%= f.label :email %><br />
     <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
