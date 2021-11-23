@@ -40,6 +40,7 @@
 | user           | references | null: false, foreign_key: true |
 
 + belongs_to :user
++ belongs_to :update_type
 + has_many :reviews
 + has_one :contract_renewal
 + has_one :contract_cancel
