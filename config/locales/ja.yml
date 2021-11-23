@@ -7,6 +7,13 @@ ja:
         email: Eメール
         password: パスワード
         password_confirmation: パスワード(確認用)
+      subscription:
+        name: サブスク名
+        price: 価格
+        contract_date: 契約開始日
+        update_type: 契約タイプ
+        update_type_id: 契約タイプ
+        update_cycle: 更新サイクル
     errors:
       messages:
         record_invalid: 'バリデーションに失敗しました: %{errors}'
