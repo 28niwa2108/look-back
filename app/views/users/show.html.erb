@@ -1,3 +1,10 @@
-<%= current_user.id %>
-<%= current_user.nickname %>
-<%= link_to 'ログアウト' , destroy_user_session_path, method: :delete %>
+ユーザーID:<%= current_user.id %><br>
+ユーザー名：<%= current_user.nickname %><br>
+<br>
+<%= link_to 'ログアウト' , destroy_user_session_path, method: :delete %><br>
+<%= link_to 'サブスク登録' , new_user_subscription_path(current_user) %><br>
+<br>
+登録済サブスク<br>
+<% @subs.each_with_index do |subs, i| %>
+  <%= "#{i+1}：#{subs.name}" %><br>
+<% end %>
