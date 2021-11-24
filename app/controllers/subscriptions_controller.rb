@@ -13,12 +13,13 @@ class SubscriptionsController < ApplicationController
       @subs.save
       redirect_to user_path(current_user)
     else
-      set_user 
+      set_user
       render 'subscriptions/new'
     end
   end
 
   private
+
   def user_identification
     redirect_to root_path if current_user != User.find(params[:user_id])
   end
