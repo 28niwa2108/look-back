@@ -1,7 +1,7 @@
 <div class="bg-gray-100 py-8">
   <%= form_with model: @user, url: user_session_path, class: "w-full", local: true do |f| %>
     <div class="container px-5 py-6 mx-auto my-10 flex flex-col items-center lg:w-2/4 md:w-2/4 sm:w-96 bg-white rounded-lg">
-      <h2 class="text-gray-900 text-2xl font-bold title-font my-5">New Account</h2>
+      <h2 class="text-gray-900 text-2xl font-bold title-font my-5">Login Mypage</h2>
 
       <div class='mb-4 text-red-600'>
         <%= flash[:notice] %>
@@ -20,11 +20,6 @@
         </label>
         <%= f.password_field :password, autocomplete: "current-password", id: "password", class: "w-full bg-white rounded border border-gray-300 focus:border-gray-400 focus:ring-2 focus:ring-gray-400 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" %>
       </div>
-      <div class="relative mb-4 flex flex-col">
-        <label id="password_confirmation" class="flex flex-row leading-7 text-base text-gray-600">
-          Password(check)
-        </label>
-        <%= f.password_field :password_confirmation, autocomplete: "new-password", id: "password_confirmation", placeholder: "パスワードの再確認", class: "w-full bg-white rounded border border-gray-300 focus:border-gray-400 focus:ring-2 focus:ring-gray-400 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" %>
         <%# if devise_mapping.rememberable? 
           <div class="field">
             <%= f.check_box :remember_me >
@@ -33,10 +28,7 @@
             </label>
           </div>
         <% end %>
-      </div>
-      <button class="text-white bg-black border-0 mt-6 py-2 px-8 focus:outline-none hover:bg-gray-200 hover:text-black rounded text-lg">
-        Login
-      </button>
+      <%= f.submit "Login", class: "block text-white bg-black border-0 mt-6 py-2 px-8 focus:outline-none hover:bg-gray-200 hover:text-black rounded text-lg" %>
     </div>
   <% end %>
 </div>
