@@ -55,25 +55,25 @@ RSpec.describe 'ユーザー新規登録', type: :model do
     it 'emailが空では登録できない' do
       @user.email = ''
       @user.valid?
-      expect(@user.errors.full_messages).to include("Eメールを入力してください")
+      expect(@user.errors.full_messages).to include('Eメールを入力してください')
     end
 
     it 'passwordが空では登録できない' do
       @user.password = ''
       @user.valid?
-      expect(@user.errors.full_messages).to include("パスワードを入力してください")
+      expect(@user.errors.full_messages).to include('パスワードを入力してください')
     end
 
     it 'password_confirmationが空では登録できない' do
       @user.password_confirmation = ''
       @user.valid?
-      expect(@user.errors.full_messages).to include("パスワード(確認用)とパスワードの入力が一致しません")
+      expect(@user.errors.full_messages).to include('パスワード(確認用)とパスワードの入力が一致しません')
     end
 
     it 'nicknameが空では登録できない' do
       @user.nickname = ''
       @user.valid?
-      expect(@user.errors.full_messages).to include("ニックネームを入力してください")
+      expect(@user.errors.full_messages).to include('ニックネームを入力してください')
     end
 
     it 'emailが重複してる場合は登録できない' do
@@ -129,7 +129,7 @@ RSpec.describe 'ユーザー新規登録', type: :model do
       @user.password = 'a23456'
       @user.password_confirmation = 'b23456'
       @user.valid?
-      expect(@user.errors.full_messages).to include("パスワード(確認用)とパスワードの入力が一致しません")
+      expect(@user.errors.full_messages).to include('パスワード(確認用)とパスワードの入力が一致しません')
     end
 
     it 'nicknameが6文字超過では登録できない' do

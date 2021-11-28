@@ -1,3 +1,51 @@
-<%= current_user.id %>
-<%= current_user.nickname %>
-<%= link_to 'ログアウト' , destroy_user_session_path, method: :delete %>
+<section class="text-gray-600 body-font">
+  <div class="container px-5 py-8 mx-auto">
+    <% if @subs.empty? %>
+      <div class="my-2 text-lg">ようこそ、<%= current_user.nickname %>さん！</div>
+      <div class="text-lg">
+        まずは、
+        <button class="text-white bg-black border-0 mt-2 py-2 px-2 focus:outline-none hover:bg-gray-200 hover:text-black rounded text-lg">
+            <%= link_to 'サブスクを登録', new_user_subscription_path(current_user), class: "lg:w-2/3 leading-relaxed text-base" %>
+        </button>
+        をしてみよう！
+      </div>
+    <% else %>
+      <button class="text-white bg-black border-0 mt-2 py-2 px-4 focus:outline-none hover:bg-gray-200 hover:text-black rounded text-lg">
+          <%= link_to 'サブスク登録', new_user_subscription_path(current_user), class: "lg:w-2/3 leading-relaxed text-base" %>
+      </button>
+      <div class="flex flex-col text-center w-full mb-4">
+        <h1 class="sm:text-4xl text-3xl font-medium title-font mb-2 text-gray-900">登録中のサブスク一覧</h1>
+      </div>
+      <div class="lg:w-2/3 w-full mx-auto overflow-auto">
+        <table class="table-auto w-full text-left whitespace-no-wrap border-b-2">
+          <thead>
+            <tr>
+              <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 rounded-tl rounded-bl">Name</th>
+              <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">Tatal Period</th>
+              <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">Tatal Amount</th>
+              <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">Next Update</th>
+              <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">Edit Link</th>
+              <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">Delete Link</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @subs.each_with_index do |subs, i| %>
+            <tr>
+              <td class="px-4 py-3 border-b-2"><%= subs.name %></td>
+              <td class="px-4 py-3 border-b-2"><%= subs.contract_date %></td>
+              <td class="px-4 py-3 border-b-2"><%= subs.price %></td>
+              <td class="px-4 py-3 border-b-2 text-lg text-gray-900"><%= "#{subs.update_cycle}#{subs.update_type[:name]}" %></td>
+              <td class="px-4 py-3 border-b-2">
+                  <%= link_to '編集' , url='#', class: "block text-white text-center bg-black border-0 focus:outline-none hover:bg-gray-200 hover:text-black w-16 py-2 px-3 rounded" %>
+              </td>
+              <td class="px-4 py-3 border-b-2">
+                <%= link_to '削除' , url='#', class: "block text-white text-center bg-black border-0 focus:outline-none hover:bg-gray-200 hover:text-black w-16 py-2 px-3 rounded" %>
+              </td>
+            </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    <% end %>
+  </div>
+</section>
