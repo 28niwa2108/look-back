@@ -2,8 +2,9 @@
   display: contents;
 }
 .bg {
-  background-image: url('./bg-image.jpg');
+  background-image: url('bg_image.jpg');
   background-size: cover;
   width: 100%;
   height: 600px;
+  /* https://pixabay.com/images/id-1867616/ */
 }
