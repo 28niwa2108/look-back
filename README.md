@@ -34,7 +34,7 @@
 |----------------|------------|--------------------------------|
 | name           | string     | null: false                    |
 | price          | integer    | null: false                    |
-| contact_date   | date       | null: false                    |
+| contract_date   | date       | null: false                    |
 | update_type_id | integer    | null: false                    |
 | update_cycle   | integer    | null: false                    |
 | user           | references | null: false, foreign_key: true |
