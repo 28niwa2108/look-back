@@ -39,7 +39,8 @@ class SubscriptionsController < ApplicationController
 
   def destroy
     set_subs
-    redirect_to user_path(current_user) if @subs.destroy
+    sub_name = @subs.name
+    render json: { subname: sub_name } if @subs.destroy
   end
 
   private

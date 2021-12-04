@@ -1,7 +1,14 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
+require 'date'
+
+subs = []
+10.times do |i|
+  subs << Subscription.new(
+    user_id: 1,
+    name: "#{i}サブスク",
+    price: 3000,
+    contract_date: Date.parse('2021-12-1'),
+    update_type_id: 1,
+    update_cycle: 30
+  )
+end
+Subscription.import subs
