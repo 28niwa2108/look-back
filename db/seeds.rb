@@ -1,9 +1,16 @@
 require 'date'
 
+user = User.new(
+  email: 'test@email.com',
+  password: "test123",
+  nickname: "サブsub",
+)
+user.save
+
 subs = []
 10.times do |i|
   subs << Subscription.new(
-    user_id: 1,
+    user_id: user.id,
     name: "#{i}サブスク",
     price: 3000,
     contract_date: Date.parse('2021-12-1'),
