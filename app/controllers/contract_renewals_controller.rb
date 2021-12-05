@@ -1,0 +1,2 @@
+class ContractRenewalsController < ApplicationController
+end

@@ -1,0 +1,2 @@
+module ContractRenewalsHelper
+end
