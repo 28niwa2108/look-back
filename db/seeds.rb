@@ -8,7 +8,7 @@ user = User.new(
 user.save
 
 subs = []
-10.times do |i|
+20.times do |i|
   subs << Subscription.new(
     user_id: user.id,
     name: "#{i}サブスク",
