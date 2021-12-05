@@ -1,14 +1,16 @@
 function cation() {
   //要素の取得
-  const sub_delete = document.getElementById("sub-delete");
-  const form = document.getElementById("form");
-  const formData = new FormData(form);
+  const delete_btns = document.querySelectorAll(".delete_btn");
+  const forms = document.querySelectorAll("form");
 
 // 削除ボタン押下でイベント発火
-  sub_delete.addEventListener('click',(e) => {
-    e.preventDefault();
-    const sub_delete_path = form.getAttribute("action");
-
+  for(let i = 0; i < delete_btns.length;  i++){
+    delete_btns[i].addEventListener('click',(e) => {
+      e.preventDefault();
+      const form = forms[i]
+      const sub_delete_path = form.getAttribute("action");
+      const formData = new FormData(form);
+  
 // 削除警告画面
     Swal.fire({
       title: 'サブスクを削除します',
@@ -25,12 +27,11 @@ function cation() {
       if (result.isConfirmed) {
         const request  = new XMLHttpRequest();
         request.open("DELETE", sub_delete_path, true);
-        debugger
         request.responseType = "json";
         request.send(formData);
         request.onload = () => {
 //レスポンスが200以外の場合
-          if (request.status != 200){
+          if (request.status != 200 || request.response.process_ng){
             Swal.fire({
               icon: 'error',
               title: '削除失敗',
@@ -39,7 +40,6 @@ function cation() {
             return null;
           };
 //レスポンス200が返却されたら、削除完了ホップアップを表示
-          console.log(request.response);
           Swal.fire({
             icon: 'success',
             title: '削除しました',
@@ -53,10 +53,11 @@ function cation() {
               location.reload();
             };
           });
-        };  
+        };
       };
     });
   });
+  };
 };
 
 window.addEventListener('load', cation);

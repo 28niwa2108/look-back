@@ -40,7 +40,11 @@ class SubscriptionsController < ApplicationController
   def destroy
     set_subs
     sub_name = @subs.name
-    render json: { subname: sub_name } if @subs.destroy
+    if @subs.destroy
+      render json: { subname: sub_name }
+    else
+      render json: { process_ng: true }
+    end
   end
 
   private
