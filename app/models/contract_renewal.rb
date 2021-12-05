@@ -1,0 +1,2 @@
+class ContractRenewal < ApplicationRecord
+end
