@@ -16,6 +16,7 @@ class Subscription < ApplicationRecord
   }
 
   belongs_to :user
+  has_one :contract_renewal
 
   extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to :update_type
