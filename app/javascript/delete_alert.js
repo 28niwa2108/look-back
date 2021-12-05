@@ -50,7 +50,7 @@ function cation() {
           }).then((result) => {
 // OK押下後、マイページ画面のリロード
             if (result.isConfirmed) {
-              location.reload();
+              location.href = location.href;
             };
           });
         };
