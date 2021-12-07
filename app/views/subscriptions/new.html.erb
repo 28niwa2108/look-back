@@ -28,6 +28,12 @@
               <%= f.collection_radio_buttons(:update_type_id, UpdateType.all, :id, :name, {}, {class:"mr-px ml-2 focus:border-gray-400 focus:ring-2 focus:ring-gray-400", id:"update_type_id"}) %>
           </div>
 
+          <div class="hidden" id="day_type_btn" >
+              <label for="update_day_type_id" class="block text-gray-600 mb-2">更新日のタイプ</label>
+              <%= f.check_box(:update_day_type_id, {class:"form-checkbox h-4 w-4"}, 1, 2) %>
+              <span class="ml-2">1日更新ならチェック</span>
+          </div>
+
           <div class="relative mt-2 p-2 w-10/12 mx-auto">
             <%= f.submit "登録する" ,class:"flex mx-auto text-white bg-black border-0 focus:outline-none hover:bg-gray-200 hover:text-black py-2 px-8 rounded text-lg" %>
           </div>

@@ -33,7 +33,7 @@
           <p class="leading-relaxed text-base">契約開始：xxxx/xx/xx</p>
           <p class="leading-relaxed text-base">次回更新日：xxxx/xx/xx</p>
           <p class="leading-relaxed text-base">累計◯◯日継続中</p>
-          <p class="leading-relaxed text-base">契約サイクル：●xxxx</p>
+          <p class="leading-relaxed text-base">契約サイクル：●xxxx<% if @subs.update_day_type_id == 1 %><span class="px-2">(1日更新)</span></p><% end %>
           <p class="leading-relaxed text-base">Blue bottle crucifix vinyl post-ironic four dollar toast vegan</p>
         </div>
       </div>

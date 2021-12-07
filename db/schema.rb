@@ -29,6 +29,7 @@ ActiveRecord::Schema.define(version: 2021_12_05_070523) do
     t.date "contract_date", null: false
     t.integer "update_type_id", null: false
     t.integer "update_cycle", null: false
+    t.integer "update_day_type_id"
     t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

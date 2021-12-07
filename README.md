@@ -30,17 +30,18 @@
 + has_many :subscriptions
 
 ## subscriptions
-| Column         | Type       | Options                        |
-|----------------|------------|--------------------------------|
-| name           | string     | null: false                    |
-| price          | integer    | null: false                    |
-| contract_date   | date       | null: false                    |
-| update_type_id | integer    | null: false                    |
-| update_cycle   | integer    | null: false                    |
-| user           | references | null: false, foreign_key: true |
+| Column             | Type       | Options                        |
+|--------------------|------------|--------------------------------|
+| name               | string     | null: false                    |
+| price              | integer    | null: false                    |
+| contract_date      | date       | null: false                    |
+| update_type_id     | integer    | null: false                    |
+| update_cycle       | integer    | null: false                    |
+| update_day_type_id | integer    |                                |
+| user               | references | null: false, foreign_key: true |
 
+### Association
 + belongs_to :user
-+ belongs_to :update_type
 + has_many :reviews
 + has_one :contract_renewal
 + has_one :contract_cancel
@@ -53,6 +54,8 @@
 | total_period     | integer    | null: false                    |
 | next_update_date | date       | null: false                    |
 | subscription     | references | null: false, foreign_key: true |
+
+### Association
 + belongs_to :subscription
 
 
@@ -63,6 +66,8 @@
 | reason_id      | integer    | null: false                    |
 | cancel_comment | text       |                                |
 | subscription   | references | null: false, foreign_key: true |
+
+### Association
 + belongs_to :subscription
 
 
@@ -72,6 +77,8 @@
 | review_rate    | float      | null: false                    |
 | review_comment | text       |                                |
 | subscription   | references | null: false, foreign_key: true |
+
+### Association
 + belongs_to :subscription
 + has_one :action_plan
 
@@ -83,6 +90,8 @@
 | action_review_comment| text       |                                |
 | action_plan          | text       | null: false                    |
 | review               | references | null: false, foreign_key: true |
+
+### Association
 + belongs_to :review
 
 

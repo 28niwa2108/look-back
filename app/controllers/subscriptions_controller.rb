@@ -14,6 +14,8 @@ class SubscriptionsController < ApplicationController
 
   def create
     @subs = Subscription.new(subs_params)
+    #更新タイプが「日」なら、更新日タイプをnilにする
+    @subs.update_day_type_id = nil if @subs.update_type_id == 1
     if @subs.save
       redirect_to user_path(current_user)
     else
@@ -29,6 +31,9 @@ class SubscriptionsController < ApplicationController
 
   def update
     set_subs
+    update_sub = subs_params
+    #更新タイプが「日」なら、更新日タイプをnilにする
+    update_sub[:update_day_type_id] = nil if update_sub[:update_type_id] == "1"
     if @subs.update(subs_params)
       redirect_to user_path(current_user)
     else
@@ -64,7 +69,7 @@ class SubscriptionsController < ApplicationController
 
   def subs_params
     params.require(:subscription).permit(
-      :name, :price, :contract_date, :update_type_id, :update_cycle
+      :name, :price, :contract_date, :update_type_id, :update_cycle, :update_day_type_id
     ).merge(user_id: current_user.id)
   end
 end
