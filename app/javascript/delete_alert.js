@@ -1,6 +1,5 @@
 //[サブスク削除]警告ホップアップJS(マイページ)
 window.addEventListener('load', () => {
-  console.log('a')
   //要素の取得
   const mypage_path = document.getElementById("my-page").getAttribute("href");
   const delete_btns = document.querySelectorAll(".delete_btn");
@@ -67,7 +66,6 @@ window.addEventListener('load', () => {
 
 //[サブスク削除]警告ホップアップJS(サブスク詳細ページ)
 window.addEventListener('load', () => {
-  console.log('b')
   //要素の取得
   const mypage_path = document.getElementById("my-page").getAttribute("href");
   const delete_btn = document.getElementById("sub-show-delete-btn");
