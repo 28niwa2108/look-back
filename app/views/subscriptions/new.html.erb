@@ -1,9 +1,10 @@
 <div class="bg-gray-100 py-8">
-  <%= form_with model: [@user, @subs], class:"w-full", local: true do |f| %>
+  <%= form_with model: [@user, @subs], url: user_subscriptions_path(@user), class:"w-full", local: true do |f| %>
     <div class="container px-5 py-6 mx-auto my-8 flex flex-col items-center lg:w-2/4 md:w-2/4 sm:w-96 bg-white rounded-lg">
       <h2 class="text-gray-900 text-2xl font-bold title-font my-5">サブスク登録</h2>
 
       <%= render "shared/error_messages", model: f.object %>
+      <%= render "shared/error_messages_second", model: @renewal if @renewal != nil %>
 
       <div class="my-2 mx-auto">
 
@@ -19,7 +20,7 @@
 
           <div class="relative p-2 w-10/12 mx-auto">
               <label for="contract_data" class="block text-gray-600">契約開始日</label>
-              <%= f.date_field :contract_date, id:"contract_date", placeholder:"", class: "w-full focus:border-gray-400 focus:ring-2 focus:ring-gray-400 bg-gray-100 bg-opacity-50 rounded border border-gray-300 text-base outline-none text-gray-700 py-1 px-3 resize-none transition-colors ease-in-out" %>
+              <%= f.date_field :contract_date, id:"contract_date", value: Date.today, class: "w-full focus:border-gray-400 focus:ring-2 focus:ring-gray-400 bg-gray-100 bg-opacity-50 rounded border border-gray-300 text-base outline-none text-gray-700 py-1 px-3 resize-none transition-colors ease-in-out" %>
           </div>
 
           <div class="relative p-2 w-10/12 mx-auto">
