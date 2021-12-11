@@ -5,6 +5,10 @@ class UsersController < ApplicationController
   def show
     @user = User.find_by(id: params[:id])
     @subs = Subscription.where(user_id: params[:id])
+    @renewals = []
+    @subs.each do |sub|
+      @renewals << sub.contract_renewal
+    end
     redirect_to root_path if @user.nil?
   end
 

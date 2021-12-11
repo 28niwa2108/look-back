@@ -25,14 +25,14 @@
             </tr>
           </thead>
           <tbody>
-            <% @subs.each_with_index do |subs, i| %>
+            <% @subs.zip(@renewals) do |subs, renew| %>
             <tr>
               <td class="px-4 py-3 border-b-2">
                   <%= link_to subs.name, user_subscription_path(@user, subs), class: "hover:bg-gray-200" %>
               </td>
-              <td class="px-4 py-3 border-b-2"><%= subs.contract_date %></td>
-              <td class="px-4 py-3 border-b-2"><%= subs.price %></td>
-              <td class="px-4 py-3 border-b-2 text-lg text-gray-900"><%= "#{subs.update_cycle}#{subs.update_type[:name]}" %></td>
+              <td class="px-4 py-3 border-b-2"><%= renew.total_period %>日</td>
+              <td class="px-4 py-3 border-b-2"><%= renew.total_price %></td>
+              <td class="px-4 py-3 border-b-2 text-lg text-gray-900"><%= renew.next_update_date %></td>
               <td class="px-4 py-3 border-b-2">
                 <%= link_to '編集', edit_user_subscription_path(@user, subs), class: "block text-white text-center bg-black border-0 focus:outline-none hover:bg-gray-200 hover:text-black w-16 py-2 px-3 rounded" %>
               </td>

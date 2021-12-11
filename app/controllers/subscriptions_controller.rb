@@ -5,6 +5,7 @@ class SubscriptionsController < ApplicationController
   def show
     set_user
     set_subs
+    set_renewal
   end
 
   def new
@@ -60,18 +61,24 @@ class SubscriptionsController < ApplicationController
     redirect_to user_path(current_user) if current_user != User.find_by(id: params[:user_id])
   end
 
-  #ユーザーオブジェクトのセット
+  #Userブジェクトのセット
   def set_user
     @user = current_user
   end
 
-  #サブスクリプションオブジェクトのセット
+  #Subscriptionオブジェクトのセット
   def set_subs
     @subs = Subscription.find_by(id: params[:id])
     redirect_to user_path(current_user) if @subs.nil?
   end
 
-  #Subscriptionストロングパラメーター
+  #ContractRenewalオブジェクトのセット
+  def set_renewal
+    @renewal = ContractRenewal.find_by(subscription_id: @subs.id)
+    redirect_to user_path(current_user) if @renewal.nil?
+  end
+
+    #Subscriptionストロングパラメーター
   def subs_params
     params.require(:subscription).permit(
       :name, :price, :contract_date, :update_type_id, :update_cycle, :update_day_type_id
