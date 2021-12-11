@@ -1,6 +1,5 @@
-//[サブスク登録・編集]更新日タイプカラム追加JS
-function judge_type() {
-
+//[サブスク登録・編集]更新日タイプカラム追加JS------------------------------------------
+window.addEventListener('load', () => {
   //要素の取得
   const update_type_ids = document.querySelectorAll("#update_type_id");
   const day_type_btn = document.getElementById("day_type_btn")
@@ -26,6 +25,66 @@ function judge_type() {
       };
     });
   };
-};
+});
 
-window.addEventListener('load', judge_type);
+// ------------------------------------------------------------------------------
+
+//[サブスク編集]編集確認ホップアップJS-------------------------------------------------
+window.addEventListener('load', () => {
+  //要素の取得
+  const sub_edit_btn = document.getElementById("sub-edit-btn");
+  const form = document.getElementById("sub-edit-form");
+  const update_path = form.getAttribute("action");
+  const mypage_path = document.getElementById("my-page").getAttribute("href");
+
+  // 更新するボタン押下でイベント発火
+  sub_edit_btn.addEventListener('click',(e) => {
+    e.preventDefault();
+    const formData = new FormData(form);
+
+    // 更新確認画面
+    Swal.fire({
+      title: 'サブスク情報をを更新します',
+      html: '変更は次回更新日より、適応されます。',
+      icon: 'info',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: ' OK ',
+      allowOutsideClick: false
+    }).then((result) => {
+      // OK押下の場合、更新処理
+      if (result.isConfirmed) {
+        const request  = new XMLHttpRequest();
+        request.open("POST", update_path, true);
+        request.responseType = "json";
+        request.send(formData);
+        request.onload = () => {
+          //レスポンスが200以外の場合
+          if (request.status != 200 || request.response.process_ng){
+            Swal.fire({
+              icon: 'error',
+              title: '更新失敗',
+              confirmButtonColor: '#cc3333',
+              html: '大変お手数ですが、<a href="#" class="text-blue-400 hover:bg-gray-200">こちら</a>から<br>不具合のご報告をお願い申し上げます。'
+            });
+            return null;
+          };
+          //レスポンス200が返却されたら、更新完了ホップアップを表示
+          Swal.fire({
+            icon: 'success',
+            title: '更新しました',
+            confirmButtonColor: '#3085d6',
+            confirmButtonText: ' OK ',
+            allowOutsideClick: false
+          }).then((result) => {
+            // OK押下後、マイページ画面へ遷移
+            if (result.isConfirmed) {
+              location.replace(mypage_path);
+            };
+          });
+        };
+      };
+    });
+  });
+});
