@@ -58,7 +58,9 @@
     </div>
     <div class="flex justify-around mt-16">
       <%= link_to '編集する', edit_user_subscription_path(@user, @subs), class: "text-white bg-purple-500 bg-opacity-70 border-0 py-2 px-8 focus:outline-none hover:bg-purple-500 rounded text-lg" %>
-      <%= link_to '削除する', user_subscription_path(@user, @subs), method: :delete, class: "text-white bg-purple-500 bg-opacity-70 border-0 py-2 px-8 focus:outline-none hover:bg-purple-500 rounded text-lg" %>
+      <%= form_with url: user_subscription_path(@user, @subs), method: :delete, id: "sub-delete-form", local: true do |f| %>
+        <%= f.submit '削除する', id: "sub-show-delete-btn", class: "block text-white bg-purple-500 bg-opacity-70 border-0 py-2 px-8 focus:outline-none hover:bg-purple-500 rounded text-lg" %>
+      <% end %>
     </div>
   </div>
 </section>
