@@ -1,9 +1,10 @@
+//[サブスク削除]警告ホップアップJS
 function cation() {
   //要素の取得
   const delete_btns = document.querySelectorAll(".delete_btn");
-  const forms = document.querySelectorAll("form");
+  const forms = document.querySelectorAll(".sub-delete-form");
 
-// 削除ボタン押下でイベント発火
+  // 削除ボタン押下でイベント発火
   for(let i = 0; i < delete_btns.length;  i++){
     delete_btns[i].addEventListener('click',(e) => {
       e.preventDefault();
@@ -11,7 +12,7 @@ function cation() {
       const sub_delete_path = form.getAttribute("action");
       const formData = new FormData(form);
   
-// 削除警告画面
+    // 削除警告画面
     Swal.fire({
       title: 'サブスクを削除します',
       html: '過去のレビューも削除され、元に戻せません。',
@@ -23,23 +24,24 @@ function cation() {
       confirmButtonText: ' OK ',
       allowOutsideClick: false
     }).then((result) => {
-// OK押下の場合、削除処理
+      // OK押下の場合、削除処理
       if (result.isConfirmed) {
         const request  = new XMLHttpRequest();
         request.open("DELETE", sub_delete_path, true);
         request.responseType = "json";
         request.send(formData);
         request.onload = () => {
-//レスポンスが200以外の場合
+          //レスポンスが200以外の場合
           if (request.status != 200 || request.response.process_ng){
             Swal.fire({
               icon: 'error',
               title: '削除失敗',
+              confirmButtonColor: '#cc3333',
               html: '大変お手数ですが、<a href="#" class="text-blue-400 hover:bg-gray-200">こちら</a>から<br>不具合のご報告をお願い申し上げます。'
             });
             return null;
           };
-//レスポンス200が返却されたら、削除完了ホップアップを表示
+          //レスポンス200が返却されたら、削除完了ホップアップを表示
           Swal.fire({
             icon: 'success',
             title: '削除しました',
@@ -48,7 +50,7 @@ function cation() {
             confirmButtonText: ' OK ',
             allowOutsideClick: false
           }).then((result) => {
-// OK押下後、マイページ画面のリロード
+            // OK押下後、マイページ画面のリロード
             if (result.isConfirmed) {
               location.href = location.href;
             };
