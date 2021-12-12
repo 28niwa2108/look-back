@@ -1,14 +1,15 @@
 <section class="text-gray-600 body-font">
   <div class="container px-5 py-8 mx-auto">
+    <%= render "shared/error_messages_second", model: @error if @error != nil %>
     <% if @subs.empty? %>
-      <div class="my-2 text-lg">ようこそ、<%= current_user.nickname %>さん！</div>
+      <div class="my-2 text-lg">ようこそ、<%= @user.nickname %>さん！</div>
       <div class="text-lg">
         まずは、
-        <%= link_to 'サブスクを登録', new_user_subscription_path(current_user), class: "text-white bg-black border-0 mt-2 py-2 px-4 focus:outline-none hover:bg-gray-200 hover:text-black rounded text-base" %>
+        <%= link_to 'サブスクを登録', new_user_subscription_path(@user), class: "text-white bg-black border-0 mt-2 py-2 px-4 focus:outline-none hover:bg-gray-200 hover:text-black rounded text-base" %>
         をしてみよう！
       </div>
     <% else %>
-      <%= link_to 'サブスク登録', new_user_subscription_path(current_user), class: "block w-32 text-white bg-black border-0 my-4 py-3 px-4 focus:outline-none hover:bg-gray-200 hover:text-black rounded text-base" %>
+      <%= link_to 'サブスク登録', new_user_subscription_path(@user), class: "block w-32 text-white bg-black border-0 my-4 py-3 px-4 focus:outline-none hover:bg-gray-200 hover:text-black rounded text-base" %>
       <div class="flex flex-col text-center w-full mb-4">
         <h1 class="sm:text-4xl text-3xl font-medium title-font mb-2 text-gray-900">登録中のサブスク一覧</h1>
       </div>
@@ -25,14 +26,19 @@
             </tr>
           </thead>
           <tbody>
-            <% @subs.zip(@renewals) do |subs, renew| %>
+            <% @subs.zip(@renewal) do |subs, renew| %>
             <tr>
               <td class="px-4 py-3 border-b-2">
                   <%= link_to subs.name, user_subscription_path(@user, subs), class: "hover:bg-gray-200" %>
               </td>
               <td class="px-4 py-3 border-b-2"><%= renew.total_period %>日</td>
               <td class="px-4 py-3 border-b-2"><%= renew.total_price %></td>
-              <td class="px-4 py-3 border-b-2 text-lg text-gray-900"><%= renew.next_update_date %></td>
+              <td class="m-sub-update-date px-4 py-3 border-b-2 text-lg text-gray-900"><%= renew.next_update_date %></td>
+              <td class="hidden m-sub-update-link">
+                <%= link_to 'Clickで更新', user_subscription_contract_renewal_path(@user, subs, renew), method: :PATCH, class: "pl-2"%>
+                <span class="absolute left-2 top-2 rounded-full h-3 w-3 bg-pink-500"></span>
+                <span class="absolute left-1.5 top-1.5 animate-ping inline-flex h-4 w-4 rounded-full bg-pink-400 opacity-75"></span>
+              </td>
               <td class="px-4 py-3 border-b-2">
                 <%= link_to '編集', edit_user_subscription_path(@user, subs), class: "block text-white text-center bg-black border-0 focus:outline-none hover:bg-gray-200 hover:text-black w-16 py-2 px-3 rounded" %>
               </td>
