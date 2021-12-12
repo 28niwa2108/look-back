@@ -7,7 +7,7 @@ class UsersController < ApplicationController
     @subs = Subscription.where(user_id: params[:id])
     @renewal = []
     @subs.each do |sub|
-      @renewals << sub.contract_renewal
+      @renewal << sub.contract_renewal
     end
     redirect_to root_path if @user.nil?
   end
