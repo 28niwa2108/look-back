@@ -1,11 +1,11 @@
 class UsersController < ApplicationController
-  before_action :authenticate_user!
-  before_action :user_identification
+  before_action :authenticate_user!, only: [:show]
+  before_action :user_identification, only: [:show]
 
   def show
     @user = User.find_by(id: params[:id])
     @subs = Subscription.where(user_id: params[:id])
-    @renewals = []
+    @renewal = []
     @subs.each do |sub|
       @renewals << sub.contract_renewal
     end
