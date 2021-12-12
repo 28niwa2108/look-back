@@ -1,5 +1,4 @@
 require 'rails_helper'
 
-RSpec.describe "ContractRenewals", type: :request do
-
+RSpec.describe 'ContractRenewals', type: :request do
 end

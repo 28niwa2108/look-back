@@ -50,14 +50,14 @@ RSpec.describe Subscription, type: :model do
   context 'type_is_dayメソッドが成功するとき' do
     it 'update_type_idが1なら、update_day_type_idのバリデーションが働かない' do
       @subs.update_type_id = 1
-      expect(@subs.type_is_day).to eq(true) 
+      expect(@subs.type_is_day).to eq(true)
       @subs.update_day_type_id = ''
       expect(@subs).to be_valid
     end
 
     it 'update_type_idが2(か3)なら、update_day_type_idのバリデーションが働く' do
       @subs.update_type_id = 2
-      expect(@subs.type_is_day).to eq(false) 
+      expect(@subs.type_is_day).to eq(false)
       @subs.update_day_type_id = ''
       @subs.valid?
       expect(@subs.errors.full_messages).to include('更新日タイプは数値で入力してください')
@@ -65,7 +65,7 @@ RSpec.describe Subscription, type: :model do
 
     it 'update_type_idが(2か)3なら、update_day_type_idのバリデーションが働く' do
       @subs.update_type_id = 3
-      expect(@subs.type_is_day).to eq(false) 
+      expect(@subs.type_is_day).to eq(false)
       @subs.update_day_type_id = ''
       @subs.valid?
       expect(@subs.errors.full_messages).to include('更新日タイプは数値で入力してください')

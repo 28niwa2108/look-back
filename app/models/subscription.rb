@@ -1,5 +1,5 @@
 class Subscription < ApplicationRecord
-  #バリデーション
+  # バリデーション
   with_options presence: true do
     validates :name, length: { maximum: 10 }
     validates :price, numericality: { only_integer: true }
@@ -23,7 +23,7 @@ class Subscription < ApplicationRecord
     less_than_or_equal_to: 2
   }, unless: :type_is_day
 
-  #アソシエーション
+  # アソシエーション
   belongs_to :user
   has_one :contract_renewal, dependent: :destroy
 
@@ -31,8 +31,8 @@ class Subscription < ApplicationRecord
   belongs_to :update_type
   belongs_to :update_day_type
 
-  #メソッド
+  # メソッド
   def type_is_day
-    self.update_type_id == 1
+    update_type_id == 1
   end
 end

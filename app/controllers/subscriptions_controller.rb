@@ -15,10 +15,10 @@ class SubscriptionsController < ApplicationController
 
   def create
     @subs = Subscription.new(subs_params)
-    #更新タイプが「日」なら、更新日タイプをnilにする
+    # 更新タイプが「日」なら、更新日タイプをnilにする
     @subs.update_day_type_id = nil if @subs.update_type_id == 1
     if @subs.save
-      #契約更新テーブルに反映
+      # 契約更新テーブルに反映
       first_renewal(@subs.id)
     else
       set_user
@@ -34,8 +34,8 @@ class SubscriptionsController < ApplicationController
   def update
     set_subs
     update_sub = subs_params
-    #更新タイプが「日」なら、更新日タイプをnilにする
-    update_sub[:update_day_type_id] = nil if update_sub[:update_type_id] == "1"
+    # 更新タイプが「日」なら、更新日タイプをnilにする
+    update_sub[:update_day_type_id] = nil if update_sub[:update_type_id] == '1'
     if @subs.update(subs_params)
       render json: { process_ng: false }
     else
@@ -56,36 +56,36 @@ class SubscriptionsController < ApplicationController
 
   private
 
-  #ログインユーザーの確認
+  # ログインユーザーの確認
   def user_identification
     redirect_to user_path(current_user) if current_user != User.find_by(id: params[:user_id])
   end
 
-  #Userブジェクトのセット
+  # Userブジェクトのセット
   def set_user
     @user = current_user
   end
 
-  #Subscriptionオブジェクトのセット
+  # Subscriptionオブジェクトのセット
   def set_subs
     @subs = Subscription.find_by(id: params[:id])
     redirect_to user_path(current_user) if @subs.nil?
   end
 
-  #ContractRenewalオブジェクトのセット
+  # ContractRenewalオブジェクトのセット
   def set_renewal
     @renewal = ContractRenewal.find_by(subscription_id: @subs.id)
     redirect_to user_path(current_user) if @renewal.nil?
   end
 
-    #Subscriptionストロングパラメーター
+  # Subscriptionストロングパラメーター
   def subs_params
     params.require(:subscription).permit(
       :name, :price, :contract_date, :update_type_id, :update_cycle, :update_day_type_id
     ).merge(user_id: current_user.id)
   end
 
-  #サブスク「登録」時、契約更新テーブルにも反映
+  #  サブスク「登録」時、契約更新テーブルにも反映
   def first_renewal(sub_id)
     @subs = Subscription.find_by(id: sub_id)
     @renewal = ContractRenewal.new(
@@ -97,7 +97,7 @@ class SubscriptionsController < ApplicationController
     @renewal.total_period = @renewal.get_total_period(@subs.contract_date, @renewal.next_update_date)
     judge = true
 
-    while judge do
+    while judge
       if @renewal.next_update_date >= Date.today
         judge = false
       else
