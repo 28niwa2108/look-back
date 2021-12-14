@@ -19,11 +19,13 @@ y_subs = []
     contract_date: Date.parse('2021-12-1'),
     update_type_id: 1,
     update_cycle: 20,
-    update_day_type_id: nil
+    update_day_type_id: nil,
+    id: i + 1
   )
 end
 
 update_day_type = 1
+num = 6
 10.times do |i|
   update_day_type = 2 if i > 4 
   m_subs << Subscription.new(
@@ -33,10 +35,13 @@ update_day_type = 1
     contract_date: Date.parse('2021-12-1'),
     update_type_id: 2,
     update_cycle: 1,
-    update_day_type_id: update_day_type
+    update_day_type_id: update_day_type,
+    id: num
   )
+  num += 1
 end
 
+num = 16
 update_day_type = 1
 10.times do |i|
   update_day_type = 2 if i > 4 
@@ -47,8 +52,10 @@ update_day_type = 1
     contract_date: Date.parse('2021-12-1'),
     update_type_id: 3,
     update_cycle: 1,
-    update_day_type_id: update_day_type
+    update_day_type_id: update_day_type,
+    id: num
   )
+  num += 1
 end
 
 Subscription.import d_subs
