@@ -5,11 +5,12 @@ class ContractRenewalsController < ApplicationController
   def update
     @subs = Subscription.find_by(id: params[:subscription_id])
     @renewal = ContractRenewal.find_by(subscription_id: params[:subscription_id])
+    next_update = @renewal.get_update_date(@subs, @renewal.next_update_date)
     if @renewal.update(
       renewal_count: @renewal.renewal_count + 1,
       total_price: @renewal.total_price + @subs.price,
-      next_update_date: @renewal.get_update_date(@subs, @renewal.next_update_date),
-      total_period: @renewal.get_total_period(@subs.contract_date, @renewal.next_update_date)
+      next_update_date: next_update,
+      total_period: @renewal.get_total_period(@subs.contract_date, next_update)
     )
       redirect_to user_path(current_user)
     else
