@@ -1,6 +1,6 @@
 class ContractRenewalsController < ApplicationController
-  before_action :authenticate_user!, except: [:update]
-  before_action :user_identification, except: [:update]
+  before_action :authenticate_user!, only: [:update]
+  before_action :user_identification, only: [:update]
 
   def update
     @subs = Subscription.find_by(id: params[:subscription_id])
