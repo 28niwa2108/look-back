@@ -2,10 +2,10 @@ require 'rails_helper'
 
 RSpec.describe ContractRenewal, type: :model do
   before do
-    @renewal= FactoryBot.build(:contract_renewal)
+    @renewal = FactoryBot.build(:contract_renewal)
   end
 
-# 正常系テスト ------------------------------------
+  # 正常系テスト ------------------------------------
   context '契約更新の保存ができるとき' do
     it '全てに正しい値が存在すれば保存できる' do
       expect(@renewal).to be_valid
@@ -35,8 +35,8 @@ RSpec.describe ContractRenewal, type: :model do
   context 'get_total_periodメソッドが成功するとき' do
     it '次回更新日(第2引数)から、契約日(第1引数)を減算した合計契約期間が数値で返る' do
       # 契約日、更新日の用意
-      contract_date = Date.new(2021, 12, 01)
-      update_date = Date.new(2022, 01, 01)
+      contract_date = Date.new(2021, 12, 1)
+      update_date = Date.new(2022, 1, 1)
       # テスト対象のメソッド呼び出し
       contract_period = @renewal.get_total_period(contract_date, update_date)
       # 戻り地が数値か、減算結果と等しいか確認
@@ -52,12 +52,12 @@ RSpec.describe ContractRenewal, type: :model do
         @renewal.subscription.update_type_id = 1
         # 更新サイクルを「20日」に
         @renewal.subscription.update_cycle = 20
-        # 更新日を「2022/01/01」に
-        date = Date.new(2022, 01, 01)
+        # 更新日を「2022/1/1」に
+        date = Date.new(2022, 1, 1)
         # テスト対象のメソッド呼び出し
         update_date = @renewal.get_update_date(@renewal.subscription, date)
         # 戻り値の月が、20日後の「2022年1月21日」か確認
-        result = Date.new(2022, 01, 21)
+        result = Date.new(2022, 1, 21)
         expect(update_date).to eq(result)
       end
     end
@@ -70,11 +70,11 @@ RSpec.describe ContractRenewal, type: :model do
         @renewal.subscription.update_type_id = 2
         @renewal.subscription.update_day_type_id = 1
         # 1日ではない更新日を用意
-        date = Date.new(2022, 01, 12)
+        date = Date.new(2022, 1, 12)
         # テスト対象のメソッド呼び出し
         update_date = @renewal.day_type_diagnose(@renewal.subscription, date)
-        # 戻り値の日にちが、「2022年01月01日」になっているか確認
-        result =  Date.new(2022, 01, 01)
+        # 戻り値の日にちが、「2022年1月1日」になっているか確認
+        result = Date.new(2022, 1, 1)
         expect(update_date).to eq(result)
       end
 
@@ -83,10 +83,10 @@ RSpec.describe ContractRenewal, type: :model do
         @renewal.subscription.update_type_id = 2
         @renewal.subscription.update_day_type_id = 2
         # 1日ではない更新日を用意
-        date = Date.new(2022, 01, 12)
+        date = Date.new(2022, 1, 12)
         # テスト対象のメソッド呼び出し
         update_date = @renewal.day_type_diagnose(@renewal.subscription, date)
-        #戻り値の日にちが、dateと同じか確認
+        # 戻り値の日にちが、dateと同じか確認
         expect(update_date).to eq(date)
       end
     end
@@ -97,8 +97,8 @@ RSpec.describe ContractRenewal, type: :model do
         @renewal.subscription.update_type_id = 2
         # 更新サイクルを「3ヶ月」に
         @renewal.subscription.update_cycle = 3
-        # 更新日を「2022/01/01」に
-        date = Date.new(2022, 01, 01)
+        # 更新日を「2022/1/1」に
+        date = Date.new(2022, 1, 1)
         # テスト対象のメソッド呼び出し
         update_date = @renewal.get_update_date(@renewal.subscription, date)
         # 戻り値の月が、3ヶ月後の「2022年4月」か確認
@@ -115,11 +115,11 @@ RSpec.describe ContractRenewal, type: :model do
         @renewal.subscription.update_type_id = 3
         @renewal.subscription.update_day_type_id = 1
         # 1日ではない更新日を用意
-        date = Date.new(2022, 01, 12)
+        date = Date.new(2022, 1, 12)
         # テスト対象のメソッド呼び出し
         update_date = @renewal.day_type_diagnose(@renewal.subscription, date)
-        # 戻り値の日にちが、「2022年01月01日」になっているか確認
-        result =  Date.new(2022, 01, 01)
+        # 戻り値の日にちが、「2022年1月1日」になっているか確認
+        result = Date.new(2022, 1, 1)
         expect(update_date).to eq(result)
       end
 
@@ -128,10 +128,10 @@ RSpec.describe ContractRenewal, type: :model do
         @renewal.subscription.update_type_id = 3
         @renewal.subscription.update_day_type_id = 2
         # 1日ではない更新日を用意
-        date = Date.new(2022, 01, 12)
+        date = Date.new(2022, 1, 12)
         # テスト対象のメソッド呼び出し
         update_date = @renewal.day_type_diagnose(@renewal.subscription, date)
-        #戻り値の日にちが、dateと同じか確認
+        # 戻り値の日にちが、dateと同じか確認
         expect(update_date).to eq(date)
       end
     end
@@ -142,8 +142,8 @@ RSpec.describe ContractRenewal, type: :model do
         @renewal.subscription.update_type_id = 3
         # 更新サイクルを「2年」に
         @renewal.subscription.update_cycle = 2
-        # 更新日を「2022/01/01」に
-        date = Date.new(2022, 01, 01)
+        # 更新日を「2022/1/1」に
+        date = Date.new(2022, 1, 1)
         # テスト対象のメソッド呼び出し
         update_date = @renewal.get_update_date(@renewal.subscription, date)
         # 戻り値の月が、2年後の「2024年1月」か確認
@@ -153,7 +153,7 @@ RSpec.describe ContractRenewal, type: :model do
     end
   end
 
-# 異常系テスト ------------------------------------
+  # 異常系テスト ------------------------------------
   context '契約更新の保存ができないとき' do
     it 'renewal_countが空では保存できない' do
       @renewal.renewal_count = ''
@@ -175,7 +175,7 @@ RSpec.describe ContractRenewal, type: :model do
 
     it 'next_update_dateが空では保存できない' do
       @renewal.next_update_date = ''
-       @renewal.valid?
+      @renewal.valid?
       expect(@renewal.errors.full_messages).to include('Next update dateを入力してください')
     end
 
@@ -221,5 +221,4 @@ RSpec.describe ContractRenewal, type: :model do
       expect(@renewal.errors.full_messages).to include('Total periodは0以上の値にしてください')
     end
   end
-
 end

@@ -35,4 +35,4 @@ class ContractRenewalsController < ApplicationController
   def user_identification
     redirect_to user_path(current_user) if current_user != User.find_by(id: params[:user_id])
   end
-
+end
