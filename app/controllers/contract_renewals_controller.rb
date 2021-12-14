@@ -5,6 +5,8 @@ class ContractRenewalsController < ApplicationController
   def update
     @subs = Subscription.find_by(id: params[:subscription_id])
     @renewal = ContractRenewal.find_by(subscription_id: params[:subscription_id])
+
+    # total_periodの更新に、「次回」更新日が必要なため、予め変数に代入しておく
     next_update = @renewal.get_update_date(@subs, @renewal.next_update_date)
     if @renewal.update(
       renewal_count: @renewal.renewal_count + 1,
@@ -14,13 +16,15 @@ class ContractRenewalsController < ApplicationController
     )
       redirect_to user_path(current_user)
     else
+      # render時に必要なインスタンス変数の用意
       @error = @renewal
-      set_user
+      @user = current_user
       @subs = Subscription.where(user_id: @user.id)
       @renewal = []
       @subs.each do |sub|
         @renewal << sub.contract_renewal
       end
+      # 失敗した場合は、マイページに戻る
       render 'users/show'
     end
   end
@@ -32,8 +36,3 @@ class ContractRenewalsController < ApplicationController
     redirect_to user_path(current_user) if current_user != User.find_by(id: params[:user_id])
   end
 
-  # Userブジェクトのセット
-  def set_user
-    @user = current_user
-  end
-end
