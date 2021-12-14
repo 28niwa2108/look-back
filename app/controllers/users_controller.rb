@@ -1,10 +1,14 @@
 class UsersController < ApplicationController
-  before_action :authenticate_user!
-  before_action :user_identification
+  before_action :authenticate_user!, only: [:show]
+  before_action :user_identification, only: [:show]
 
   def show
     @user = User.find_by(id: params[:id])
     @subs = Subscription.where(user_id: params[:id])
+    @renewal = []
+    @subs.each do |sub|
+      @renewal << sub.contract_renewal
+    end
     redirect_to root_path if @user.nil?
   end
 

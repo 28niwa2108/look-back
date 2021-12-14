@@ -10,7 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_22_225747) do
+ActiveRecord::Schema.define(version: 2021_12_05_070523) do
+
+  create_table "contract_renewals", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.integer "renewal_count", null: false
+    t.integer "total_price", null: false
+    t.integer "total_period", null: false
+    t.date "next_update_date", null: false
+    t.bigint "subscription_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["subscription_id"], name: "index_contract_renewals_on_subscription_id"
+  end
 
   create_table "subscriptions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
@@ -18,6 +29,7 @@ ActiveRecord::Schema.define(version: 2021_11_22_225747) do
     t.date "contract_date", null: false
     t.integer "update_type_id", null: false
     t.integer "update_cycle", null: false
+    t.integer "update_day_type_id"
     t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -37,5 +49,6 @@ ActiveRecord::Schema.define(version: 2021_11_22_225747) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "contract_renewals", "subscriptions"
   add_foreign_key "subscriptions", "users"
 end

@@ -14,6 +14,7 @@ ja:
         update_type: 契約タイプ
         update_type_id: 契約タイプ
         update_cycle: 更新サイクル
+        update_day_type_id: 更新日タイプ
     errors:
       messages:
         record_invalid: 'バリデーションに失敗しました: %{errors}'
