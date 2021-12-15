@@ -1,7 +1,7 @@
 # LookBack
 
 # アプリケーション概要
-[![Image from Gyazo](https://i.gyazo.com/1d884a89bca2f4312676f0638b4cd5b0.png)](https://gyazo.com/1d884a89bca2f4312676f0638b4cd5b0)
+[![Image from Gyazo](https://i.gyazo.com/a300d271bc7a9ef491dda15ebf34b186.jpg)](https://gyazo.com/a300d271bc7a9ef491dda15ebf34b186)
 
 # URL
 + https://look-back-36323.herokuapp.com/
@@ -18,7 +18,8 @@
 # 実装予定機能
 
 # DB設計
-[![Image from Gyazo](https://i.gyazo.com/4d432a34b9d9400b79c24271c1466774.jpg)](https://gyazo.com/4d432a34b9d9400b79c24271c1466774)
+[![Image from Gyazo](https://i.gyazo.com/c8ccc015e51b008c6ea84826682eb083.jpg)](https://gyazo.com/c8ccc015e51b008c6ea84826682eb083)
+
 ## users
 | Column             | Type   | Options                   |
 |--------------------|--------|---------------------------|
