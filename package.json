@@ -4,7 +4,7 @@
   "scripts": {
     "dev": "tailwindcss -i app/assets/stylesheets/tailwind.css -o app/assets/stylesheets/output.css",
     "pro": "tailwindcss -i app/assets/stylesheets/tailwind.css -o app/assets/stylesheets/output.css --minify",
-    "watch": "tailwindcss -i app/assets/stylesheets/tailwind.css -o app/assets/stylesheets/output.css --watch"
+    "watch": "NODE_ENV=production tailwindcss -i app/assets/stylesheets/tailwind.css -o app/assets/stylesheets/output.css --watch"
   },
   "dependencies": {
     "@rails/actioncable": "^6.0.0-alpha",
