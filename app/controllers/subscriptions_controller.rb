@@ -14,16 +14,21 @@ class SubscriptionsController < ApplicationController
   end
 
   def create
-    @subs = Subscription.new(subs_params)
-    # 更新タイプが「日」なら、更新日タイプをnilにする
-    @subs.update_day_type_id = nil if @subs.update_type_id == 1
-    if @subs.save
-      # 契約更新テーブルに反映
-      first_renewal(@subs.id)
-    else
+    # @sub・@renewal、どちらのsaveも成功した際のみレコードが保存される
+    ActiveRecord::Base.transaction do
+      @subs = Subscription.new(subs_params)
+      # 更新タイプが「日」なら、更新日タイプをnilにする
+      @subs.update_day_type_id = nil if @subs.update_type_id == 1
+        @subs.save!
+        # 契約更新テーブルに反映
+        first_renewal(@subs.id)
+    end
+    # @sub・@renewal、どちらのsaveも成功した際のみレコードが保存される
+    redirect_to user_path(current_user)
+    #  @sub・@renewal、いずれかのsaveに失敗すれば、登録ページにrenderされ、エラーメッセージが表示される
+    rescue => e
       set_user
       render :new
-    end
   end
 
   def edit
@@ -95,8 +100,10 @@ class SubscriptionsController < ApplicationController
     )
     @renewal.next_update_date = @renewal.get_update_date(@subs, @subs.contract_date)
     @renewal.total_period = @renewal.get_total_period(@subs.contract_date, @renewal.next_update_date)
+    
     judge = true
 
+    # 次回更新日 >= 今日の日付 になるまで、更新処理を行う
     while judge
       if @renewal.next_update_date >= Date.today
         judge = false
@@ -109,11 +116,6 @@ class SubscriptionsController < ApplicationController
       end
     end
 
-    if @renewal.save
-      redirect_to user_path(current_user)
-    else
-      set_user
-      render :new
-    end
+    @renewal.save!
   end
 end
