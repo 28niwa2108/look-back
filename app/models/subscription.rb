@@ -2,7 +2,10 @@ class Subscription < ApplicationRecord
   # バリデーション
   with_options presence: true do
     validates :name, length: { maximum: 10 }
-    validates :price, numericality: { only_integer: true }
+    validates :price, numericality: {
+      only_integer: true,
+      greater_than_or_equal_to: 0
+    }
     validates :contract_date
     validates :update_cycle, numericality: {
       only_integer: true,

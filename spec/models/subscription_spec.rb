@@ -20,6 +20,11 @@ RSpec.describe Subscription, type: :model do
       expect(@subs).to be_valid
     end
 
+    it 'priceが0以上なら登録できる' do
+      @subs.price = 0
+      expect(@subs).to be_valid
+    end
+
     it 'update_cycleが1~31の数値なら登録できる' do
       @subs.update_cycle = 25
       expect(@subs).to be_valid
@@ -126,6 +131,12 @@ RSpec.describe Subscription, type: :model do
       @subs.price = 'e'
       @subs.valid?
       expect(@subs.errors.full_messages).to include('価格は数値で入力してください')
+    end
+
+    it 'priceが0未満の数値では登録できない' do
+      @subs.price = -1
+      @subs.valid?
+      expect(@subs.errors.full_messages).to include('価格は0以上の値にしてください')
     end
 
     it 'update_type_idが数値以外では登録できない' do
