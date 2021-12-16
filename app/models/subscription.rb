@@ -4,7 +4,7 @@ class Subscription < ApplicationRecord
     validates :name, length: { maximum: 10 }
     validates :price, numericality: {
       only_integer: true,
-      greater_than_or_equal_to: 0
+      # greater_than_or_equal_to: 0
     }
     validates :contract_date
     validates :update_cycle, numericality: {
