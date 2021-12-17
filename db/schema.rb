@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_05_070523) do
+ActiveRecord::Schema.define(version: 2021_12_17_125115) do
 
   create_table "contract_renewals", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "renewal_count", null: false
@@ -21,6 +21,15 @@ ActiveRecord::Schema.define(version: 2021_12_05_070523) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["subscription_id"], name: "index_contract_renewals_on_subscription_id"
+  end
+
+  create_table "reviews", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.float "review_rate", null: false
+    t.text "review_comment"
+    t.bigint "subscription_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["subscription_id"], name: "index_reviews_on_subscription_id"
   end
 
   create_table "subscriptions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -50,5 +59,6 @@ ActiveRecord::Schema.define(version: 2021_12_05_070523) do
   end
 
   add_foreign_key "contract_renewals", "subscriptions"
+  add_foreign_key "reviews", "subscriptions"
   add_foreign_key "subscriptions", "users"
 end
