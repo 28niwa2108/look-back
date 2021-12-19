@@ -11,7 +11,7 @@ class ReviewAction
 
   # Reviewモデルバリデーション
   validates :review_rate, presence: true, numericality: {
-    greater_than_or_equal_to: 0,
+    greater_than_or_equal_to: 1,
     less_than_or_equal_to: 5
   }
   validates :review_comment, length: { maximum: 300 }
@@ -20,7 +20,7 @@ class ReviewAction
   # ActionPlanモデルバリデーション
   with_options presence: true do
     validates :action_rate ,numericality: {
-      greater_than_or_equal_to: 0,
+      greater_than_or_equal_to: 1,
       less_than_or_equal_to: 5
     }
     validates :action_plan, length: { maximum: 300 }
