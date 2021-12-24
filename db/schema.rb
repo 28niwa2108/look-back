@@ -13,9 +13,9 @@
 ActiveRecord::Schema.define(version: 2021_12_17_131257) do
 
   create_table "action_plans", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.float "action_rate", null: false
+    t.integer "action_rate"
     t.text "action_review_comment"
-    t.text "action_plan", null: false
+    t.text "action_plan"
     t.bigint "review_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -34,8 +34,11 @@ ActiveRecord::Schema.define(version: 2021_12_17_131257) do
   end
 
   create_table "reviews", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.float "review_rate", null: false
+    t.integer "review_rate"
     t.text "review_comment"
+    t.date "start_date", null: false
+    t.date "end_date", null: false
+    t.integer "later_check_id", null: false
     t.bigint "subscription_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

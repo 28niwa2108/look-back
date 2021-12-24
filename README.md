@@ -75,8 +75,11 @@
 ## reviews
 | Column         | Type       | Options                        |
 |----------------|------------|--------------------------------|
-| review_rate    | float      | null: false                    |
+| review_rate    | integer    |                                |
 | review_comment | text       |                                |
+| start_date     | date       | null: false                    |
+| end_date       | date       | null: false                    |
+| later_check_id | integer    | null: false                    |
 | subscription   | references | null: false, foreign_key: true |
 
 ### Association
@@ -85,12 +88,12 @@
 
 
 ## action_plans
-| Column               | Type       | Options                        |
-|----------------------|------------|--------------------------------|
-| action_rate          | float      | null: false                    |
-| action_review_comment| text       |                                |
-| action_plan          | text       | null: false                    |
-| review               | references | null: false, foreign_key: true |
+| Column                | Type       | Options                        |
+|-----------------------|------------|--------------------------------|
+| action_rate           | integer    |                                |
+| action_review_comment | text       |                                |
+| action_plan           | text       |                                |
+| review                | references | null: false, foreign_key: true |
 
 ### Association
 + belongs_to :review
