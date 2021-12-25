@@ -39,4 +39,21 @@ class Subscription < ApplicationRecord
   def type_is_day
     update_type_id == 1
   end
+
+  def get_update_cycle_days(update_date)
+    case update_type_id
+    when 1 # 日
+        update_date - update_cycle
+    when 2 # 月
+        update_cycle.times do
+          update_date = update_date.last_month
+        end
+        update_date
+    when 3 #年
+      update_cycle.times do
+        update_date = update_date.last_year
+      end
+      update_date
+    end
+  end
 end
