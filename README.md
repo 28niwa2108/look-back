@@ -53,6 +53,7 @@
 | renewal_count    | integer    | null: false                    |
 | total_price      | integer    | null: false                    |
 | total_period     | integer    | null: false                    |
+| update_date      | date       | null: false                    |
 | next_update_date | date       | null: false                    |
 | subscription     | references | null: false, foreign_key: true |
 

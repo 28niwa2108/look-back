@@ -72,6 +72,7 @@ y_cons = []
     renewal_count: 0,
     total_price: Subscription.find(i+1).price,
     total_period: 20,
+    update_date: Date.parse('2021-12-1'),
     next_update_date: Date.parse('2021-12-21'),
     subscription_id: Subscription.find(i+1).id
   )
@@ -85,6 +86,7 @@ date = Date.parse('2021-12-21').next_month.beginning_of_month
     renewal_count: 0,
     total_price: Subscription.find(index).price,
     total_period: 31,
+    update_date: Date.parse('2021-12-1'),
     next_update_date: date,
     subscription_id: Subscription.find(index).id
   )
@@ -99,6 +101,7 @@ date = Date.parse('2021-12-21').next_year.beginning_of_month
     renewal_count: 0,
     total_price: Subscription.find(index).price,
     total_period: 365,
+    update_date: Date.parse('2021-12-1'),
     next_update_date: date,
     subscription_id: Subscription.find(index).id
   )

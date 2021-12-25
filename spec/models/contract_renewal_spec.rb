@@ -173,6 +173,12 @@ RSpec.describe ContractRenewal, type: :model do
       expect(@renewal.errors.full_messages).to include('Total periodを入力してください')
     end
 
+    it 'update_dateが空では保存できない' do
+      @renewal.update_date = ''
+      @renewal.valid?
+      expect(@renewal.errors.full_messages).to include('Update dateを入力してください')
+    end
+
     it 'next_update_dateが空では保存できない' do
       @renewal.next_update_date = ''
       @renewal.valid?
