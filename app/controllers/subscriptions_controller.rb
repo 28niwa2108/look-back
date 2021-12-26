@@ -19,11 +19,11 @@ class SubscriptionsController < ApplicationController
       @subs = Subscription.new(subs_params)
       # 更新タイプが「日」なら、更新日タイプをnilにする
       @subs.update_day_type_id = nil if @subs.update_type_id == 1
-        @subs.save!
-        # 契約更新テーブルに反映
-        first_renewal(@subs.id)
+      @subs.save!
+      # 契約更新テーブルに反映
+      first_renewal(@subs.id)
     end
-    # @sub・@renewal、どちらのsaveも成功した際のみレコードが保存される
+    # @sub・@renewal、どちらのsaveも成功したらマイページに遷移する
     redirect_to user_path(current_user)
     #  @sub・@renewal、いずれかのsaveに失敗すれば、登録ページにrenderされ、エラーメッセージが表示される
     rescue => e
@@ -96,6 +96,7 @@ class SubscriptionsController < ApplicationController
     @renewal = ContractRenewal.new(
       renewal_count: 0,
       total_price: @subs.price,
+      update_date: Date.today,
       subscription_id: @subs.id
     )
     @renewal.next_update_date = @renewal.get_update_date(@subs, @subs.contract_date)
@@ -108,11 +109,11 @@ class SubscriptionsController < ApplicationController
       if @renewal.next_update_date >= Date.today
         judge = false
       else
-        start_date = @renewal.next_update_date
+        @renewal.update_date = @renewal.next_update_date
         @renewal.next_update_date = @renewal.get_update_date(@subs, @renewal.next_update_date)
         @renewal.renewal_count += 1
         @renewal.total_price += @subs.price
-        @renewal.total_period += @renewal.get_total_period(start_date, @renewal.next_update_date)
+        @renewal.total_period += @renewal.get_total_period(@renewal.update_date, @renewal.next_update_date)
       end
     end
 

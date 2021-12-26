@@ -13,6 +13,7 @@ class ContractRenewal < ApplicationRecord
       only_integer: true,
       greater_than_or_equal_to: 0
     }
+    validates :update_date
     validates :next_update_date
   end
 

@@ -42,10 +42,26 @@ class ReviewAction
   }, unless: :type_is_later
 
   validates :action_plan, presence: true, unless: :type_is_later
-
+  validates :review_id, presence: true
 
   def type_is_later
-    binding.pry
     later_check_id  == "2"
+  end
+
+  def save
+    review = Review.create!(
+      review_rate: review_rate,
+      review_comment: review_comment,
+      start_date: start_date,
+      end_date: end_date,
+      later_check_id: later_check_id, 
+      subscription_id: subscription_id
+    )
+    ActionPlan.create!(
+      action_rate: action_rate,
+      action_review_comment: action_review_comment,
+      action_plan: action_plan,
+      review_id:review.id 
+    )
   end
 end
