@@ -64,4 +64,24 @@ class ReviewAction
       review_id:review.id 
     )
   end
+
+  def update(params)
+    review = Review.find_by(id: review_id)
+    review.update!(
+      review_rate: review_rate,
+      review_comment: review_comment,
+      start_date: start_date,
+      end_date: end_date,
+      later_check_id: later_check_id, 
+      subscription_id: subscription_id
+    )
+
+    action = ActionPlan.find_by(review_id: review_id)
+    action.update!(
+      action_rate: action_rate,
+      action_review_comment: action_review_comment,
+      action_plan: action_plan,
+      review_id: review_id
+    )
+  end
 end

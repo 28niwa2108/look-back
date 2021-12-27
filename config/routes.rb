@@ -9,7 +9,7 @@ Rails.application.routes.draw do
     end
     resources :subscriptions, only: [:show, :new, :create, :edit, :update, :destroy] do
       resources :contract_renewals, only: [:update]
-      resources :reviews, only: [:index, :edit, :update]
+      resources :reviews, only: [:index, :show, :edit, :update]
     end
   end
 end
