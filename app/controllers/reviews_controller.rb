@@ -6,13 +6,22 @@ class ReviewsController < ApplicationController
   end
 
   def index
+    set_subs
+    @reviews = Review.where(subscription_id: params[:subscription_id]).includes(:action_plan).order("created_at DESC")
+  end
+
+  def show
+    set_user
+    set_subs
+    set_review
+    set_action
   end
 
   def edit
     set_user
     set_subs
     set_review
-    @action = ActionPlan.find_by(review_id: params[:id])
+    set_action
     @review_action = ReviewAction.new(
       review_rate: @review.review_rate,
       review_comment: @review.review_comment,
@@ -31,7 +40,7 @@ class ReviewsController < ApplicationController
     @review_action = ReviewAction.new(review_params)
     ActiveRecord::Base.transaction do
       @review_action.valid?
-      @review_action.save
+      @review_action.update(review_params)
     end
       redirect_to user_subscription_reviews_path(current_user, params[:subscription_id])
     rescue => e
@@ -64,11 +73,13 @@ class ReviewsController < ApplicationController
   # Subscriptionオブジェクトのセット
   def set_subs
     @subs = Subscription.find_by(id: params[:subscription_id])
-    redirect_to user_path(current_user) if @subs.nil?
   end
 
   def set_review
     @review = Review.find_by(id: params[:id])
-    redirect_to user_path(current_user) if @review.nil?
+  end
+
+  def set_action
+    @action = ActionPlan.find_by(review_id: params[:id])
   end
 end

@@ -48,7 +48,7 @@ class ContractRenewalsController < ApplicationController
   def create_review(sub, update_date)
     review = Review.new(
       review_rate: nil,
-      review_comment: nil,
+      review_comment: "",
       start_date: sub.get_update_cycle_days(update_date),
       end_date: update_date - 1,
       later_check_id: 2,
@@ -57,8 +57,8 @@ class ContractRenewalsController < ApplicationController
     review.save!
     ActionPlan.create!(
       action_rate: nil,
-      action_review_comment: nil,
-      action_plan: nil,
+      action_review_comment: "",
+      action_plan: "",
       review_id: review.id
     )
     return review
