@@ -52,6 +52,7 @@ class ContractRenewalsController < ApplicationController
       start_date: sub.get_update_cycle_days(update_date),
       end_date: update_date - 1,
       later_check_id: 2,
+      user_id: current_user.id,
       subscription_id: sub.id
     )
     review.save!

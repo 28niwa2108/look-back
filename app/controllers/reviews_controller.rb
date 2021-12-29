@@ -62,7 +62,7 @@ class ReviewsController < ApplicationController
     params.require(:review_action).permit(
       :review_rate, :review_comment, :start_date, :end_date, :later_check_id,
       :action_rate, :action_review_comment, :action_plan, :review_id
-    ).merge(subscription_id: params[:subscription_id], review_id: params[:id])
+    ).merge(user_id: params[:user_id], subscription_id: params[:subscription_id], review_id: params[:id])
   end
 
   # Userブジェクトのセット

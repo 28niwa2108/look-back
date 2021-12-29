@@ -40,10 +40,12 @@ ActiveRecord::Schema.define(version: 2021_12_17_131257) do
     t.date "start_date", null: false
     t.date "end_date", null: false
     t.integer "later_check_id", null: false
+    t.bigint "user_id", null: false
     t.bigint "subscription_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["subscription_id"], name: "index_reviews_on_subscription_id"
+    t.index ["user_id"], name: "index_reviews_on_user_id"
   end
 
   create_table "subscriptions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -75,5 +77,6 @@ ActiveRecord::Schema.define(version: 2021_12_17_131257) do
   add_foreign_key "action_plans", "reviews"
   add_foreign_key "contract_renewals", "subscriptions"
   add_foreign_key "reviews", "subscriptions"
+  add_foreign_key "reviews", "users"
   add_foreign_key "subscriptions", "users"
 end

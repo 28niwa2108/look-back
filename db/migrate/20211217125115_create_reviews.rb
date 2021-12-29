@@ -6,6 +6,7 @@ class CreateReviews < ActiveRecord::Migration[6.0]
       t.date       :start_date,        null: false
       t.date       :end_date,          null: false
       t.integer    :later_check_id,    null: false
+      t.references :user,              null: false, foreign_key: true
       t.references :subscription,      null: false, foreign_key: true
       t.timestamps
     end

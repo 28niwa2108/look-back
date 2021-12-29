@@ -6,6 +6,7 @@ class ReviewAction
                 :start_date,
                 :end_date,
                 :later_check_id,
+                :user_id,
                 :subscription_id,
                 :action_rate,
                 :action_review_comment,
@@ -21,6 +22,7 @@ class ReviewAction
       greater_than_or_equal_to: 1,
       less_than_or_equal_to: 2
     }
+    validates :user_id
     validates :subscription_id
   end
 
@@ -55,6 +57,7 @@ class ReviewAction
       start_date: start_date,
       end_date: end_date,
       later_check_id: later_check_id, 
+      user_id: user_id,
       subscription_id: subscription_id
     )
     ActionPlan.create!(
@@ -72,7 +75,8 @@ class ReviewAction
       review_comment: review_comment,
       start_date: start_date,
       end_date: end_date,
-      later_check_id: later_check_id, 
+      later_check_id: later_check_id,
+      user_id: user_id,
       subscription_id: subscription_id
     )
 

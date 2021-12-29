@@ -1,5 +1,6 @@
 class Review < ApplicationRecord
   # アソシエーション
+  belongs_to :user
   belongs_to :subscription
   has_one :action_plan, dependent: :destroy
 

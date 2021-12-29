@@ -18,7 +18,7 @@
 # 実装予定機能
 
 # DB設計
-[![Image from Gyazo](https://i.gyazo.com/c8ccc015e51b008c6ea84826682eb083.jpg)](https://gyazo.com/c8ccc015e51b008c6ea84826682eb083)
+[![Image from Gyazo](https://i.gyazo.com/07ac22c92535ab8d2e5901272d07492d.png)](https://gyazo.com/07ac22c92535ab8d2e5901272d07492d)
 
 ## users
 | Column             | Type   | Options                   |
@@ -29,6 +29,7 @@
 
 ### Association
 + has_many :subscriptions
++ has_many :reviews
 
 ## subscriptions
 | Column             | Type       | Options                        |
@@ -81,9 +82,11 @@
 | start_date     | date       | null: false                    |
 | end_date       | date       | null: false                    |
 | later_check_id | integer    | null: false                    |
+| user           | references | null: false, foreign_key: true |
 | subscription   | references | null: false, foreign_key: true |
 
 ### Association
++ belongs_to :user
 + belongs_to :subscription
 + has_one :action_plan
 
