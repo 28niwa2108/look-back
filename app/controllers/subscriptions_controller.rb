@@ -6,6 +6,17 @@ class SubscriptionsController < ApplicationController
     set_user
     set_subs
     set_renewal
+
+    #サブスク評価の平均☆を用意
+    sum_rate = 0
+    review_count = 0
+    @subs.reviews.each do |review|
+      if review.review_rate != nil
+        sum_rate += review.review_rate
+        review_count += 1
+      end
+    end
+    @ave_rate = (sum_rate / review_count).round if review_count != 0
   end
 
   def new
