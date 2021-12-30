@@ -3,6 +3,14 @@ class ReviewsController < ApplicationController
   before_action :user_identification, only: [:all_index, :index, :edit, :update]
 
   def all_index
+    set_user
+    @subs = Subscription.where(user_id: @user.id)
+    all_reviews = Review.where(user_id: @user.id).includes(:action_plan).order("created_at DESC")
+
+    @reviews = []
+    all_reviews.each do |review|
+      @reviews << review if review.later_check_id == 2
+    end
   end
 
   def index

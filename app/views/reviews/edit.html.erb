@@ -5,7 +5,7 @@
       <%= render "shared/error_messages", model: f.object %>
 
       <div class="my-2 mx-auto">
-        <h2 class="text-gray-900 text-2xl text-center font-bold title-font my-4">サブスクの振り返り</h2>
+        <h2 class="text-gray-900 text-2xl text-center font-bold title-font my-4"><%= @subs.name%>の振り返り</h2>
         <h4 class="text-gray-500 text-lg text-center font-bold title-font mb-8"><%= @review_action.start_date %> 〜 <%= @review_action.end_date %></h2>
         
         <div class="flex items-center justify-center w-full mb-4">
