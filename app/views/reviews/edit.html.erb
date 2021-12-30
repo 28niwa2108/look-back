@@ -25,14 +25,14 @@
 
 
         <div class="" id="later_hidden_parts">
-          <div data-score=<%= @review_action.review_rate %><% if @review_action.review_rate.nil? || @review_action.review_rate.empty? %>0<% end %> class="flex justify-center py-4" id="review_rate"></div>
+          <div data-score=<%= @review_action.review_rate %><% if @review_action.review_rate.nil? || @review_action.review_rate == '' %>0<% end %> class="flex justify-center py-4" id="review_rate"></div>
           <div class="relative p-2 mx-auto">
               <%= f.text_area :review_comment, id:"review_comment", placeholder:"サブスクについて、感じたこと何でも書いてみてください！", size: "70x4",maxlength:"300", class: "word_count w-full focus:border-gray-400 focus:ring-2 focus:ring-gray-400 bg-gray-100 bg-opacity-50 rounded border border-gray-300 text-base outline-none text-gray-700 py-1 px-3 leading-8" %>
           </div>
           <div class="text-right pr-2">あと<span class="word_remaining">300</span>文字</div>
 
           <h2 class="text-gray-900 text-2xl text-center font-bold title-font my-5">アクションプランの振り返り</h2>
-          <div data-score=<%= @review_action.action_rate %><% if @review_action.action_rate.nil? || @review_action.action_rate.empty? %>0<% end %> class="flex justify-center py-4" id="action_rate"></div>
+          <div data-score=<%= @review_action.action_rate %><% if @review_action.action_rate.nil? || @review_action.action_rate == '' %>0<% end %> class="flex justify-center py-4" id="action_rate"></div>
           <div class="relative p-2 mx-auto">
               <%= f.text_area :action_review_comment, id:"action_comment", placeholder:"サブスクについて、感じたこと何でも書いてみてください！", size: "70x4",maxlength:"300", class: "word_count w-full focus:border-gray-400 focus:ring-2 focus:ring-gray-400 bg-gray-100 bg-opacity-50 rounded border border-gray-300 text-base outline-none text-gray-700 py-1 px-3 leading-8" %>
           </div>
