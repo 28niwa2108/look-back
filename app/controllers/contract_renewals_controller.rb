@@ -19,9 +19,13 @@ class ContractRenewalsController < ApplicationController
         total_period: @renewal.get_total_period(@subs.contract_date, next_update)
       )
       review = create_review(@subs, update_date)
-    # 成功した場合は、マイページに戻り、更新完了を表示
-      sub_name = @renewal.subscription.name
-      data = { process_ng: false, sub_name: sub_name, look_back_path: edit_user_subscription_review_path(current_user, @subs, review) }
+      binding.pry
+      # 成功した場合は、マイページに戻り、更新完了を表示
+      data = {
+        process_ng: false,
+        sub_name: @renewal.subscription.name,
+        look_back_path: edit_user_subscription_review_path(current_user, @subs, review)
+      }
       render json: { data: data }
     end
 
@@ -48,7 +52,7 @@ class ContractRenewalsController < ApplicationController
   def create_review(sub, update_date)
     review = Review.new(
       review_rate: nil,
-      review_comment: "",
+      review_comment: '',
       start_date: sub.get_update_cycle_days(update_date),
       end_date: update_date - 1,
       later_check_id: 2,
@@ -58,10 +62,10 @@ class ContractRenewalsController < ApplicationController
     review.save!
     ActionPlan.create!(
       action_rate: nil,
-      action_review_comment: "",
-      action_plan: "",
+      action_review_comment: '',
+      action_plan: '',
       review_id: review.id
     )
-    return review
+    review
   end
 end

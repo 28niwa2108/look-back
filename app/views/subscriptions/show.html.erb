@@ -41,7 +41,7 @@
         <div class="w-400px flex-grow">
           <h2 class="text-gray-900 text-lg title-font font-medium mb-3">Review</h2>
           <p class="leading-relaxed text-base pb-1">レビューAve</p>
-            <div data-score=<%= @ave_rate %><%if @ave_rate == nil %>0<% end %> class="flex justify-center" id="average_rate_read_only"></div>
+            <div data-score=<%= @ave_rate %><%if @ave_rate.nil? %>0<% end %> class="flex justify-center" id="average_rate_read_only"></div>
             <% if @ave_rate.nil? %>
             <p>まだ評価がありません</p> 
             <% end %>

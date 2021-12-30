@@ -18,7 +18,7 @@ class Review < ApplicationRecord
     validates :subscription_id
   end
 
-  validates :review_comment, length: { maximum: 300 }  
+  validates :review_comment, length: { maximum: 300 }
   validates :review_rate, presence: true, numericality: {
     only_integer: true,
     greater_than_or_equal_to: 1,
@@ -26,6 +26,6 @@ class Review < ApplicationRecord
   }, unless: :type_is_later
 
   def type_is_later
-    later_check_id  == 2
+    later_check_id == 2
   end
 end

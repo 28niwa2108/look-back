@@ -14,6 +14,6 @@ class ActionPlan < ApplicationRecord
   validates :action_plan, presence: true, unless: :review_type_is_later
 
   def review_type_is_later
-    self.review.later_check_id  == 2
+    review.later_check_id == 2
   end
 end

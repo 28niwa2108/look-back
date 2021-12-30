@@ -5,7 +5,7 @@ class ReviewsController < ApplicationController
   def all_index
     set_user
     @subs = Subscription.where(user_id: @user.id)
-    all_reviews = Review.where(user_id: @user.id).includes(:action_plan).order("created_at DESC")
+    all_reviews = Review.where(user_id: @user.id).includes(:action_plan).order('created_at DESC')
 
     @reviews = []
     all_reviews.each do |review|
@@ -15,7 +15,7 @@ class ReviewsController < ApplicationController
 
   def index
     set_subs
-    @reviews = Review.where(subscription_id: params[:subscription_id]).includes(:action_plan).order("created_at DESC")
+    @reviews = Review.where(subscription_id: params[:subscription_id]).includes(:action_plan).order('created_at DESC')
   end
 
   def show
@@ -48,9 +48,10 @@ class ReviewsController < ApplicationController
     @review_action = ReviewAction.new(review_params)
     ActiveRecord::Base.transaction do
       @review_action.valid?
-      @review_action.update(review_params)
+      
+      @review_action.update
     end
-      redirect_to user_subscription_reviews_path(current_user, params[:subscription_id])
+    redirect_to user_subscription_reviews_path(current_user, params[:subscription_id])
     rescue => e
       set_user
       set_subs

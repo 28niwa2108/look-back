@@ -26,7 +26,7 @@ class ReviewAction
     validates :subscription_id
   end
 
-  validates :review_comment, length: { maximum: 300 }  
+  validates :review_comment, length: { maximum: 300 }
   validates :review_rate, presence: true, numericality: {
     only_integer: true,
     greater_than_or_equal_to: 1,
@@ -47,7 +47,7 @@ class ReviewAction
   validates :review_id, presence: true
 
   def type_is_later
-    later_check_id  == "2"
+    later_check_id == '2'
   end
 
   def save
@@ -56,7 +56,7 @@ class ReviewAction
       review_comment: review_comment,
       start_date: start_date,
       end_date: end_date,
-      later_check_id: later_check_id, 
+      later_check_id: later_check_id,
       user_id: user_id,
       subscription_id: subscription_id
     )
@@ -64,11 +64,11 @@ class ReviewAction
       action_rate: action_rate,
       action_review_comment: action_review_comment,
       action_plan: action_plan,
-      review_id:review.id 
+      review_id: review.id
     )
   end
 
-  def update(params)
+  def update
     review = Review.find_by(id: review_id)
     review.update!(
       review_rate: review_rate,
