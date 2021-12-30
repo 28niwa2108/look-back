@@ -15,7 +15,6 @@ class Review < ApplicationRecord
       greater_than_or_equal_to: 1,
       less_than_or_equal_to: 2
     }
-    validates :subscription_id
   end
 
   validates :review_comment, length: { maximum: 300 }
