@@ -48,7 +48,6 @@ class ReviewsController < ApplicationController
     @review_action = ReviewAction.new(review_params)
     ActiveRecord::Base.transaction do
       @review_action.valid?
-      
       @review_action.update
     end
     redirect_to user_subscription_reviews_path(current_user, params[:subscription_id])

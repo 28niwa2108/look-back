@@ -19,7 +19,7 @@ class ContractRenewalsController < ApplicationController
         total_period: @renewal.get_total_period(@subs.contract_date, next_update)
       )
       review = create_review(@subs, update_date)
-      binding.pry
+
       # 成功した場合は、マイページに戻り、更新完了を表示
       data = {
         process_ng: false,

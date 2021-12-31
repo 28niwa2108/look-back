@@ -112,7 +112,7 @@ class SubscriptionsController < ApplicationController
     )
     @renewal.next_update_date = @renewal.get_update_date(@subs, @subs.contract_date)
     @renewal.total_period = @renewal.get_total_period(@subs.contract_date, @renewal.next_update_date)
-    
+
     judge = true
 
     # 次回更新日 >= 今日の日付 になるまで、更新処理を行う
