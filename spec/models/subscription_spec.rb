@@ -77,6 +77,32 @@ RSpec.describe Subscription, type: :model do
     end
   end
 
+  context 'get_update_cycle_daysメソッドが成功するとき' do
+    it 'update_day_type_idが1なら、引数からupdate_cycleを引いた日付が返る' do
+      @subs.update_type_id = 1
+      @subs.update_cycle = 24
+      date = Date.new(2021, 12, 25)
+      expect_date = Date.new(2021, 12, 1)
+      expect(@subs.get_update_cycle_days(date)).to eq(expect_date)
+    end
+
+    it 'update_day_type_idが2なら、update_cycle月前の日付が返る' do
+      @subs.update_type_id = 2
+      @subs.update_cycle = 2
+      date = Date.new(2021, 12, 25)
+      expect_date = Date.new(2021, 10, 25)
+      expect(@subs.get_update_cycle_days(date)).to eq(expect_date)
+    end
+
+    it 'update_day_type_idが3なら、update_cycle年前の日付が返る' do
+      @subs.update_type_id = 3
+      @subs.update_cycle = 3
+      date = Date.new(2021, 12, 1)
+      expect_date = Date.new(2018, 12, 1)
+      expect(@subs.get_update_cycle_days(date)).to eq(expect_date)
+    end
+  end
+
   context 'サブスクの登録ができないとき' do
     it 'nameが空では登録できない' do
       @subs.name = ''

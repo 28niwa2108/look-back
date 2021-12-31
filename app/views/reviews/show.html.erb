@@ -1,0 +1,52 @@
+<section class="text-gray-600 body-font overflow-hidden">
+  <div class="container px-5 py-24 mx-auto">
+    <div class="lg:w-4/5 mx-auto flex justify-center ">
+      <div class="lg:w-3/4 w-full lg:px-10 lg:py-10 mt-6 lg:mt-0">
+
+        <h2 class="text-base title-font text-gray-500 tracking-widest"><%= @subs.name %></h2>
+        <div class="flex items-center">
+          <h1 class="text-gray-900 mr-4 text-2xl sm:text-3xl title-font font-medium"><%= @review.start_date %> ~ <%= @review.end_date %></h1>
+          <a href=<%= edit_user_subscription_review_path(@user, @subs, @review) %>>
+            <button class="flex text-white bg-indigo-400 bg-opacity-75 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-500 rounded">Edit</button>
+          </a>
+        </div>
+
+        <div class="my-6 items-center border-b-2 border-gray-100 ">
+          <div class="flex items-center mt-4 mb-3">
+            <div data-score=<%= @action.action_rate %><% if @action.action_rate.nil? %>0<% end %> class="flex justify-start" id="action_rate_read_only"></div>
+            <div class="text-gray-600 ml-3">Action Plan</div>
+          </div>
+          <div class="my-2">
+            <div class="font-bold">Plan</div>
+            <div class="leading-relaxed">
+              <%= simple_format(h(@action.action_plan))%>
+              <% if @action.action_plan.empty? %><p class="text-gray-400">レビューが未入力です<br>Editボタンから、評価を入力できます</p><% end %>
+            </div>
+          </div>
+          <div class="mb-6">
+            <div class="font-bold">Look Back</div>
+            <div class="leading-relaxed">
+              <%= simple_format(h(@action.action_review_comment))%>
+              <% if @action.action_review_comment.empty? %><p class="text-gray-400">レビューが未入力です<br>Editボタンから、評価を入力できます</p><% end %>
+            </div>
+          </div>
+        </div>
+
+        <div class="my-6 items-center">
+          <div class="flex items-center mt-4 mb-3">
+            <div data-score=<%= @review.review_rate %><% if @review.review_rate.nil? %>0<% end %> class="flex justify-start" id="review_rate_read_only"></div>
+            <div class="text-gray-600 ml-3">Subscription</div>
+          </div>
+          <div class="my-2">
+            <div class="font-bold">Review</div>
+            <div class="leading-relaxed">
+              <%= simple_format(h(@review.review_comment))%>
+              <% if @review.review_comment.empty? %><p class="text-gray-400">レビューが未入力です<br>Editボタンから、評価を入力できます</p><% end %>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>

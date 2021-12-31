@@ -15,6 +15,15 @@ ja:
         update_type_id: 契約タイプ
         update_cycle: 更新サイクル
         update_day_type_id: 更新日タイプ
+  activemodel:
+    attributes:
+      review_action:
+        later_check_id: 後で評価する場合は、あとで振り返るを
+        review_rate: サブスク評価☆
+        review_comment: サブスクレビューコメント
+        action_rate: アクションプラン評価☆
+        action_review_comment: アクションレビューコメント
+        action_plan: アクションプラン
     errors:
       messages:
         record_invalid: 'バリデーションに失敗しました: %{errors}'

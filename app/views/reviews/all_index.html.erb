@@ -1,0 +1,27 @@
+<section class="text-gray-600 body-font">
+  <div class="container px-5 py-24 mx-auto">
+    <div class="flex flex-col text-center w-full mb-20">
+      <h1 class="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900">Wating for Look Back!</h1>
+      <p class="lg:w-2/3 mx-auto leading-relaxed text-base">振り返り未完了一覧</p>
+    </div>
+    <div class="flex flex-wrap -m-2">
+      <% @reviews.each do |review| %>
+        <div class="p-2 lg:w-1/3 md:w-1/2 w-full">
+          <a href=<%= edit_user_subscription_review_path(@user, review.subscription, review) %>>
+            <div class="h-full flex items-center border-purple-100 border-2 p-4 rounded-lg  hover:border-purple-400">
+            <div class="mr-4 w-16 h-16 inline-flex items-center justify-center rounded-full bg-purple-100 text-purple-500 flex-shrink-0">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+              </svg>
+            </div>
+              <div class="flex-grow">
+                <h2 class="text-gray-900 title-font font-medium"><%= review.subscription.name %></h2>
+                <p class="text-gray-500"><%= review.start_date %> ~ <%= review.end_date %></p>
+              </div>
+            </div>
+          </a>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</section>

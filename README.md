@@ -18,7 +18,7 @@
 # 実装予定機能
 
 # DB設計
-[![Image from Gyazo](https://i.gyazo.com/c8ccc015e51b008c6ea84826682eb083.jpg)](https://gyazo.com/c8ccc015e51b008c6ea84826682eb083)
+[![Image from Gyazo](https://i.gyazo.com/07ac22c92535ab8d2e5901272d07492d.png)](https://gyazo.com/07ac22c92535ab8d2e5901272d07492d)
 
 ## users
 | Column             | Type   | Options                   |
@@ -29,6 +29,7 @@
 
 ### Association
 + has_many :subscriptions
++ has_many :reviews
 
 ## subscriptions
 | Column             | Type       | Options                        |
@@ -53,6 +54,7 @@
 | renewal_count    | integer    | null: false                    |
 | total_price      | integer    | null: false                    |
 | total_period     | integer    | null: false                    |
+| update_date      | date       | null: false                    |
 | next_update_date | date       | null: false                    |
 | subscription     | references | null: false, foreign_key: true |
 
@@ -75,22 +77,27 @@
 ## reviews
 | Column         | Type       | Options                        |
 |----------------|------------|--------------------------------|
-| review_rate    | float      | null: false                    |
+| review_rate    | integer    |                                |
 | review_comment | text       |                                |
+| start_date     | date       | null: false                    |
+| end_date       | date       | null: false                    |
+| later_check_id | integer    | null: false                    |
+| user           | references | null: false, foreign_key: true |
 | subscription   | references | null: false, foreign_key: true |
 
 ### Association
++ belongs_to :user
 + belongs_to :subscription
 + has_one :action_plan
 
 
 ## action_plans
-| Column               | Type       | Options                        |
-|----------------------|------------|--------------------------------|
-| action_rate          | float      | null: false                    |
-| action_review_comment| text       |                                |
-| action_plan          | text       | null: false                    |
-| review               | references | null: false, foreign_key: true |
+| Column                | Type       | Options                        |
+|-----------------------|------------|--------------------------------|
+| action_rate           | integer    |                                |
+| action_review_comment | text       |                                |
+| action_plan           | text       |                                |
+| review                | references | null: false, foreign_key: true |
 
 ### Association
 + belongs_to :review

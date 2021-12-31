@@ -1,5 +1,5 @@
 <div class="bg-gray-100 py-8">
-  <%= form_with model: [@user, @subs], url: user_subscription_path(@user, @subs), id: "sub-edit-form", class:"w-full", local: true do |f| %>
+  <%= form_with model: [@user, @subs], url: user_subscription_path(@user, @subs), method: :PATCH, id: "sub-edit-form", class:"w-full", local: true do |f| %>
     <div class="container px-5 py-6 mx-auto my-8 flex flex-col items-center lg:w-2/4 md:w-2/4 sm:w-96 bg-white rounded-lg">
       <h2 class="text-gray-900 text-2xl font-bold title-font my-5">サブスク編集</h2>
 

@@ -7,11 +7,14 @@ require("@rails/ujs").start()
 // require("turbolinks").start()
 require("@rails/activestorage").start()
 require("channels")
+require("jquery")
+require("../raty.js")
 require("../sub_update.js")
 require("../delete_alert.js")
 require("../sub_form.js")
-
-
+require("../review.js")
+require("../show_review.js")
+require("../average_rate.js")
 
 
 // Uncomment to copy all static images under ../images to the output folder and reference

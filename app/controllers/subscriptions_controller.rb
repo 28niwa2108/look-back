@@ -6,6 +6,17 @@ class SubscriptionsController < ApplicationController
     set_user
     set_subs
     set_renewal
+
+    # サブスク評価の平均☆を用意
+    sum_rate = 0
+    review_count = 0
+    @subs.reviews.each do |review|
+      unless review.review_rate.nil?
+        sum_rate += review.review_rate
+        review_count += 1
+      end
+    end
+    @ave_rate = (sum_rate / review_count).round if review_count != 0
   end
 
   def new
@@ -19,11 +30,11 @@ class SubscriptionsController < ApplicationController
       @subs = Subscription.new(subs_params)
       # 更新タイプが「日」なら、更新日タイプをnilにする
       @subs.update_day_type_id = nil if @subs.update_type_id == 1
-        @subs.save!
-        # 契約更新テーブルに反映
-        first_renewal(@subs.id)
+      @subs.save!
+      # 契約更新テーブルに反映
+      first_renewal(@subs.id)
     end
-    # @sub・@renewal、どちらのsaveも成功した際のみレコードが保存される
+    # @sub・@renewal、どちらのsaveも成功したらマイページに遷移する
     redirect_to user_path(current_user)
     #  @sub・@renewal、いずれかのsaveに失敗すれば、登録ページにrenderされ、エラーメッセージが表示される
     rescue => e
@@ -96,11 +107,12 @@ class SubscriptionsController < ApplicationController
     @renewal = ContractRenewal.new(
       renewal_count: 0,
       total_price: @subs.price,
+      update_date: Date.today,
       subscription_id: @subs.id
     )
     @renewal.next_update_date = @renewal.get_update_date(@subs, @subs.contract_date)
     @renewal.total_period = @renewal.get_total_period(@subs.contract_date, @renewal.next_update_date)
-    
+
     judge = true
 
     # 次回更新日 >= 今日の日付 になるまで、更新処理を行う
@@ -108,11 +120,11 @@ class SubscriptionsController < ApplicationController
       if @renewal.next_update_date >= Date.today
         judge = false
       else
-        start_date = @renewal.next_update_date
+        @renewal.update_date = @renewal.next_update_date
         @renewal.next_update_date = @renewal.get_update_date(@subs, @renewal.next_update_date)
         @renewal.renewal_count += 1
         @renewal.total_price += @subs.price
-        @renewal.total_period += @renewal.get_total_period(start_date, @renewal.next_update_date)
+        @renewal.total_period += @renewal.get_total_period(@renewal.update_date, @renewal.next_update_date)
       end
     end
 

@@ -9,7 +9,6 @@ class UsersController < ApplicationController
     @subs.each do |sub|
       @renewal << sub.contract_renewal
     end
-    redirect_to root_path if @user.nil?
   end
 
   private
