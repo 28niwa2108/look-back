@@ -18,7 +18,7 @@
 # 実装予定機能
 
 # DB設計
-[![Image from Gyazo](https://i.gyazo.com/07ac22c92535ab8d2e5901272d07492d.png)](https://gyazo.com/07ac22c92535ab8d2e5901272d07492d)
+[![Image from Gyazo](https://i.gyazo.com/62fb8899e09196bc634d8edd33381395.png)](https://gyazo.com/62fb8899e09196bc634d8edd33381395)
 
 ## users
 | Column             | Type   | Options                   |
