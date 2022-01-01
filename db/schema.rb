@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_31_092835) do
+ActiveRecord::Schema.define(version: 2021_12_17_131257) do
 
   create_table "action_plans", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "action_rate"
@@ -20,16 +20,6 @@ ActiveRecord::Schema.define(version: 2021_12_31_092835) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["review_id"], name: "index_action_plans_on_review_id"
-  end
-
-  create_table "contract_calcels", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.date "cancel_date", null: false
-    t.integer "reason_id", null: false
-    t.text "cancel_comment"
-    t.bigint "subscription_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["subscription_id"], name: "index_contract_calcels_on_subscription_id"
   end
 
   create_table "contract_renewals", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -85,7 +75,6 @@ ActiveRecord::Schema.define(version: 2021_12_31_092835) do
   end
 
   add_foreign_key "action_plans", "reviews"
-  add_foreign_key "contract_calcels", "subscriptions"
   add_foreign_key "contract_renewals", "subscriptions"
   add_foreign_key "reviews", "subscriptions"
   add_foreign_key "reviews", "users"
