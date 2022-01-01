@@ -1,6 +1,6 @@
 class ReviewsController < ApplicationController
-  before_action :authenticate_user!, only: [:all_index, :index, :edit, :update]
-  before_action :user_identification, only: [:all_index, :index, :edit, :update]
+  before_action :authenticate_user!, only: [:all_index, :index, :show, :edit, :update]
+  before_action :user_identification, only: [:all_index, :index, :show, :edit, :update]
 
   def all_index
     set_user
