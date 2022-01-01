@@ -15,6 +15,10 @@ ja:
         update_type_id: 契約タイプ
         update_cycle: 更新サイクル
         update_day_type_id: 更新日タイプ
+      contract_calcel:
+        cancel_date: 解約日
+        reason_id: 解約理由
+        cancel_comment: 解約フリーコメント
   activemodel:
     attributes:
       review_action:
