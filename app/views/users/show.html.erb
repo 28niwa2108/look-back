@@ -11,6 +11,7 @@
     <% else %>
       <%= link_to 'サブスク登録', new_user_subscription_path(@user), class: "block w-32 text-white bg-black border-0 my-4 py-3 px-4 focus:outline-none hover:bg-gray-200 hover:text-black rounded text-base" %>
       <%= link_to '振り返る', all_index_user_reviews_path(@user), class: "block w-32 text-white bg-black border-0 my-4 py-3 px-4 focus:outline-none hover:bg-gray-200 hover:text-black rounded text-base" %>
+      <%= link_to '解約一覧', user_contract_cancels_path(@user), class: "block w-32 text-white bg-black border-0 my-4 py-3 px-4 focus:outline-none hover:bg-gray-200 hover:text-black rounded text-base" %>
       
       <a href=<%= new_user_subscription_path(@user)%>>
         <div class="w-20 h-20 inline-flex items-center justify-center rounded-full bg-purple-100 text-purple-500 mb-5 flex-shrink-0">

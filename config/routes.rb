@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   root to: 'subscriptions#index'
   devise_for :users
   resources :users, only: [:show] do
+    resources :contract_cancels, only: [:index]
     resources :reviews, except: [:index, :show, :new, :create, :edit, :update, :destroy] do
       collection do
         get 'all_index'

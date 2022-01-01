@@ -1,6 +1,19 @@
 class ContractCancelsController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :create]
-  before_action :user_identification, only: [:new, :create]
+  before_action :authenticate_user!, only: [:index, :new, :create]
+  before_action :user_identification, only: [:index, :new, :create]
+
+  def index
+    set_user
+    subs = Subscription.where(user_id: params[:user_id])
+    @subs = []
+    @contract_cancels = []
+    subs.each do |sub|
+      unless sub.contract_cancel.nil?
+        @subs << sub
+        @contract_cancels << ContractCancel.find_by(subscription_id: sub.id)
+      end
+    end
+  end
 
   def new
     set_user
