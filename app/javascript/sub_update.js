@@ -2,16 +2,20 @@
 window.addEventListener('load', () => {
   //要素の取得
   const today = new Date();
+  today.setHours(23, 59, 59);
+  const next_update_infos = document.querySelectorAll(".next_update_info");
   const sub_update_dates = document.querySelectorAll(".m-sub-update-date");
   const sub_update_links = document.querySelectorAll(".m-sub-update-link");
+  const update_notifications = document.querySelectorAll(".update-notification");
+
 
   // 『更新日がきたら、次回更新日が更新リンクに変化する』
   for(let i = 0; i < sub_update_dates.length;  i++){
     const update_date = new Date(sub_update_dates[i].innerHTML);
     if (update_date <= today){
-      sub_update_dates[i].setAttribute ("class", "hidden");
+      next_update_infos[i].setAttribute ("class", "hidden");
       sub_update_links[i].removeAttribute("class", "hidden");
-      sub_update_links[i].setAttribute("class", "m-sub-update-link relative px-4 py-3 border-b-2 text-base text-pink-500");
+      update_notifications[i].removeAttribute("class", "hidden");
     };
   };
 
