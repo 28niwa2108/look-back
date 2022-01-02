@@ -1,0 +1,32 @@
+<div class="bg-gray-100 py-8">
+  <%= form_with model: @contract_cancel, url: user_subscription_contract_cancels_path(@user, @subs), method: :POST, class:"w-full", local: true do |f| %>
+    <div class="container px-5 py-6 mx-auto my-8 flex flex-col items-center lg:w-2/4 md:w-2/4 sm:w-96 bg-white rounded-lg">
+
+      <%= render "shared/error_messages", model: f.object %>
+
+      <div class="my-2 mx-auto">
+        <h2 class="text-gray-900 text-2xl text-center font-bold title-font my-4"><%= @subs.name%>の解約</h2>
+        <div class="flex-col items-center justify-center w-full mb-4">
+          <div class="relative p-2 mx-auto">
+             <label for="contract_date" class="block text-gray-600">解約日</label>
+              <%= f.date_field :cancel_date, id:"contract_date", value: @subs.contract_date, class: "w-full focus:border-gray-400 focus:ring-2 focus:ring-gray-400 bg-gray-100 bg-opacity-50 rounded border border-gray-300 text-base outline-none text-gray-700 py-1 px-3 resize-none transition-colors ease-in-out" %>
+          </div>
+
+          <div class="relative p-2 mx-auto">
+            <label for="update_cycle" class="block text-gray-600">解約理由</label>
+            <%= f.collection_select(:reason_id, Reason.all, :id, :name, {}, {class:"w-full focus:border-gray-400 focus:ring-2 focus:ring-gray-400 bg-gray-100 bg-opacity-50 rounded border border-gray-300 text-base outline-none text-gray-700 py-1 px-3 resize-none transition-colors ease-in-out", id:"readon_id"}) %>
+          </div>
+
+          <div class="relative mt-2 p-2 mx-auto">
+              <%= f.text_area :cancel_comment, id:"action_comment", placeholder:"解約のきっかけ、思考などを書き留める", size:"70x4",maxlength:"300", class: "word_count w-full focus:border-gray-400 focus:ring-2 focus:ring-gray-400 bg-gray-100 bg-opacity-50 rounded border border-gray-300 text-base outline-none text-gray-700 py-1 px-3 leading-8" %>
+              <div class="text-right pr-2">あと<span class="word_remaining" id="action_comment_length">300</span>文字</div>
+          </div>
+
+          <div class="relative p-2 mx-auto">
+            <%= f.submit "解約する" ,class:"flex mx-auto text-white bg-black border-0 focus:outline-none hover:bg-gray-200 hover:text-black py-2 px-8 rounded text-lg" %>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>

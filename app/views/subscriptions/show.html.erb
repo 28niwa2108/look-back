@@ -5,6 +5,13 @@
       <div class="flex mt-6 justify-center">
         <div class="w-32 h-1 rounded-full bg-purple-500 inline-flex"></div>
       </div>
+      <div class="flex flex-col mt-6 justify-center">
+      <% unless @contract_cancel.nil? %>
+        <h2 class="text-xl text-gray-90"><%= @contract_cancel.cancel_date %>：解約済</h2>
+        <div class="pt-2">解約理由：<%= @contract_cancel.reason.name %></div>
+        <div class="pt-2">詳細：<%= @contract_cancel.cancel_comment %></div>
+      <% end %>
+      </div>
     </div>
     <div class="flex flex-wrap justify-center sm:-m-4 -mx-4 -mb-10 -mt-4 md:space-y-0 space-y-6">
       <div class="p-4 md:w-1/3 flex flex-col text-center items-center">

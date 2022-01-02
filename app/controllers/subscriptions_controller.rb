@@ -7,6 +7,9 @@ class SubscriptionsController < ApplicationController
     set_subs
     set_renewal
 
+    # 解約済であればcontract_cancelのレコードを取得
+    @contract_cancel = ContractCancel.find_by(subscription_id: @subs.id) unless @subs.contract_cancel.nil?
+
     # サブスク評価の平均☆を用意
     sum_rate = 0
     review_count = 0

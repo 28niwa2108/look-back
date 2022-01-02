@@ -4,10 +4,14 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find_by(id: params[:id])
-    @subs = Subscription.where(user_id: params[:id])
+    all_subs = Subscription.where(user_id: params[:id])
+    @subs = []
     @renewal = []
-    @subs.each do |sub|
-      @renewal << sub.contract_renewal
+    all_subs.each do |sub|
+      if sub.contract_cancel.nil?
+        @subs << sub
+        @renewal << sub.contract_renewal
+      end
     end
   end
 

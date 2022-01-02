@@ -1,6 +1,6 @@
 class ReviewsController < ApplicationController
-  before_action :authenticate_user!, only: [:all_index, :index, :edit, :update]
-  before_action :user_identification, only: [:all_index, :index, :edit, :update]
+  before_action :authenticate_user!, only: [:all_index, :index, :show, :edit, :update]
+  before_action :user_identification, only: [:all_index, :index, :show, :edit, :update]
 
   def all_index
     set_user
@@ -69,7 +69,7 @@ class ReviewsController < ApplicationController
   def review_params
     params.require(:review_action).permit(
       :review_rate, :review_comment, :start_date, :end_date, :later_check_id,
-      :action_rate, :action_review_comment, :action_plan, :review_id
+      :action_rate, :action_review_comment, :action_plan
     ).merge(user_id: params[:user_id], subscription_id: params[:subscription_id], review_id: params[:id])
   end
 

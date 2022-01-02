@@ -29,6 +29,7 @@ class Subscription < ApplicationRecord
   # アソシエーション
   belongs_to :user
   has_one :contract_renewal, dependent: :destroy
+  has_one :contract_cancel, dependent: :destroy
   has_many :reviews, dependent: :destroy
 
   extend ActiveHash::Associations::ActiveRecordExtensions
