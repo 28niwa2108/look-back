@@ -45,7 +45,7 @@ window.addEventListener('load', () => {
     // 更新確認画面
     Swal.fire({
       title: 'サブスク情報を更新します',
-      html: '変更は次回更新日より、適応されます。',
+      html: '変更は次回更新日より、適応されます。<br>(サブスク名は即時反映されます。)',
       icon: 'info',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
