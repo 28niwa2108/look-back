@@ -162,10 +162,11 @@
 [![Image from Gyazo](https://i.gyazo.com/a388aeb55b759029b0dc3ccecf553ae4.gif)](https://gyazo.com/a388aeb55b759029b0dc3ccecf553ae4)
 + サブスク更新日になると、次回更新日がClickで更新に変化する
 + Clickで更新をクリック
-+ 更新完了後、振り返りを促すホップアップが表示されるので、Goをクリック<br>
++ 更新完了後、振り返りを促すホップアップが表示されるので、Goをクリック
+<br>
 
-+ 後で振り返るをクリックすると、自分の好きなタイミングで振り返ることができる
 [![Image from Gyazo](https://i.gyazo.com/3a26bf91480dfc07a49ccf7ce049d922.png)](https://gyazo.com/3a26bf91480dfc07a49ccf7ce049d922)
++ 後で振り返るをクリックすると、自分の好きなタイミングで振り返ることができる
 <br>
 
 ## サブスク評価機能
@@ -216,13 +217,13 @@
 <br>
 
 ## 解約サブスク一覧表示機能
-[![Image from Gyazo](https://i.gyazo.com/a8a6944d8590fe2dd07739c375a43bda.png)](https://gyazo.com/a8a6944d8590fe2dd07739c375a43bda)
+[![Image from Gyazo](https://i.gyazo.com/4f8ff2438192f624db7d1893dd805cf9.png)](https://gyazo.com/4f8ff2438192f624db7d1893dd805cf9)
 + マイページで、Cancelsタブをクリック
 + 解約済のサブスク一覧を確認できる
 <br>
 
 ## 解約サブスク詳細表示機能
-[![Image from Gyazo](https://i.gyazo.com/4f8ff2438192f624db7d1893dd805cf9.png)](https://gyazo.com/4f8ff2438192f624db7d1893dd805cf9)
+[![Image from Gyazo](https://i.gyazo.com/d714df7f13ff7e951bd53556c73e3041.gif)](https://gyazo.com/d714df7f13ff7e951bd53556c73e3041)
 + マイページで、Cancelsタブをクリック
 + 閲覧したいサブスクカードをクリック
 + サブスク詳細ページに解約理由が表示される
