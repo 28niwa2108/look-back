@@ -1,10 +1,6 @@
 # LookBack
-[![Image from Gyazo](https://i.gyazo.com/9717dcd86db84db505e5651e46357354.png)](https://gyazo.com/9717dcd86db84db505e5651e46357354)
-<br>
-
-
 # アプリケーション概要
-サブスクをもっと活用するための、サブスク管理アプリ。
+小さな行動につなげるための、サブスク管理アプリ。
 + サブスク情報を一括管理
 + 累計金額・契約期間等サブスク情報の閲覧
 + 活用度の振り返り・アクションプラン設定
@@ -41,95 +37,99 @@
 <br>
 
 ## 機能の実装背景
-+ 振り返る
-有益な情報も、インプットしただけでは自己成長につながりにくい。
-情報を実際に活用することで、自分の目標へ近づくことができる。
-実際の「行動」につなげるために、振り返り、何を実行するか決める事が必要だと考えた。
-実装の具体例）
-アクションプラン設定
++ 振り返る<br>
+有益な情報も、インプットしただけでは自己成長につながりにくい。<br>
+情報を実際に活用することで、自分の目標へ近づくことができる。<br>
+実際の「行動」につなげるために、振り返り、何を実行するか決める事が必要だと考えた。<br>
+実装の具体例）<br>
+アクションプラン設定<br>
 
-+ 手軽さ
-半年間のプログラミング学習中、学習後に振り返りを記入する時間を設けていた。
-ほんの少しの改善や工夫が問題を解決したり、
-振り返りを記入している間に、何が問題か気づく事があった。
-大体的でなくとも、振り返る「きっかけ」があれば、現状の改善につながり、
-簡易な方法であれば習慣化しやすいと実感した。
-実装での具体例）
-☆での簡易評価
++ 手軽さ<br>
+半年間のプログラミング学習中、学習後に振り返りを記入する時間を設けていた。<br>
+ほんの少しの改善や工夫が問題を解決したり、<br>
+振り返りを記入している間に、何が問題か気づく事があった。<br>
+大体的でなくとも、振り返る「きっかけ」があれば、現状の改善につながり、<br>
+簡易な方法であれば習慣化しやすいと実感した。<br>
+実装での具体例）<br>
+☆での簡易評価<br>
 
-+ 気づく
-毎月の金額では妥当と感じていても、年間支払金額を見ると印象が変わる経験があった。
-また、コンテンツが良いか悪いかという判断軸だけでなく、
-実際にどんなときに役立ったか・いつ活用したか？と考えることで、
-有益な支払いかどうか判断しやすくなると気づいた。
-実装での具体例）
-累計課金額・期間
-
++ 気づく<br>
+毎月の金額では妥当と感じていても、年間支払金額を見ると印象が変わる経験があった。<br>
+また、コンテンツが良いか悪いかという判断軸だけでなく、<br>
+実際にどんなときに役立ったか・いつ活用したか？と考えることで、<br>
+有益な支払いかどうか判断しやすくなると気づいた。<br>
+実装での具体例）<br>
+累計課金額・期間<br>
+<br>
 
 # 洗い出した要件
-+ ユーザー管理機能
-  ユーザーごとにサブスク情報を管理するため
-+ ユーザー編集機能
-  ユーザー情報を修正するため(未実装)
-+ ユーザー削除機能
-  ユーザー登録を削除するため(未実装)
-+ サブスク登録機能
-  管理するサブスクを登録するため
-+ サブスク一覧表示機能
-  登録済のサブスクを確認するため
-+ サブスク詳細機能
-  登録したサブスクの情報を閲覧するため
-+ サブスク編集機能
-  登録したサブスクの情報を訂正するため
-+ サブスク削除機能
-  登録したサブスクを削除するため
-+ サブスク更新機能
-  サブスクの更新日に累計金額・期間を更新するため
-+ サブスク評価機能
-  サブスクの振り返りを行うため
-+ サブスク評価一覧表示機能
-  登録した振り返り情報を表示するため
-+ サブスク評価詳細表示機能
-  登録した振り返り情報を確認するため
-+ サブスク評価編集機能
-  登録した振り返り情報を訂正するため
-+ サブスク未評価一覧表示機能
-  振り返り待ちの評価を一覧で表示するため
-+ サブスク解約機能
-  サブスクの更新を停止するため
-+ 解約サブスク一覧表示機能
-  解約したサブスクを確認するため
-+ 解約サブスク詳細表示機能
-  解約理由を閲覧するため
-+ 再開機能
-  解約済のサブスクを再度契約状態にするため(未実装)
-+ 更新通知機能
-  サブスク更新日・振り返りをリマインドするため(未実装)
-+ アクション記録機能
-  実行したアクションプランを記録するため(未実装)
-+ エクセル出力機能
-  サブスク情報を出力し、より分析するため(未実装)
-+ 問い合わせ機能
-  エラー等を問い合わせるため(未実装)
-
++ ユーザー管理機能<br>
+  ユーザーごとにサブスク情報を管理するため<br>
++ ユーザー編集機能<br>
+  ユーザー情報を修正するため(未実装)<br>
++ ユーザー削除機能<br>
+  ユーザー登録を削除するため(未実装)<br>
++ サブスク登録機能<br>
+  管理するサブスクを登録するため<br>
++ サブスク一覧表示機能<br>
+  登録済のサブスクを確認するため<br>
++ サブスク詳細機能<br>
+  登録したサブスクの情報を閲覧するため<br>
++ サブスク編集機能<br>
+  登録したサブスクの情報を訂正するため<br>
++ サブスク削除機能<br>
+  登録したサブスクを削除するため<br>
++ サブスク更新機能<br>
+  サブスクの更新日に累計金額・期間を更新するため<br>
++ サブスク評価機能<br>
+  サブスクの振り返りを行うため<br>
++ サブスク評価一覧表示機能<br>
+  登録した振り返り情報を表示するため<br>
++ サブスク評価詳細表示機能<br>
+  登録した振り返り情報を確認するため<br>
++ サブスク評価編集機能<br>
+  登録した振り返り情報を訂正するため<br>
++ サブスク未評価一覧表示機能<br>
+  振り返り待ちの評価を一覧で表示するため<br>
++ サブスク解約機能<br>
+  サブスクの更新を停止するため<br>
++ 解約サブスク一覧表示機能<br>
+  解約したサブスクを確認するため<br>
++ 解約サブスク詳細表示機能<br>
+  解約理由を閲覧するため<br>
++ 再開機能<br>
+  解約済のサブスクを再度契約状態にするため(未実装)<br>
++ 更新通知機能<br>
+  サブスク更新日・振り返りをリマインドするため(未実装)<br>
++ アクション記録機能<br>
+  実行したアクションプランを記録するため(未実装)<br>
++ エクセル出力機能<br>
+  サブスク情報を出力し、より分析するため(未実装)<br>
++ 問い合わせ機能<br>
+  エラー等を問い合わせるため(未実装)<br>
+<br>
 
 # 実装した機能・利用方法
 ## ユーザー登録機能
 [![Image from Gyazo](https://i.gyazo.com/e4c31b1f276d5ca93d582bf084590b36.gif)](https://gyazo.com/e4c31b1f276d5ca93d582bf084590b36)
 + トップページで、sign upをクリック
 + 必要事項を入力し、Createをクリック
+<br>
 
 ## ログイン機能
 + ヘッダーのLoginをクリック
 + 必要事項を入力し、Loginをクリック
+<br>
 
 ## ログアウト機能
 + ヘッダーのLogoutをクリック
+<br>
 
 ## サブスク登録機能
 [![Image from Gyazo](https://i.gyazo.com/295f8517208ba5dd4d0d2a3194c669b6.gif)](https://gyazo.com/295f8517208ba5dd4d0d2a3194c669b6)
 + マイページで、Addをクリック
 + 必要事項を入力・選択し、登録するをクリック
+<br>
 
 ## サブスク編集機能
 [![Image from Gyazo](https://i.gyazo.com/337856d1349270bf7256c259deef0d27.gif)](https://gyazo.com/337856d1349270bf7256c259deef0d27)
@@ -138,6 +138,7 @@
 + 必要事項を入力・選択し、更新するをクリック
 + 確認ホップアップが表示されるので、OKをクリック
 + 更新完了のホップアップが表示されるので、OKをクリック
+<br>
 
 ## サブスク削除機能
 [![Image from Gyazo](https://i.gyazo.com/828413e1db5968bdb095fa7ae7995361.gif)](https://gyazo.com/828413e1db5968bdb095fa7ae7995361)
@@ -145,15 +146,18 @@
 + メニューから、削除をクリック
 + 確認ホップアップが表示されるので、OKをクリック
 + 削除完了のホップアップが表示されるので、OKをクリック
+<br>
 
 ## サブスク一覧表示機能
 [![Image from Gyazo](https://i.gyazo.com/371870f47d6d04aff7b3a90661f57dca.png)](https://gyazo.com/371870f47d6d04aff7b3a90661f57dca)
 + マイページトップ(Listsタブ)で、契約中のサブスク一覧が確認できる
+<br>
 
 ## サブスク詳細表示機能
 [![Image from Gyazo](https://i.gyazo.com/fdf88dab4895e4958d1d71ddc7cda437.gif)](https://gyazo.com/fdf88dab4895e4958d1d71ddc7cda437)
 + マイページで、サブスクのカードをクリック
 + サブスク情報を確認できる
+<br>
 
 ## サブスク更新機能
 [![Image from Gyazo](https://i.gyazo.com/a388aeb55b759029b0dc3ccecf553ae4.gif)](https://gyazo.com/a388aeb55b759029b0dc3ccecf553ae4)
@@ -163,20 +167,24 @@
 [![Image from Gyazo](https://i.gyazo.com/bd7b3e0b424dde625db14b2fa7e2aec8.png)](https://gyazo.com/bd7b3e0b424dde625db14b2fa7e2aec8)
 + 後で振り返るをクリックすると、好きなタイミングで振り返ることができる
 [![Image from Gyazo](https://i.gyazo.com/8659d7a65a7d6cba90f5827dd4afb502.png)](https://gyazo.com/8659d7a65a7d6cba90f5827dd4afb502)
+<br>
 
 ## サブスク評価機能
 [![Image from Gyazo](https://i.gyazo.com/be824e4fdaed1fbc7c5124f262990728.gif)](https://gyazo.com/be824e4fdaed1fbc7c5124f262990728)
 + サブスク更新後に表示される画面に、必要事項を入力する
 + レビューをクリック
+<br>
 
 [![Image from Gyazo](https://i.gyazo.com/16fd7f4c93498d68b4aeca4a6077cd1e.gif)](https://gyazo.com/16fd7f4c93498d68b4aeca4a6077cd1e)
 + 後で振り返るをONにすると、現在の入力を一時保存できる
+<br>
 
 ## サブスク評価一覧表示機能
 [![Image from Gyazo](https://i.gyazo.com/ae690605373fa767773fe33081877418.gif)](https://gyazo.com/ae690605373fa767773fe33081877418)
 + マイページで、サブスクのカードをクリック
 + Reviewのもっと見る→をクリック
 + 過去のレビュー一覧が確認できる
+<br>
 
 ## サブスク評価詳細表示機能
 [![Image from Gyazo](https://i.gyazo.com/b8bdead730ce15e99769f8ee95126a88.gif)](https://gyazo.com/b8bdead730ce15e99769f8ee95126a88)
@@ -184,6 +192,7 @@
 + Reviewのもっと見る→をクリック
 + 閲覧したいレビューのカードのLook More→をクリック
 + 入力したレビューの詳細を確認できる
+<br>
 
 ## サブスク評価編集機能
 [![Image from Gyazo](https://i.gyazo.com/1a23fd0b73168212ca8febea8169dcef.gif)](https://gyazo.com/1a23fd0b73168212ca8febea8169dcef)
@@ -192,29 +201,34 @@
 + 閲覧したいレビューのカードのLook More→をクリック
 + Editをクリック
 + 必要事項を入力して、レビューをクリック
+<br>
 
 ## サブスク未評価一覧表示機能
 [![Image from Gyazo](https://i.gyazo.com/25ee168c5e77275c444d967b7d7882c3.png)](https://gyazo.com/25ee168c5e77275c444d967b7d7882c3)
 + マイページで、Reviewsタブをクリック
 + 後で振り返るをONにしているレビュー一覧を確認できる
+<br>
 
 ## サブスク解約機能
 [![Image from Gyazo](https://i.gyazo.com/059109baa76c6104b59683a86f2ceeaf.gif)](https://gyazo.com/059109baa76c6104b59683a86f2ceeaf)
 + マイページで、サブスクのハンバーガーメニューをクリック
 + メニューから、解約をクリック
 + 必要事項を入力・選択し、解約するをクリック
+<br>
 
 ## 解約サブスク一覧表示機能
 [![Image from Gyazo](https://i.gyazo.com/a8a6944d8590fe2dd07739c375a43bda.png)](https://gyazo.com/a8a6944d8590fe2dd07739c375a43bda)
 + マイページで、Cancelsタブをクリック
 + 解約済のサブスク一覧を確認できる
+<br>
 
 ## 解約サブスク詳細表示機能
 [![Image from Gyazo](https://i.gyazo.com/d714df7f13ff7e951bd53556c73e3041.gif)](https://gyazo.com/d714df7f13ff7e951bd53556c73e3041)
 + マイページで、Cancelsタブをクリック
 + 閲覧したいサブスクカードをクリック
 + サブスク詳細ページに解約理由が表示される
-
+<br>
+<br>
 
 # 工夫した点
 + サブスク管理だけでなく、振り返り機能があり、サブスクの活用を保証する設計にした
@@ -236,7 +250,8 @@
   - サブスク契約金額だけでなく、累計金額・期間を表示
   - 解約理由・コメントを残すことで、自分の判断を見返す事が可能
   - サブスク☆評価の平均を表示することで、ロングスパンでのサブスク評価も確認可能
-
+<br>
+<br>
 
 # 課題・実装予定機能
 ## 課題及び解決方法
@@ -248,6 +263,7 @@
 + 繰り返しの記述、冗長な表現などコード改善、リファクタリング
 + 解約日が更新日・契約日より前の日付の場合、確認ホップアップを表示
 + エラー等を連絡するコンタクトフォームの作成
+<br>
 
 ## 実装予定機能
 + 上記課題の解消
@@ -255,40 +271,36 @@
 + ユーザー編集機能
 + ユーザー削除機能
 + サブスク登録、評価入力時に、Javascriptで説明を表示する
-
+<br>
+<br>
 
 # 使用技術(開発環境)
 + バックエンド
-
-Ruby, Ruby on Rails
+  - Ruby, Ruby on Rails
 
 + フロントエンド
-
-HTML, CSS, tailwindcss, JavaScript, JQuery, Ajax
+  - HTML, CSS, tailwindcss, JavaScript, JQuery, Ajax
 
 + データベース
-
-MySQL, Sequel Pro
+  - MySQL, Sequel Pro
 
 + 本番環境
-
-Heroku
+  - Heroku
 
 + ソース管理
-
-GitHub, GitHub Desktop
+  - GitHub, GitHub Desktop
 
 + テスト
-
-RSpec
+  - RSpec
 
 + エディタ
-
-Visual Studio Code
-
+  - Visual Studio Code
+<br>
+<br>
 
 # DB設計
 [![Image from Gyazo](https://i.gyazo.com/456fcd402ba60029ce78bf077362140c.png)](https://gyazo.com/456fcd402ba60029ce78bf077362140c)
+<br>
 
 ## users
 | Column             | Type   | Options                   |
@@ -300,6 +312,7 @@ Visual Studio Code
 ### Association
 + has_many :subscriptions
 + has_many :reviews
+<br>
 
 ## subscriptions
 | Column             | Type       | Options                        |
@@ -317,6 +330,7 @@ Visual Studio Code
 + has_many :reviews
 + has_one :contract_renewal
 + has_one :contract_cancel
+<br>
 
 ## contract_renewals
 | Column           | Type       | Options                        |
@@ -330,7 +344,7 @@ Visual Studio Code
 
 ### Association
 + belongs_to :subscription
-
+<br>
 
 ## contract_cancels
 | Column         | Type       | Options                        |
@@ -342,7 +356,7 @@ Visual Studio Code
 
 ### Association
 + belongs_to :subscription
-
+<br>
 
 ## reviews
 | Column         | Type       | Options                        |
@@ -359,7 +373,7 @@ Visual Studio Code
 + belongs_to :user
 + belongs_to :subscription
 + has_one :action_plan
-
+<br>
 
 ## action_plans
 | Column                | Type       | Options                        |
