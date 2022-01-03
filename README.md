@@ -2,7 +2,7 @@
 # アプリケーション概要
 小さな行動につなげるための、サブスク管理アプリ。
 + サブスク情報を一括管理
-+ 累計金額・契約期間等サブスク情報の閲覧
++ 累計金額・契約期間等、サブスク情報の閲覧
 + 活用度の振り返り・アクションプラン設定
 <br>
 <br>
@@ -162,10 +162,10 @@
 [![Image from Gyazo](https://i.gyazo.com/a388aeb55b759029b0dc3ccecf553ae4.gif)](https://gyazo.com/a388aeb55b759029b0dc3ccecf553ae4)
 + サブスク更新日になると、次回更新日がClickで更新に変化する
 + Clickで更新をクリック
-+ 更新完了後、振り返りを促すホップアップが表示されるので、Goをクリック
-[![Image from Gyazo](https://i.gyazo.com/bd7b3e0b424dde625db14b2fa7e2aec8.png)](https://gyazo.com/bd7b3e0b424dde625db14b2fa7e2aec8)
-+ 後で振り返るをクリックすると、好きなタイミングで振り返ることができる
-[![Image from Gyazo](https://i.gyazo.com/8659d7a65a7d6cba90f5827dd4afb502.png)](https://gyazo.com/8659d7a65a7d6cba90f5827dd4afb502)
++ 更新完了後、振り返りを促すホップアップが表示されるので、Goをクリック<br>
+
++ 後で振り返るをクリックすると、自分の好きなタイミングで振り返ることができる
+[![Image from Gyazo](https://i.gyazo.com/3a26bf91480dfc07a49ccf7ce049d922.png)](https://gyazo.com/3a26bf91480dfc07a49ccf7ce049d922)
 <br>
 
 ## サブスク評価機能
@@ -182,7 +182,7 @@
 [![Image from Gyazo](https://i.gyazo.com/ae690605373fa767773fe33081877418.gif)](https://gyazo.com/ae690605373fa767773fe33081877418)
 + マイページで、サブスクのカードをクリック
 + Reviewのもっと見る→をクリック
-+ 過去のレビュー一覧が確認できる
++ 過去のレビュー 一覧が確認できる
 <br>
 
 ## サブスク評価詳細表示機能
@@ -203,9 +203,9 @@
 <br>
 
 ## サブスク未評価一覧表示機能
-[![Image from Gyazo](https://i.gyazo.com/25ee168c5e77275c444d967b7d7882c3.png)](https://gyazo.com/25ee168c5e77275c444d967b7d7882c3)
+[![Image from Gyazo](https://i.gyazo.com/93c491d63a12cc4efe8491f0f1d700cc.png)](https://gyazo.com/93c491d63a12cc4efe8491f0f1d700cc)
 + マイページで、Reviewsタブをクリック
-+ 後で振り返るをONにしているレビュー一覧を確認できる
++ 後で振り返るをONにしているレビュー 一覧を確認できる
 <br>
 
 ## サブスク解約機能
@@ -222,7 +222,7 @@
 <br>
 
 ## 解約サブスク詳細表示機能
-[![Image from Gyazo](https://i.gyazo.com/d714df7f13ff7e951bd53556c73e3041.gif)](https://gyazo.com/d714df7f13ff7e951bd53556c73e3041)
+[![Image from Gyazo](https://i.gyazo.com/4f8ff2438192f624db7d1893dd805cf9.png)](https://gyazo.com/4f8ff2438192f624db7d1893dd805cf9)
 + マイページで、Cancelsタブをクリック
 + 閲覧したいサブスクカードをクリック
 + サブスク詳細ページに解約理由が表示される
