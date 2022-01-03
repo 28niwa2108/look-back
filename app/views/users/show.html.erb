@@ -1,7 +1,7 @@
-<div class="my-24">
+<div class="py-24">
   <div class="select_now ">
-    <div class="flex flex-col text-center w-full mb-2">
-      <h1 class="sm:text-3xl text-2xl font-medium title-font mb-2 text-yellow-500">Subscription List</h1>
+    <div class="flex flex-col text-center w-full mb-4">
+      <h1 class="sm:text-3xl text-2xl font-medium title-font mb-2 text-gray-500">Subscription List</h1>
       <p class="lg:w-2/3 mx-auto leading-relaxed text-base">契約中のサブスク</p>
     </div>
   </div>
@@ -9,25 +9,25 @@
   <section class="text-gray-600 body-font">
     <div class="container px-5 pt-4 mx-auto flex flex-wrap flex-col">
       <div class="flex mx-auto flex-wrap mb-3">
-        <a href=<%= new_user_subscription_path(@user) %> class="sm:px-6 py-3 w-1/2 sm:w-auto justify-center sm:justify-start border-b-2 title-font font-medium inline-flex items-center leading-none border-gray-200 hover:bg-gray-400 hover:bg-opacity-20 hover:text-gray-900 tracking-wider rounded-t">
+        <a href=<%= new_user_subscription_path(@user) %> class="sm:px-6 py-3 w-1/2 sm:w-auto justify-center sm:justify-start border-b-2 title-font font-medium inline-flex items-center leading-none border-gray-200 hover:bg-gray-400 hover:bg-opacity-20 hover:text-black tracking-wider rounded-t">
           <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
-          </svg>Add
+          </svg><span class="text-gray-600">Add</span>
         </a>
-        <a class="sm:px-6 py-3 w-1/2 sm:w-auto justify-center sm:justify-start border-b-2 title-font font-medium bg-yellow-100 inline-flex items-center leading-none border-yellow-200 text-yellow-500 tracking-wider">
+        <a href=<%= user_path(@user) %> class="sm:px-6 py-3 w-1/2 sm:w-auto justify-center sm:justify-start border-b-2 title-font font-medium inline-flex items-center leading-none border-gray-200 bg-gray-300 bg-opacity-40 text-gray-500 tracking-wider">
           <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
-          </svg>Lists
+          </svg><span class="text-gray-600">Lists</span>
         </a>
-        <a href=<%= all_index_user_reviews_path(@user) %> class="sm:px-4 py-3 w-1/2 sm:w-auto justify-center sm:justify-start border-b-2 title-font font-medium inline-flex items-center leading-none border-gray-200 hover:bg-pink-400 hover:bg-opacity-20 hover:text-gray-900 tracking-wider">
+        <a href=<%= all_index_user_reviews_path(@user) %> class="sm:px-4 py-3 w-1/2 sm:w-auto justify-center sm:justify-start border-b-2 title-font font-medium inline-flex items-center leading-none border-gray-200 hover:bg-gray-400 hover:bg-opacity-20 hover:text-pink-400 tracking-wider">
           <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
-          </svg>Reviews
+          </svg><span class="text-gray-600">Reviews</span>
         </a>
-        <a href=<%= user_contract_cancels_path(@user) %> class="sm:px-4 py-3 w-1/2 sm:w-auto justify-center sm:justify-start border-b-2 title-font font-medium inline-flex items-center leading-none border-gray-200 hover:bg-blue-300 hover:bg-opacity-30 hover:text-gray-900 tracking-wider">
+        <a href=<%= user_contract_cancels_path(@user) %> class="sm:px-4 py-3 w-1/2 sm:w-auto justify-center sm:justify-start border-b-2 title-font font-medium inline-flex items-center leading-none border-gray-200 hover:bg-gray-400 hover:bg-opacity-20 hover:text-blue-500 tracking-wider">
           <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636" />
-          </svg>Cancels
+          </svg><span class="text-gray-600">Cancels</span>
         </a>
       </div>
     </div> 
@@ -45,10 +45,10 @@
                 </svg>
               </div>
               <ul class="sub-ope-menu-lists hidden">
-                <li class="px-4 py-2 border-r-2 border-yellow-300"><%= link_to '編集', edit_user_subscription_path(@user, sub) %></li>
-                <li class="px-4 py-2 border-r-2 border-yellow-300">
+                <li class="px-4 py-2 border-r-2 border-gray-200"><%= link_to '編集', edit_user_subscription_path(@user, sub) %></li>
+                <li class="px-4 py-2 border-r-2 border-gray-200">
                   <%= form_with url: user_subscription_path(@user, sub), method: :delete, class: "sub-delete-form", local: true do |f| %>
-                    <%= f.submit '削除', class: "delete_btn bg-yellow-200" %>
+                    <%= f.submit '削除', class: "delete_btn bg-gray-100" %>
                   <% end %>
                 </li>
                 <li class="px-4 py-2"><%= link_to '解約', new_user_subscription_contract_cancel_path(@user, sub) %></li>
@@ -56,13 +56,13 @@
               <%# メニュー %>
               <%# 通知 %>
               <div class="update-notification hidden">
-                <span class="absolute left-2 top-1.5 rounded-full h-4 w-4 bg-pink-300"></span>
-                <span class="absolute left-1.5 top-1 animate-ping inline-flex h-5 w-5 rounded-full bg-pink-400 opacity-75"></span>
+                <span class="absolute left-1.5 top-1.5 rounded-full h-4 w-4 bg-gray-300"></span>
+                <span class="absolute left-1 top-1 animate-ping inline-flex h-5 w-5 rounded-full bg-gray-400 opacity-75"></span>
               </div>
               <%# 通知 %>
               <a href=<%= user_subscription_path(@user, sub) %>>
                 <div class="h-full flex items-center border-yellow-100 border-2 p-4 rounded-lg  hover:border-yellow-400">
-                <div class="mr-4 w-16 h-16 inline-flex items-center justify-center rounded-full bg-yellow-100 text-yellow-400 flex-shrink-0">
+                <div class="mr-4 w-16 h-16 inline-flex items-center justify-center rounded-full bg-gray-100 text-yellow-400 flex-shrink-0">
                   <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
                   </svg>
@@ -72,7 +72,7 @@
                     <div class="next_update_info">次回更新日：<span class="m-sub-update-date text-gray-500"><%= renew.next_update_date %></span></div>
                     <div class="m-sub-update-link hidden">
                       <%= form_with url: user_subscription_contract_renewal_path(@user, sub, renew), method: :PATCH, class: "sub-update-form", local: true do |f| %>
-                        <%= f.submit 'Clickで更新', class: "m-sub-update-link_tag text-yellow-500 font-bold bg-white hover:text-pink-400" %>
+                        <%= f.submit 'Clickで更新', class: "m-sub-update-link_tag animate-bounce mt-3 text-gray-400 text-lg font-bold bg-white hover:text-gray-700" %>
                       <% end %>
                     </div>
                   </div>

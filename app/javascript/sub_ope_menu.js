@@ -8,7 +8,7 @@ window.addEventListener('load', () => {
   for(let i = 0; i < sub_ope_menus.length;  i++){
     sub_ope_menus[i].addEventListener('click',(e) => {
       if(sub_ope_menu_lists[i].getAttribute("class") == "sub-ope-menu-lists hidden"){
-        sub_ope_menu_lists[i].setAttribute("class", "absolute right-11 top-6 flex bg-yellow-200 w-15 h-50");
+        sub_ope_menu_lists[i].setAttribute("class", "absolute right-11 top-6 flex bg-gray-100 w-15 h-50");
       }else{
         sub_ope_menu_lists[i].setAttribute("class", "sub-ope-menu-lists hidden");
       };
