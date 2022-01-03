@@ -1,37 +1,44 @@
 # LookBack
-[![Image from Gyazo](https://i.gyazo.com/9717dcd86db84db505e5651e46357354.png)](https://gyazo.com/9717dcd86db84db505e5651e46357354)  
+[![Image from Gyazo](https://i.gyazo.com/9717dcd86db84db505e5651e46357354.png)](https://gyazo.com/9717dcd86db84db505e5651e46357354)
+<br>
 
 
 # アプリケーション概要
 サブスクをもっと活用するための、サブスク管理アプリ。
 + サブスク情報を一括管理
 + 累計金額・契約期間等サブスク情報の閲覧
-+ 活用度の振り返り・アクションプラン設定    
-
++ 活用度の振り返り・アクションプラン設定
+<br>
+<br>
 
 # 動作環境
 ## URL
 + https://look-back-36323.herokuapp.com/
+<br>
 
 ## BASIC認証
 + ID      ： admin 
 + Password： 36323 
+<br>
 
 ## テスト用アカウント
 + Email   ： test@email.com
 + Password： test123
-
+<br>
+<br>
 
 # 制作背景
 ## 対象
 + 自己投資目的で、サブスクに課金している人
 + いろいろなサブスクを試している人
 + サブスクの契約を継続すべきか迷う人
+<br>
 
 ## 解決したい事
 + 登録したものの、あまり活用できていないサブスクがある状態
 + 行動の伴わない受動的な活用にとどまる状態
 + 自分にとって有用な支払いか、判断しかねる状態
+<br>
 
 ## 機能の実装背景
 + 振り返る
