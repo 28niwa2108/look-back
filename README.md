@@ -312,6 +312,7 @@
 <br>
 
 # DB設計
+[![Image from Gyazo](https://i.gyazo.com/08ae366ae3bad47dc1baa54211e9e34d.png)](https://gyazo.com/08ae366ae3bad47dc1baa54211e9e34d)
 [![Image from Gyazo](https://i.gyazo.com/456fcd402ba60029ce78bf077362140c.png)](https://gyazo.com/456fcd402ba60029ce78bf077362140c)
 <br>
 
