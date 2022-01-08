@@ -4,12 +4,15 @@
 + サブスク情報を一括管理
 + 累計金額・契約期間等、サブスク情報の閲覧
 + 活用度の振り返り・アクションプラン設定
+[![Image from Gyazo](https://i.gyazo.com/0eda3935761b54259610e4c2dda8339b.png)](https://gyazo.com/0eda3935761b54259610e4c2dda8339b)
 <br>
 <br>
 
 # 動作環境
 ## URL
 + https://look-back-36323.herokuapp.com/
+※追加機能実装によるデプロイ等で、接続できないタイミングがございます。
+少し置いてからのアクセスをお願いします。
 <br>
 
 ## BASIC認証
@@ -109,6 +112,8 @@
 <br>
 
 # 実装した機能・利用方法
+[![Image from Gyazo](https://i.gyazo.com/f6eb5101c47756a302ff576dfd88ace2.png)](https://gyazo.com/f6eb5101c47756a302ff576dfd88ace2)
+<br>
 ## ユーザー登録機能
 [![Image from Gyazo](https://i.gyazo.com/e4c31b1f276d5ca93d582bf084590b36.gif)](https://gyazo.com/e4c31b1f276d5ca93d582bf084590b36)
 + トップページで、sign upをクリック
@@ -160,13 +165,14 @@
 
 ## サブスク更新機能
 [![Image from Gyazo](https://i.gyazo.com/a388aeb55b759029b0dc3ccecf553ae4.gif)](https://gyazo.com/a388aeb55b759029b0dc3ccecf553ae4)
-+ サブスク更新日になると、次回更新日がClickで更新に変化する
++ サブスク更新日になると、通知アイコンが表示される
++ 次回更新日がClickで更新に変化する
 + Clickで更新をクリック
 + 更新完了後、振り返りを促すホップアップが表示されるので、Goをクリック
 <br>
 
 [![Image from Gyazo](https://i.gyazo.com/3a26bf91480dfc07a49ccf7ce049d922.png)](https://gyazo.com/3a26bf91480dfc07a49ccf7ce049d922)
-+ 後で振り返るをクリックすると、自分の好きなタイミングで振り返ることができる
++ 更新完了後のホップアップで、後で振り返るをクリックし、後で振り返ることも可能
 <br>
 
 ## サブスク評価機能
@@ -241,6 +247,7 @@
 + サブスク登録時、契約開始日が過去の場合にも対応した
   - 契約開始日〜登録当日までの累計金額・契約期間が保存される仕様
 + 利用しやすいUIを心がけて設計した
+  - レスポンシブ対応
   - 感覚的な操作ができるように、アイコン、hoverイベントを使用
   - サブスク登録時、自動で当日の日付が入る(カレンダー選択不要)
   - ハンバーガーメニューから、ワンクリックで編集・削除・解約操作ができる
