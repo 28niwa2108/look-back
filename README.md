@@ -4,14 +4,15 @@
 + サブスク情報を一括管理
 + 累計金額・契約期間等、サブスク情報の閲覧
 + 活用度の振り返り・アクションプラン設定
+<br>
 [![Image from Gyazo](https://i.gyazo.com/0eda3935761b54259610e4c2dda8339b.png)](https://gyazo.com/0eda3935761b54259610e4c2dda8339b)
 <br>
 <br>
 
 # 動作環境
 ## URL
-+ https://look-back-36323.herokuapp.com/
-※追加機能実装によるデプロイ等で、接続できないタイミングがございます。
++ https://look-back-36323.herokuapp.com/<br>
+※追加機能実装によるデプロイ等で、接続できないタイミングがございます。<br>
 少し置いてからのアクセスをお願いします。
 <br>
 
@@ -114,6 +115,8 @@
 # 実装した機能・利用方法
 [![Image from Gyazo](https://i.gyazo.com/f6eb5101c47756a302ff576dfd88ace2.png)](https://gyazo.com/f6eb5101c47756a302ff576dfd88ace2)
 <br>
+<br>
+
 ## ユーザー登録機能
 [![Image from Gyazo](https://i.gyazo.com/e4c31b1f276d5ca93d582bf084590b36.gif)](https://gyazo.com/e4c31b1f276d5ca93d582bf084590b36)
 + トップページで、sign upをクリック
