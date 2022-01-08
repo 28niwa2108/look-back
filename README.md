@@ -5,6 +5,7 @@
 + 累計金額・契約期間等、サブスク情報の閲覧
 + 活用度の振り返り・アクションプラン設定
 <br>
+
 [![Image from Gyazo](https://i.gyazo.com/0eda3935761b54259610e4c2dda8339b.png)](https://gyazo.com/0eda3935761b54259610e4c2dda8339b)
 <br>
 <br>
