@@ -121,7 +121,7 @@ https://look-back-36323.herokuapp.com/<br>
 <br>
 
 ## 画面遷移図
-[![Image from Gyazo](https://i.gyazo.com/d1d5405ef30f85527eed2908124c22ec.png)](https://gyazo.com/d1d5405ef30f85527eed2908124c22ec)
+[![Image from Gyazo](https://i.gyazo.com/0527c12b6682c96b83e21cb3b174446c.png)](https://gyazo.com/0527c12b6682c96b83e21cb3b174446c)
 <br>
 
 ## ユーザー登録機能
