@@ -27,4 +27,27 @@ class Review < ApplicationRecord
   def type_is_later
     later_check_id == 2
   end
+
+  def self.get_ave_rate(reviews)
+    review_sum = 0
+    action_sum = 0
+    review_count = 0
+    action_count = 0
+
+    reviews.each do |review|
+      unless review.review_rate.nil?
+        review_sum += review.review_rate
+        review_count += 1
+      end
+
+      action = review.action_plan
+      unless action.action_rate.nil?
+        action_sum += action.action_rate
+        action_count += 1
+      end
+    end
+    review_ave = (review_sum / review_count).round if review_count != 0
+    action_ave = (action_sum / action_count).round if action_count != 0
+    { review_ave: review_ave, action_ave: action_ave }
+  end
 end

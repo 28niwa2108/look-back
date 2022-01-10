@@ -47,11 +47,20 @@
         </div>
         <div class="w-400px flex-grow">
           <h2 class="text-gray-900 text-lg title-font font-medium mb-3">Review</h2>
-          <p class="leading-relaxed text-base pb-1">レビューAve</p>
-            <div data-score=<%= @ave_rate %><%if @ave_rate.nil? %>0<% end %> class="flex justify-center" id="average_rate_read_only"></div>
-            <% if @ave_rate.nil? %>
-            <p>まだ評価がありません</p> 
+          <div>
+            <p class="leading-relaxed text-base pb-1">サブスクAve</p>
+            <div data-score=<%= @review_ave %><%if @review_ave.nil? %>0<% end %> class="average_rate_read_only flex justify-center"></div>
+            <% if @review_ave.nil? %>
+              <p>まだ評価がありません</p> 
             <% end %>
+          </div>
+          <div>
+            <p class="leading-relaxed text-base pb-1">アクションAve</p>
+            <div data-score=<%= @action_ave %><%if @action_ave.nil? %>0<% end %> class="average_rate_read_only flex justify-center""></div>
+            <% if @action_ave.nil? %>
+              <p>まだ評価がありません</p> 
+            <% end %>
+          </div>
           <a class="mt-3 text-purple-500 inline-flex items-center" href=<%= user_subscription_reviews_path(@user, @subs) %>>もっと見る
             <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-2" viewBox="0 0 24 24">
               <path d="M5 12h14M12 5l7 7-7 7"></path>
