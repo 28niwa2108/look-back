@@ -40,7 +40,7 @@ $(function () {
       later_hidden_parts.setAttribute("class", "hidden")
       later_check_warning.setAttribute("class", "ml-3 text-gray-700 font-medium")
     } else {
-      later_hidden_parts.removeAttribute("class", "hidden")
+      later_hidden_parts.setAttribute("class", "py-6")
       later_check_warning.setAttribute("class", "hidden")
     };
   });

@@ -40,3 +40,14 @@ background-color: rgba(0,0,0,0.05);
   transform: translateX(100%);
   background-color: #ff0000;
 }
+
+/* 吹き出し */
+.bubble:before {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -15px;
+  border: 15px solid transparent;
+  border-top: 15px solid #e0edff;
+}
