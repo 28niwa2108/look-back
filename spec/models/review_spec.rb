@@ -78,6 +78,24 @@ RSpec.describe Review, type: :model do
     end
   end
 
+  context 'get_ave_rate_aveメソッドが成功するとき' do
+    it '成功すると、review_rateの平均値が戻る' do
+      reviews = []
+      reviews << FactoryBot.create(:review, review_rate: 1)
+      reviews << FactoryBot.create(:review, review_rate: 5)
+      review_ave = Review.get_review_rate_ave(reviews)
+      expect(review_ave).to eq(3)
+    end
+
+    it '☆評価がまだない場合は、nilが戻る' do
+      reviews = []
+      reviews << FactoryBot.create(:review, later_check_id: 2, review_rate: "")
+      reviews << FactoryBot.create(:review, later_check_id: 2, review_rate: "")
+      review_ave = Review.get_review_rate_ave(reviews)
+      expect(review_ave).to eq(nil)
+    end
+  end
+
   # 異常系テスト ------------------------------------
   context 'サブスク評価の保存ができないとき' do
     it 'start_dateが空では保存できない' do

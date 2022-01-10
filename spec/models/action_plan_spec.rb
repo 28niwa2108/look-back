@@ -82,6 +82,30 @@ RSpec.describe ActionPlan, type: :model do
     end
   end
 
+  context 'get_action_rate_aveメソッドが成功するとき' do
+    it '成功すると、action_rateの平均値が戻る' do
+      reviews = []
+      action_a = FactoryBot.create(:action_plan, action_rate: 1)
+      action_b = FactoryBot.create(:action_plan, action_rate: 5)
+      reviews << action_a.review
+      reviews << action_b.review
+      action_ave = ActionPlan.get_action_rate_ave(reviews)
+      expect(action_ave).to eq(3) 
+    end
+
+    it '☆評価がまだない場合は、nilが戻る' do
+      reviews = []
+      FactoryBot.create(:review, id: 1, later_check_id: 2)
+      FactoryBot.create(:review, id: 2, later_check_id: 2)
+      action_a = FactoryBot.create(:action_plan, review_id: 1, action_rate: "")
+      action_b = FactoryBot.create(:action_plan, review_id: 2, action_rate: "")
+      reviews << action_a.review
+      reviews << action_b.review
+      action_ave = ActionPlan.get_action_rate_ave(reviews)
+      expect(action_ave).to eq(nil)
+    end
+  end
+
   # 異常系テスト ------------------------------------
   context 'アクションプラン評価の保存ができないとき' do
     it '紐づくレビューが存在しなければ保存できない' do
