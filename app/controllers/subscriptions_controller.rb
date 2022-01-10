@@ -7,9 +7,9 @@ class SubscriptionsController < ApplicationController
     set_subs
     set_renewal
     # サブスク・アクションプラン評価の平均を取得
-    rate_aves = Review.get_ave_rate(@subs.reviews.includes(:action_plan))
-    @review_ave = rate_aves[:review_ave]
-    @action_ave = rate_aves[:action_ave]
+    reviews = @subs.reviews.includes(:action_plan)
+    @review_ave = Review.get_review_rate_ave(reviews)
+    @action_ave = ActionPlan.get_action_rate_ave(reviews)
     # 解約済であればcontract_cancelのレコードを取得
     @contract_cancel = ContractCancel.find_by(subscription_id: @subs.id) unless @subs.contract_cancel.nil?
   end

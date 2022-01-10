@@ -16,4 +16,17 @@ class ActionPlan < ApplicationRecord
   def review_type_is_later
     review.later_check_id == 2
   end
+
+  def self.get_action_rate_ave(reviews)
+    action_sum = 0
+    action_count = 0
+
+    reviews.each do |review|
+      unless review.action_plan.action_rate.nil?
+        action_sum += review.action_plan.action_rate
+        action_count += 1
+      end
+    end
+    (action_sum / action_count).round if action_count != 0
+  end
 end
