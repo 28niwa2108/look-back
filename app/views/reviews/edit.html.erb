@@ -35,7 +35,7 @@
           <h2 class="bubble relative text-gray-700 font-medium text-center bg-blue-100 rounded-lg w-52 p-2 mx-auto my-4">活用度は☆いくつ？</h2>
           <div data-score=<%= @review_action.action_rate %><% if @review_action.action_rate.nil? || @review_action.action_rate == '' %>0<% end %> class="flex justify-center py-4" id="action_rate"></div>
           <div class="relative p-2 mx-auto">
-              <%= f.text_area :action_review_comment, id:"action_comment", placeholder:"実践したアクションプランを振り返ってみましょう！\n初回レビュー時は、具体的に活かせた行動・経験があったか思い返してみましょう！", size: "70x4",maxlength:"300", class: "word_count w-full focus:border-gray-400 focus:ring-2 focus:ring-gray-400 bg-gray-100 bg-opacity-50 rounded border border-gray-300 text-base outline-none text-gray-700 py-1 px-3 leading-8" %>
+              <%= f.text_area :action_review_comment, id:"action_comment", placeholder:"実践したアクションプランを振り返ってみましょう！\n何に活用できたか、どんな行動ができたか、思い出してみましょう。", size: "70x4",maxlength:"300", class: "word_count w-full focus:border-gray-400 focus:ring-2 focus:ring-gray-400 bg-gray-100 bg-opacity-50 rounded border border-gray-300 text-base outline-none text-gray-700 py-1 px-3 leading-8" %>
           </div>
           <div class="text-right pr-2">あと<span class="word_remaining" id="action_comment_length">300</span>文字</div>
 
