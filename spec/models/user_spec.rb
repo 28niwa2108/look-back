@@ -55,7 +55,7 @@ RSpec.describe 'ユーザー新規登録', type: :model do
     it 'emailが空では登録できない' do
       @user.email = ''
       @user.valid?
-      expect(@user.errors.full_messages).to include('Eメールを入力してください')
+      expect(@user.errors.full_messages).to include('メールアドレスを入力してください')
     end
 
     it 'passwordが空では登録できない' do
@@ -81,13 +81,13 @@ RSpec.describe 'ユーザー新規登録', type: :model do
       user2 = FactoryBot.build(:user)
       user2.email = @user.email
       user2.valid?
-      expect(user2.errors.full_messages).to include('Eメールはすでに使用されています')
+      expect(user2.errors.full_messages).to include('メールアドレスはすでに使用されています')
     end
 
     it 'emailに@が含まれない場合は登録できない' do
       @user.email = 'abcdefg.com'
       @user.valid?
-      expect(@user.errors.full_messages).to include('Eメールは不正な値です')
+      expect(@user.errors.full_messages).to include('メールアドレスは不正な値です')
     end
 
     it 'passwordが6文字未満では登録できない' do
@@ -108,21 +108,21 @@ RSpec.describe 'ユーザー新規登録', type: :model do
       @user.password = 'Ａ２3456'
       @user.password_confirmation = @user.password
       @user.valid?
-      expect(@user.errors.full_messages).to include('パスワードは不正な値です')
+      expect(@user.errors.full_messages).to include('パスワードは半角英数字混合の6文字以上です')
     end
 
     it 'passwordが半角英字を含まないと登録できない' do
       @user.password = '123456'
       @user.password_confirmation = @user.password
       @user.valid?
-      expect(@user.errors.full_messages).to include('パスワードは不正な値です')
+      expect(@user.errors.full_messages).to include('パスワードは半角英数字混合の6文字以上です')
     end
 
     it 'passwordが半角数字を含まないと登録できない' do
       @user.password = 'abcdef'
       @user.password_confirmation = @user.password
       @user.valid?
-      expect(@user.errors.full_messages).to include('パスワードは不正な値です')
+      expect(@user.errors.full_messages).to include('パスワードは半角英数字混合の6文字以上です')
     end
 
     it 'passwordとpassword_confirmationが一致しないと登録できない' do
