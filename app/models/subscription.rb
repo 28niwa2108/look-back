@@ -4,20 +4,23 @@ class Subscription < ApplicationRecord
     validates :name, length: { maximum: 10 }
     validates :price, numericality: {
       only_integer: true,
-      greater_than_or_equal_to: 0
+      greater_than_or_equal_to: 0,
+      message: 'は0以上の整数を入力してください'
     }
     validates :contract_date
     validates :update_cycle, numericality: {
       only_integer: true,
       greater_than_or_equal_to: 1,
-      less_than_or_equal_to: 31
+      less_than_or_equal_to: 31,
+      allow_blank: true
     }
   end
 
   validates :update_type_id, numericality: {
     only_integer: true,
     greater_than_or_equal_to: 1,
-    less_than_or_equal_to: 3
+    less_than_or_equal_to: 3,
+    message: 'は日・月・年のいずれかを選択してください'
   }
 
   validates :update_day_type_id, numericality: {

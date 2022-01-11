@@ -89,8 +89,8 @@ RSpec.describe Review, type: :model do
 
     it '☆評価がまだない場合は、nilが戻る' do
       reviews = []
-      reviews << FactoryBot.create(:review, later_check_id: 2, review_rate: "")
-      reviews << FactoryBot.create(:review, later_check_id: 2, review_rate: "")
+      reviews << FactoryBot.create(:review, later_check_id: 2, review_rate: '')
+      reviews << FactoryBot.create(:review, later_check_id: 2, review_rate: '')
       review_ave = Review.get_review_rate_ave(reviews)
       expect(review_ave).to eq(nil)
     end

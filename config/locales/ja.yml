@@ -4,7 +4,7 @@ ja:
     attributes:
       user:
         nickname: ニックネーム
-        email: Eメール
+        email: メールアドレス
         password: パスワード
         password_confirmation: パスワード(確認用)
       subscription:
@@ -18,15 +18,14 @@ ja:
       contract_cancel:
         cancel_date: 解約日
         reason_id: 解約理由
-        cancel_comment: 解約フリーコメント
+        cancel_comment: 解約メモ
   activemodel:
     attributes:
       review_action:
-        later_check_id: 後で評価する場合は、あとで振り返るを
-        review_rate: サブスク評価☆
-        review_comment: サブスクレビューコメント
-        action_rate: アクションプラン評価☆
-        action_review_comment: アクションレビューコメント
+        review_rate: サブスク☆
+        review_comment: サブスク振り返りコメント
+        action_rate: アクションプラン☆
+        action_review_comment: アクション振り返りコメント
         action_plan: アクションプラン
     errors:
       messages:

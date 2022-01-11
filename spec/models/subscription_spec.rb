@@ -131,7 +131,7 @@ RSpec.describe Subscription, type: :model do
     it 'update_type_idが空では登録できない' do
       @subs.update_type_id = ''
       @subs.valid?
-      expect(@subs.errors.full_messages).to include('契約タイプは数値で入力してください')
+      expect(@subs.errors.full_messages).to include('契約タイプは日・月・年のいずれかを選択してください')
     end
 
     it 'update_type_idが2か3のとき、update_day_type_idが空では登録できない' do
@@ -156,19 +156,19 @@ RSpec.describe Subscription, type: :model do
     it 'priceが数値以外では登録できない' do
       @subs.price = 'e'
       @subs.valid?
-      expect(@subs.errors.full_messages).to include('価格は数値で入力してください')
+      expect(@subs.errors.full_messages).to include('価格は0以上の整数を入力してください')
     end
 
     it 'priceが0未満の数値では登録できない' do
       @subs.price = -1
       @subs.valid?
-      expect(@subs.errors.full_messages).to include('価格は0以上の値にしてください')
+      expect(@subs.errors.full_messages).to include('価格は0以上の整数を入力してください')
     end
 
     it 'update_type_idが数値以外では登録できない' do
       @subs.update_type_id = 'e'
       @subs.valid?
-      expect(@subs.errors.full_messages).to include('契約タイプは数値で入力してください')
+      expect(@subs.errors.full_messages).to include('契約タイプは日・月・年のいずれかを選択してください')
     end
 
     it 'update_cycleが数値以外では登録できない' do
@@ -192,19 +192,19 @@ RSpec.describe Subscription, type: :model do
     it 'update_type_idが1未満(3超過)では登録できない' do
       @subs.update_type_id = 0
       @subs.valid?
-      expect(@subs.errors.full_messages).to include('契約タイプは1以上の値にしてください')
+      expect(@subs.errors.full_messages).to include('契約タイプは日・月・年のいずれかを選択してください')
     end
 
     it 'update_type_idが(1未満)3超過では登録できない' do
       @subs.update_type_id = 4
       @subs.valid?
-      expect(@subs.errors.full_messages).to include('契約タイプは3以下の値にしてください')
+      expect(@subs.errors.full_messages).to include('契約タイプは日・月・年のいずれかを選択してください')
     end
 
     it 'update_type_idが1未満(3超過)では登録できない' do
       @subs.update_type_id = 0
       @subs.valid?
-      expect(@subs.errors.full_messages).to include('契約タイプは1以上の値にしてください')
+      expect(@subs.errors.full_messages).to include('契約タイプは日・月・年のいずれかを選択してください')
     end
 
     it 'update_type_idが2か3のとき、update_day_type_idが(1未満)2超過では登録できない' do

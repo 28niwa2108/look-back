@@ -1,37 +1,37 @@
 <div class="bg-gray-100 py-7">
   <%= form_with model: @user, url: user_registration_path, class: "w-full", local: true do |f| %>
     <div class="container px-5 py-6 mx-auto my-10 flex flex-col items-center lg:w-2/4 md:w-2/4 sm:w-96 bg-white rounded-lg">
-      <h2 class="text-gray-900 text-2xl font-bold title-font my-5">New Account</h2>
+      <h2 class="text-gray-900 text-2xl font-bold title-font my-5">アカウント作成</h2>
       <%= render "devise/shared/error_messages", resource: resource %>
-      <div class="relative mb-4 flex flex-col">
+      <div class="relative my-4 flex flex-col">
         <label id="nickname" class="flex flex-row leading-7 text-base text-gray-600">
-          Nickname
+          ニックネーム
           <abbr class="text-red-500 ml-1" title="必須">*</abbr>
         </label>
         <%= f.text_field :nickname, autofocus: true, autocomplete: "nickname", id: "nickname", placeholder: "6文字以内", class: "w-full bg-white rounded border border-gray-300 focus:border-gray-400 focus:ring-2 focus:ring-gray-400 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" %>
       </div>
       <div class="relative mb-4 flex flex-col">
         <label id="email" class="flex flex-row leading-7 text-base text-gray-600">
-          Email
+          メールアドレス
           <abbr class="text-red-500 ml-1" title="必須">*</abbr>
         </label>
         <%= f.email_field :email, autocomplete: "email", id: "email", placeholder: "重複不可", class: "w-full bg-white rounded border border-gray-300 focus:border-gray-400 focus:ring-2 focus:ring-gray-400 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" %>
       </div>
       <div class="relative mb-4 flex flex-col">
         <label id="password" class="flex flex-row leading-7 text-base text-gray-600">
-          Password
+          パスワード
           <abbr class="text-red-500 ml-1" title="必須">*</abbr>
         </label>
         <%= f.password_field :password, autocomplete: "current-password", id: "password", placeholder: "6文字以上の英数字混合", class: "w-full bg-white rounded border border-gray-300 focus:border-gray-400 focus:ring-2 focus:ring-gray-400 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" %>
       </div>
       <div class="relative mb-4 flex flex-col">
         <label id="password_confirmation" class="flex flex-row leading-7 text-base text-gray-600">
-          Password(check)
+          パスワード(確認)
           <abbr class="text-red-500 ml-1" title="必須">*</abbr>
         </label>
         <%= f.password_field :password_confirmation, autocomplete: "new-password", id: "password_confirmation", placeholder: "パスワードの再入力", class: "w-full bg-white rounded border border-gray-300 focus:border-gray-400 focus:ring-2 focus:ring-gray-400 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" %>
       </div>
-      <%= f.submit "Create", class: "block text-white bg-black border-0 mt-2 py-2 px-8 focus:outline-none hover:bg-gray-200 hover:text-black rounded text-lg" %>
+      <%= f.submit "登録する", class: "block text-white bg-black border-0 mt-2 py-2 px-8 focus:outline-none hover:bg-gray-200 hover:text-black rounded text-lg" %>
     </div>
   <% end %>
 </div>
