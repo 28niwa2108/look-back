@@ -108,21 +108,21 @@ RSpec.describe 'ユーザー新規登録', type: :model do
       @user.password = 'Ａ２3456'
       @user.password_confirmation = @user.password
       @user.valid?
-      expect(@user.errors.full_messages).to include('パスワードは半角英数字混合の6文字以上です')
+      expect(@user.errors.full_messages).to include('パスワードは半角英数字の混合で設定してください')
     end
 
     it 'passwordが半角英字を含まないと登録できない' do
       @user.password = '123456'
       @user.password_confirmation = @user.password
       @user.valid?
-      expect(@user.errors.full_messages).to include('パスワードは半角英数字混合の6文字以上です')
+      expect(@user.errors.full_messages).to include('パスワードは半角英数字の混合で設定してください')
     end
 
     it 'passwordが半角数字を含まないと登録できない' do
       @user.password = 'abcdef'
       @user.password_confirmation = @user.password
       @user.valid?
-      expect(@user.errors.full_messages).to include('パスワードは半角英数字混合の6文字以上です')
+      expect(@user.errors.full_messages).to include('パスワードは半角英数字の混合で設定してください')
     end
 
     it 'passwordとpassword_confirmationが一致しないと登録できない' do
