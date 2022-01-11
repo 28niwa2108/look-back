@@ -11,13 +11,14 @@ window.addEventListener('load', () => {
       e.preventDefault();
       const form = forms[i]
       const sub_delete_path = form.getAttribute("action");
+      const cancel_path = sub_delete_path + "/contract_cancels/new"
       const formData = new FormData(form);
 
       // 削除警告画面
       Swal.fire({
         title: 'サブスクを削除します',
         html: '過去のレビューも削除され、元に戻せません。',
-        footer: '<a href="#" class="text-blue-400 hover:bg-gray-200">サブスクの解約はこちら</a>',
+        footer: `<a href=${cancel_path} class="text-blue-400 hover:bg-gray-200">サブスクの解約はこちら</a>`,
         icon: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
