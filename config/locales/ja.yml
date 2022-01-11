@@ -22,11 +22,10 @@ ja:
   activemodel:
     attributes:
       review_action:
-        later_check_id: 後で評価する場合は、あとで振り返るを
-        review_rate: サブスク評価☆
-        review_comment: サブスクレビューコメント
-        action_rate: アクションプラン評価☆
-        action_review_comment: アクションレビューコメント
+        review_rate: サブスク☆
+        review_comment: サブスク振り返りコメント
+        action_rate: アクションプラン☆
+        action_review_comment: アクション振り返りコメント
         action_plan: アクションプラン
     errors:
       messages:

@@ -99,7 +99,7 @@ RSpec.describe ReviewAction, type: :model do
       @review_action.review_rate = nil
       expect(@review_action.type_is_later).to eq(false)
       @review_action.valid?
-      expect(@review_action.errors.full_messages).to include('サブスク評価☆を入力してください', 'サブスク評価☆は数値で入力してください')
+      expect(@review_action.errors.full_messages).to include('サブスク☆レビューを選択してください')
     end
 
     it 'later_check_idが1なら、falseが返り、action_rateのバリデーションが機能する' do
@@ -107,7 +107,7 @@ RSpec.describe ReviewAction, type: :model do
       @review_action.action_rate = nil
       expect(@review_action.type_is_later).to eq(false)
       @review_action.valid?
-      expect(@review_action.errors.full_messages).to include('アクションプラン評価☆を入力してください', 'アクションプラン評価☆は数値で入力してください')
+      expect(@review_action.errors.full_messages).to include('アクションプラン☆レビューを選択してください')
     end
 
     it 'later_check_idが1なら、falseが返り、action_planのバリデーションが機能する' do
@@ -221,7 +221,7 @@ RSpec.describe ReviewAction, type: :model do
     it 'later_check_idが空では保存できない' do
       @review_action.later_check_id = ''
       @review_action.valid?
-      expect(@review_action.errors.full_messages).to include('後で評価する場合は、あとで振り返るをを入力してください', '後で評価する場合は、あとで振り返るをは数値で入力してください')
+      expect(@review_action.errors.full_messages).to include('Later checkを入力してください', 'Later checkは数値で入力してください')
     end
 
     it '紐づくユーザーが存在しなければ保存できない' do
@@ -240,39 +240,39 @@ RSpec.describe ReviewAction, type: :model do
       @review_action.later_check_id = '1'
       @review_action.review_rate = ''
       @review_action.valid?
-      expect(@review_action.errors.full_messages).to include('サブスク評価☆を入力してください', 'サブスク評価☆は数値で入力してください')
+      expect(@review_action.errors.full_messages).to include('サブスク☆レビューを選択してください')
     end
 
     it 'later_check_idが1のとき、review_rateは、1未満の数値では保存できない' do
       @review_action.later_check_id = '1'
       @review_action.review_rate = 0
       @review_action.valid?
-      expect(@review_action.errors.full_messages).to include('サブスク評価☆は1以上の値にしてください')
+      expect(@review_action.errors.full_messages).to include('サブスク☆レビューを選択してください')
     end
 
     it 'later_check_idが1のとき、review_rateは、5超過の数値では保存できない' do
       @review_action.later_check_id = '1'
       @review_action.review_rate = 6
       @review_action.valid?
-      expect(@review_action.errors.full_messages).to include('サブスク評価☆は5以下の値にしてください')
+      expect(@review_action.errors.full_messages).to include('サブスク☆レビューを選択してください')
     end
 
     it 'review_commentは、300文字超過では保存できない' do
       @review_action.review_comment = 'あ' * 301
       @review_action.valid?
-      expect(@review_action.errors.full_messages).to include('サブスクレビューコメントは300文字以内で入力してください')
+      expect(@review_action.errors.full_messages).to include('サブスク振り返りコメントは300文字以内で入力してください')
     end
 
     it 'later_check_idが1未満では保存できない' do
       @review_action.later_check_id = 0
       @review_action.valid?
-      expect(@review_action.errors.full_messages).to include('後で評価する場合は、あとで振り返るをは1以上の値にしてください')
+      expect(@review_action.errors.full_messages).to include('Later checkは1以上の値にしてください')
     end
 
     it 'later_check_idが2超過では保存できない' do
       @review_action.later_check_id = 3
       @review_action.valid?
-      expect(@review_action.errors.full_messages).to include('後で評価する場合は、あとで振り返るをは2以下の値にしてください')
+      expect(@review_action.errors.full_messages).to include('Later checkは2以下の値にしてください')
     end
 
     it '紐づくレビューが存在しなければ保存できない' do
@@ -285,21 +285,21 @@ RSpec.describe ReviewAction, type: :model do
       @review_action.later_check_id = '1'
       @review_action.action_rate = ''
       @review_action.valid?
-      expect(@review_action.errors.full_messages).to include('アクションプラン評価☆を入力してください', 'アクションプラン評価☆は数値で入力してください')
+      expect(@review_action.errors.full_messages).to include('アクションプラン☆レビューを選択してください')
     end
 
     it 'reviewのlater_check_idが1のとき、action_rateが1未満では保存できない' do
       @review_action.later_check_id = '1'
       @review_action.action_rate = 0
       @review_action.valid?
-      expect(@review_action.errors.full_messages).to include('アクションプラン評価☆は1以上の値にしてください')
+      expect(@review_action.errors.full_messages).to include('アクションプラン☆レビューを選択してください')
     end
 
     it 'reviewのlater_check_idが1のとき、action_rateが5超過では保存できない' do
       @review_action.later_check_id = '1'
       @review_action.action_rate = 6
       @review_action.valid?
-      expect(@review_action.errors.full_messages).to include('アクションプラン評価☆は5以下の値にしてください')
+      expect(@review_action.errors.full_messages).to include('アクションプラン☆レビューを選択してください')
     end
 
     it 'reviewのlater_check_idが1のとき、action_planが空では保存できない' do
@@ -318,7 +318,7 @@ RSpec.describe ReviewAction, type: :model do
     it 'action_review_commentは、300文字超過では保存できない' do
       @review_action.action_review_comment = 'a' * 301
       @review_action.valid?
-      expect(@review_action.errors.full_messages).to include('アクションレビューコメントは300文字以内で入力してください')
+      expect(@review_action.errors.full_messages).to include('アクション振り返りコメントは300文字以内で入力してください')
     end
   end
 end

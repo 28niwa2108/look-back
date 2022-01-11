@@ -27,25 +27,37 @@ class ReviewAction
   end
 
   validates :review_comment, length: { maximum: 300 }
-  validates :review_rate, presence: true, numericality: {
+
+  validates :review_rate, presence: {
+    message: 'レビューを選択してください'
+  }, unless: :type_is_later
+  validates :review_rate, numericality: {
     only_integer: true,
     greater_than_or_equal_to: 1,
-    less_than_or_equal_to: 5
+    less_than_or_equal_to: 5,
+    message: 'レビューを選択してください',
+    allow_blank: true
   }, unless: :type_is_later
 
   # ActionPlanモデルバリデーション
   validates :action_plan, length: { maximum: 300 }
   validates :action_review_comment, length: { maximum: 300 }
 
-  validates :action_rate, presence: true, numericality: {
+  validates :action_rate, presence: {
+    message: 'レビューを選択してください'
+  }, unless: :type_is_later
+  validates :action_rate, numericality: {
     only_integer: true,
     greater_than_or_equal_to: 1,
-    less_than_or_equal_to: 5
+    less_than_or_equal_to: 5,
+    message: 'レビューを選択してください',
+    allow_blank: true
   }, unless: :type_is_later
 
   validates :action_plan, presence: true, unless: :type_is_later
   validates :review_id, presence: true
 
+  # メソッド
   def type_is_later
     later_check_id == '2'
   end
