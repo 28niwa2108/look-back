@@ -26,7 +26,7 @@ class Subscription < ApplicationRecord
   validates :update_day_type_id, numericality: {
     only_integer: true,
     greater_than_or_equal_to: 1,
-    less_than_or_equal_to: 2,
+    less_than_or_equal_to: 2
   }, unless: :type_is_day
 
   # アソシエーション

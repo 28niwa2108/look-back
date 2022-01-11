@@ -5,7 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   validates :password, format: {
-    with: /\A(?=.*?[a-z])(?=.*?\d)[a-z\d]+\z/i ,
+    with: /\A(?=.*?[a-z])(?=.*?\d)[a-z\d]+\z/i,
     message: 'は半角英数字の混合で設定してください',
     allow_blank: true
   }
