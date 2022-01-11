@@ -18,7 +18,7 @@ ja:
       contract_cancel:
         cancel_date: 解約日
         reason_id: 解約理由
-        cancel_comment: 解約フリーコメント
+        cancel_comment: 解約メモ
   activemodel:
     attributes:
       review_action:

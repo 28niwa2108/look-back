@@ -78,7 +78,7 @@ RSpec.describe ContractCancel, type: :model do
     it 'cancel_commentが300字超過では保存できない' do
       @cancel.cancel_comment = 'a' * 301
       @cancel.valid?
-      expect(@cancel.errors.full_messages).to include('解約フリーコメントは300文字以内で入力してください')
+      expect(@cancel.errors.full_messages).to include('解約メモは300文字以内で入力してください')
     end
   end
 end

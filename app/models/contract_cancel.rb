@@ -14,7 +14,8 @@ class ContractCancel < ApplicationRecord
     only_integer: true,
     greater_than_or_equal_to: 1,
     less_than_or_equal_to: 6,
-    message: 'を選択してください'
+    message: 'を選択してください',
+    allow_blank: true
   }
   validates :cancel_comment, length: { maximum: 300 }
 end
