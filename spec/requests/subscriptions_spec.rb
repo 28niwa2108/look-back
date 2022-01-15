@@ -167,13 +167,13 @@ RSpec.describe 'Subscriptions', type: :request do
     end
   
     context '他人のidでnewアクションにリクエストを送る場合、マイページにリダイレクトする' do
-      it 'showアクションにリクエストすると、HTTPステータス302が返ってくる' do
+      it 'newアクションにリクエストすると、HTTPステータス302が返ってくる' do
         user = FactoryBot.create(:user)
         get new_user_subscription_path(user)
         expect(response.status).to eq(302)
       end
 
-      it 'showアクションにリクエストすると、レスポンスにマイページのURLを含む' do
+      it 'newアクションにリクエストすると、レスポンスにマイページのURLを含む' do
         user = FactoryBot.create(:user)
         get new_user_subscription_path(user)
         expect(response.body).to include("http://www.example.com/users/#{@user.id}")
@@ -190,7 +190,7 @@ RSpec.describe 'Subscriptions', type: :request do
         expect(response.status).to eq(302)
       end
 
-      it 'showアクションにリクエストすると、レスポンスにサインインページのURLが含まれる' do
+      it 'newアクションにリクエストすると、レスポンスにサインインページのURLが含まれる' do
         user = FactoryBot.create(:user)
         get new_user_subscription_path(user)
         expect(response.body).to include("http://www.example.com/users/sign_in")
@@ -275,14 +275,14 @@ RSpec.describe 'Subscriptions', type: :request do
         expect(response.body).to include("価格を入力してください")
       end
 
-      it 'レスポンスにサブスク登録の文字が存在する' do
+      it 'createアクションのリクエストが失敗すると、レスポンスにサブスク登録の文字が存在する' do
         post user_subscriptions_path(@user), params: {
           subscription: FactoryBot.attributes_for(:subscription, price: nil).merge(user_id: @user.id)
         }
         expect(response.body).to include("サブスク登録")
       end
 
-      it 'レスポンスに登録するボタンが存在する' do
+      it 'createアクションのリクエストが失敗すると、レスポンスに登録するボタンが存在する' do
         post user_subscriptions_path(@user), params: {
           subscription: FactoryBot.attributes_for(:subscription, price: nil).merge(user_id: @user.id)
         }
@@ -301,7 +301,7 @@ RSpec.describe 'Subscriptions', type: :request do
         expect(response.status).to eq(302)
       end
 
-      it 'showアクションにリクエストするとレスポンスにサインインページのURLが含まれる' do
+      it 'createアクションにリクエストするとレスポンスにサインインページのURLが含まれる' do
         user = FactoryBot.create(:user)
         post user_subscriptions_path(user), params: {
           subscription: FactoryBot.attributes_for(:subscription).merge(user_id: user.id)
@@ -311,8 +311,187 @@ RSpec.describe 'Subscriptions', type: :request do
     end
   end
 
+  describe 'GET #edit(ログイン状態)' do
+    before do
+      @user = FactoryBot.create(:user)
+      @subs = FactoryBot.create(:subscription, user_id: @user.id)
+      sign_in(@user)
+    end
 
+    context 'ログイン状態なら、サブスク編集ページが表示される' do
+      it 'editアクションにリクエストすると、正常にレスポンスが返ってくる' do
+        get  edit_user_subscription_path(@user, @subs)
+        expect(response.status).to eq(200)
+      end
 
+      it 'editアクションにリクエストすると、レスポンスにサブスク編集の文字が存在する' do
+        get edit_user_subscription_path(@user, @subs)
+        expect(response.body).to include("サブスク編集")
+      end
 
+      it 'editアクションにリクエストすると、レスポンスに更新するボタンが存在する' do
+        get edit_user_subscription_path(@user, @subs)
+        expect(response.body).to include("更新する")
+      end
 
+      it 'editアクションにリクエストすると、＊契約日を変更したいときの文字が存在する' do
+        get edit_user_subscription_path(@user, @subs)
+        expect(response.body).to include("＊契約日を変更したいとき")
+      end
+
+      it 'editアクションにリクエストすると、レスポンスにサブスク名が存在する' do
+        get edit_user_subscription_path(@user, @subs)
+        expect(response.body).to include(@subs.name)
+      end
+
+      it 'editアクションにリクエストすると、レスポンスにサブスク価格が存在する' do
+        get edit_user_subscription_path(@user, @subs)
+        expect(response.body).to include(@subs.price.to_s)
+      end
+
+      it 'editアクションにリクエストすると、レスポンスにサブスクの更新サイクル存在する' do
+        get edit_user_subscription_path(@user, @subs)
+        expect(response.body).to include(@subs.update_cycle.to_s)
+      end
+    end
+
+    context '他人のidでeditアクションにリクエストを送る場合、マイページにリダイレクトする' do
+      it 'editアクションにリクエストすると、HTTPステータス302が返ってくる' do
+        user = FactoryBot.create(:user)
+        subs = FactoryBot.create(:subscription, user_id: user.id)
+        get edit_user_subscription_path(user, subs)
+        expect(response.status).to eq(302)
+      end
+
+      it 'editアクションにリクエストすると、レスポンスにマイページのURLを含む' do
+        user = FactoryBot.create(:user)
+        subs = FactoryBot.create(:subscription, user_id: user.id)
+        get edit_user_subscription_path(user, subs)
+        expect(response.body).to include("http://www.example.com/users/#{@user.id}")
+      end
+    end
+  end
+
+  describe 'GET #edit(ログアウト状態)' do
+    context 'ログイン状態でない場合、ログインページにリダイレクトする' do
+      it 'editアクションにリクエストすると、HTTPステータス302が返ってくる' do
+        user = FactoryBot.create(:user)
+        subs = FactoryBot.create(:subscription, user_id: user.id)
+        get edit_user_subscription_path(user, subs)
+        expect(response.status).to eq(302)
+      end
+
+      it 'editアクションにリクエストすると、レスポンスにサインインページのURLが含まれる' do
+        user = FactoryBot.create(:user)
+        subs = FactoryBot.create(:subscription, user_id: user.id)
+        get edit_user_subscription_path(user, subs)
+        expect(response.body).to include("http://www.example.com/users/sign_in")
+      end
+    end
+  end
+
+  describe 'PATCH #update(ログイン状態)' do
+    before do
+      @user = FactoryBot.create(:user)
+      @subs = FactoryBot.create(:subscription)
+      sign_in(@user)
+    end
+
+    context 'ログイン状態なら、サブスクが更新される' do
+      it 'updateアクションのリクエストが成功すると、HTTPステータス200が返ってくる' do
+        patch user_subscription_path(@user, @subs), params: {
+          subscription: FactoryBot.attributes_for(:subscription)
+        }
+        expect(response.status).to eq(200)
+      end
+
+      it 'updateアクションのリクエストが成功すると、サブスクレコードの値が更新される' do
+        expect {
+          patch user_subscription_path(@user, @subs), params: {
+            subscription: FactoryBot.attributes_for(:subscription, price:12345)
+          }
+        }.to change{ Subscription.find(@subs.id).price }.from(@subs.price).to(12345)
+      end
+
+      it 'updateアクションのリクエストが成功すると、レスポンスでprocess_ngはfalseで返る' do
+        patch user_subscription_path(@user, @subs), params: {
+          subscription: FactoryBot.attributes_for(:subscription).merge(user_id: @user.id)
+        }
+        expect(response.body).to include("{\"process_ng\":false}")
+      end
+    end
+
+    context '他人のidでupdateアクションにリクエストを送る場合、マイページにリダイレクトする' do
+      it 'updateアクションにリクエストを送ると、HTTPステータス302が返る' do
+        user = FactoryBot.create(:user)
+        subs = FactoryBot.create(:subscription)
+        patch user_subscription_path(user, subs), params: {
+          subscription: FactoryBot.attributes_for(:subscription, price:12345)
+        }
+        expect(response.status).to eq(302)
+      end
+
+      it 'updateアクションにリクエストを送ると、レスポンスにマイページのURLを含む' do
+        user = FactoryBot.create(:user)
+        subs = FactoryBot.create(:subscription)
+        patch user_subscription_path(user, subs), params: {
+          subscription: FactoryBot.attributes_for(:subscription, price:12345)
+        }
+        expect(response.body).to include("http://www.example.com/users/#{@user.id}")
+      end
+    end
+
+    context 'サブスク更新が失敗する場合' do
+      it 'updateアクションのリクエストが失敗すると、HTTPステータスは200が返る' do
+        patch user_subscription_path(@user, @subs), params: {
+          subscription: FactoryBot.attributes_for(:subscription, price: -1)
+        }
+        expect(response.status).to eq(200)
+      end
+
+      it 'updateアクションのリクエストが失敗すると、サブスクレコードの値は更新されない' do
+        expect {
+          patch user_subscription_path(@user, @subs), params: {
+            subscription: FactoryBot.attributes_for(:subscription, price: -1)
+          }
+        }.to_not change{ Subscription.find(@subs.id).price }
+      end
+
+      it 'updateアクションのリクエストが失敗すると、レスポンスでprocess_ngはtrueで返る' do
+        patch user_subscription_path(@user, @subs), params: {
+          subscription: FactoryBot.attributes_for(:subscription, price: -1)
+        }
+        expect(response.body).to include("\"process_ng\":true")
+      end
+
+      it 'updateアクションのリクエストが失敗すると、レスポンスにエラーメッセージが含まれる' do
+        patch user_subscription_path(@user, @subs), params: {
+          subscription: FactoryBot.attributes_for(:subscription, price: -1)
+        }
+        expect(response.body).to include('価格は0以上の整数を入力してください')
+      end
+    end
+  end
+
+  describe 'PATCH #update(ログアウト状態)' do
+    context 'ログイン状態でない場合、ログインページにリダイレクトする' do
+      it 'updateアクションにリクエストするとHTTPステータス302が返ってくる' do
+        user = FactoryBot.create(:user)
+        subs = FactoryBot.create(:subscription)
+        patch user_subscription_path(user, subs), params: {
+          subscription: FactoryBot.attributes_for(:subscription, price: 12345)
+        }
+        expect(response.status).to eq(302)
+      end
+
+      it 'updateションにリクエストするとレスポンスにサインインページのURLが含まれる' do
+        user = FactoryBot.create(:user)
+        subs = FactoryBot.create(:subscription)
+        patch user_subscription_path(user, subs), params: {
+          subscription: FactoryBot.attributes_for(:subscription, price: 12345)
+        }
+        expect(response.body).to include("http://www.example.com/users/sign_in")
+      end
+    end
+  end
 end
