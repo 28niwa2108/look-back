@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "Users", type: :request do
+RSpec.describe 'Users', type: :request do
   before do
     @user = FactoryBot.create(:user)
     @subs = FactoryBot.create(:subscription, user_id: @user.id)
@@ -8,7 +8,7 @@ RSpec.describe "Users", type: :request do
     sign_in(@user)
   end
 
-  describe "GET #show" do
+  describe 'GET #show' do
     context 'ログイン状態なら、マイページが表示される' do
       it 'showアクションにリクエストすると正常にレスポンスが返ってくる' do
         get user_path(@user)
