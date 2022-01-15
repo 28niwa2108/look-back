@@ -61,12 +61,22 @@ window.addEventListener('load', () => {
         request.send(formData);
         request.onload = () => {
           //レスポンスが200以外の場合
-          if (request.status != 200 || request.response.process_ng){
+          if (request.status != 200){
             Swal.fire({
               icon: 'error',
               title: '更新失敗',
               confirmButtonColor: '#cc3333',
               html: '大変お手数ですが、<a href="#" class="text-blue-400 hover:bg-gray-200">こちら</a>から<br>不具合のご報告をお願い申し上げます。'
+            });
+            return null;
+          };
+          if (request.response.process_ng) {
+            Swal.fire({
+              icon: 'error',
+              title: '更新失敗',
+              confirmButtonColor: '#cc3333',
+              confirmButtonText: ' OK ',
+              html: `${request.response.error_messages[0]}`
             });
             return null;
           };

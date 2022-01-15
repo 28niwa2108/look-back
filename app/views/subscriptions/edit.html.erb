@@ -1,10 +1,7 @@
 <div class="bg-gray-100 py-8">
   <%= form_with model: [@user, @subs], url: user_subscription_path(@user, @subs), method: :PATCH, id: "sub-edit-form", class:"w-full", local: true do |f| %>
     <div class="container px-5 py-6 mx-auto my-8 flex flex-col items-center lg:w-2/4 md:w-2/4 sm:w-96 bg-white rounded-lg">
-      <h2 class="text-gray-900 text-2xl font-bold title-font my-5">サブスク編集</h2>
-
-      <%= render "shared/error_messages", model: f.object %>
-      <%= render "shared/error_messages_second", model: @renewal if @renewal != nil %>
+      <h2 id="sub_edit_title" class="text-gray-900 text-2xl font-bold title-font my-5">サブスク編集</h2>
 
       <div class="my-2 mx-auto">
 
@@ -17,11 +14,6 @@
               <label for="price" class="block text-gray-600">価格</label>
               <%= f.number_field :price, class:"", id:"price", placeholder:"数字のみOK", class: "w-full focus:border-gray-400 focus:ring-2 focus:ring-gray-400 bg-gray-100 bg-opacity-50 rounded border border-gray-300 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" %>
           </div>
-
-          <%#<div class="relative p-2 w-10/12 mx-auto">
-              <label for="contract_data" class="block text-gray-600">契約開始日</label>
-              <%= f.date_field :contract_date, id:"contract_date", placeholder:"", class: "w-full focus:border-gray-400 focus:ring-2 focus:ring-gray-400 bg-gray-100 bg-opacity-50 rounded border border-gray-300 text-base outline-none text-gray-700 py-1 px-3 resize-none transition-colors ease-in-out"
-          </div>%>
 
           <div class="relative p-2 w-10/12 mx-auto">
               <label for="update_cycle" class="block text-gray-600">更新サイクル</label>
@@ -40,7 +32,7 @@
           </div>
 
           <div class="relative mt-2 p-2 w-10/12 mx-auto text-center">
-            <%= link_to '＊契約日を変更したいとき(現在：仮リンク)', '#', class: 'text-sm text-blue-400 hover:bg-gray-200' %>
+            <%= link_to '＊契約日を変更したいとき(仮)', '#', class: 'text-sm text-blue-400 hover:bg-gray-200' %>
           </div>
       </div>
     </div>

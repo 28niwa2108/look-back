@@ -51,7 +51,8 @@ class SubscriptionsController < ApplicationController
       render json: { process_ng: false }
     else
       set_user
-      render json: { process_ng: true }
+      error_messages =  @subs.errors.full_messages
+      render json: { process_ng: true, error_messages: error_messages }
     end
   end
 
