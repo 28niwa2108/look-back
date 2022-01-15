@@ -1,26 +1,27 @@
 require 'rails_helper'
 
 RSpec.describe 'Users', type: :request do
-  before do
-    @user = FactoryBot.create(:user)
-    @subs = FactoryBot.create(:subscription, user_id: @user.id)
-    @renewal = FactoryBot.create(:contract_renewal, subscription_id: @subs.id)
-    sign_in(@user)
-  end
 
-  describe 'GET #show' do
+  describe 'GET #show(ログイン状態)' do
+    before do
+      @user = FactoryBot.create(:user)
+      @subs = FactoryBot.create(:subscription, user_id: @user.id)
+      @renewal = FactoryBot.create(:contract_renewal, subscription_id: @subs.id)
+      sign_in(@user)
+    end
+
     context 'ログイン状態なら、マイページが表示される' do
-      it 'showアクションにリクエストすると正常にレスポンスが返ってくる' do
+      it 'showアクションにリクエストすると、正常にレスポンスが返ってくる' do
         get user_path(@user)
         expect(response.status).to eq(200)
       end
 
-      it 'レスポンスに登録済のサブスク名が存在する' do
+      it 'showアクションにリクエストすると、レスポンスに登録済のサブスク名が存在する' do
         get user_path(@user)
         expect(response.body).to include(@subs.name)
       end
 
-      it 'レスポンスに次回更新日が存在する' do
+      it 'showアクションにリクエストすると、レスポンスに次回更新日が存在する' do
         get user_path(@user)
         next_update_date = @renewal.next_update_date
         year = next_update_date.year
@@ -32,11 +33,33 @@ RSpec.describe 'Users', type: :request do
       end
     end
 
-    context 'ログイン失敗すると、トップページにリダイレクトする' do
+    context '他人のマイページに遷移しようとすると、マイページにリダイレクトする' do
+      it 'showアクションにリクエストすると、HTTPステータス302が返ってくる' do
+        user = FactoryBot.create(:user)
+        get user_path(user)
+        expect(response.status).to eq(302)
+      end
+
+      it 'showアクションにリクエストすると、レスポンスにマイページのURLが含まれる' do
+        user = FactoryBot.create(:user)
+        get user_path(user)
+        expect(response.body).to include("http://www.example.com/users/#{@user.id}")
+      end
+    end
+  end
+
+  describe 'GET #show(ログアウト状態)' do
+    context 'ログイン状態でない場合、ログインページにリダイレクトする' do
       it 'showアクションにリクエストするとHTTPステータス302が返ってくる' do
         user = FactoryBot.create(:user)
         get user_path(user)
         expect(response.status).to eq(302)
+      end
+
+      it 'showアクションにリクエストするとレスポンスにサインインページのURLが含まれる' do
+        user = FactoryBot.create(:user)
+        get user_path(user)
+        expect(response.body).to include("http://www.example.com/users/sign_in")
       end
     end
   end
