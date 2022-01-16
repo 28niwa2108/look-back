@@ -4,7 +4,7 @@ class ContractRenewalsController < ApplicationController
 
   def update
     @subs = Subscription.find_by(id: params[:subscription_id])
-    @renewal = ContractRenewal.find_by(subscription_id: params[:subscription_id])
+    @renewal = ContractRenewal.find_by(id: params[:id])
 
     update_date = @renewal.next_update_date
     next_update = @renewal.get_update_date(@subs, @renewal.next_update_date)
@@ -32,14 +32,14 @@ class ContractRenewalsController < ApplicationController
     # 失敗した場合は、マイページに戻り、エラーを表示
     rescue => e
       # render時に必要なインスタンス変数の用意
-      @error = @renewal
+      error = @renewal.errors.full_messages
       @user = current_user
       @subs = Subscription.where(user_id: @user.id)
       @renewal = []
       @subs.each do |sub|
         @renewal << sub.contract_renewal
       end
-      render json: { process_ng: true }
+      render json: { process_ng: true, error: error }
   end
 
   private
