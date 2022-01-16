@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe 'Subscriptions', type: :request do
-
   describe 'GET #show(ログイン状態)' do
     before do
       @user = FactoryBot.create(:user)
@@ -103,9 +102,8 @@ RSpec.describe 'Subscriptions', type: :request do
         get user_subscription_path(user, subs)
         expect(response.body).to include("http://www.example.com/users/#{@user.id}")
       end
-
     end
-  
+
     context '他人のidでshowアクションにリクエストすると、マイページにリダイレクトする' do
       it 'showアクションにリクエストすると、HTTPステータス302が返ってくる' do
         user = FactoryBot.create(:user)
@@ -120,7 +118,6 @@ RSpec.describe 'Subscriptions', type: :request do
         get user_subscription_path(user, subs)
         expect(response.body).to include("http://www.example.com/users/#{@user.id}")
       end
-
     end
   end
 
@@ -137,9 +134,8 @@ RSpec.describe 'Subscriptions', type: :request do
         user = FactoryBot.create(:user)
         subs = FactoryBot.create(:subscription, user_id: user.id)
         get user_subscription_path(user, subs)
-        expect(response.body).to include("http://www.example.com/users/sign_in")
+        expect(response.body).to include('http://www.example.com/users/sign_in')
       end
-
     end
   end
 
@@ -157,15 +153,15 @@ RSpec.describe 'Subscriptions', type: :request do
 
       it 'newアクションにリクエストすると、レスポンスにサブスク登録の文字が存在する' do
         get new_user_subscription_path(@user)
-        expect(response.body).to include("サブスク登録")
+        expect(response.body).to include('サブスク登録')
       end
 
       it 'newアクションにリクエストすると、レスポンスに登録するボタンが存在する' do
         get new_user_subscription_path(@user)
-        expect(response.body).to include("登録する")
+        expect(response.body).to include('登録する')
       end
     end
-  
+
     context '他人のidでnewアクションにリクエストを送る場合、マイページにリダイレクトする' do
       it 'newアクションにリクエストすると、HTTPステータス302が返ってくる' do
         user = FactoryBot.create(:user)
@@ -178,7 +174,6 @@ RSpec.describe 'Subscriptions', type: :request do
         get new_user_subscription_path(user)
         expect(response.body).to include("http://www.example.com/users/#{@user.id}")
       end
-
     end
   end
 
@@ -193,11 +188,10 @@ RSpec.describe 'Subscriptions', type: :request do
       it 'newアクションにリクエストすると、レスポンスにサインインページのURLが含まれる' do
         user = FactoryBot.create(:user)
         get new_user_subscription_path(user)
-        expect(response.body).to include("http://www.example.com/users/sign_in")
+        expect(response.body).to include('http://www.example.com/users/sign_in')
       end
     end
   end
-
 
   describe 'POST #create(ログイン状態)' do
     before do
@@ -215,30 +209,26 @@ RSpec.describe 'Subscriptions', type: :request do
       end
 
       it 'createアクションのリクエストが成功すると、サブスクレコードが登録される' do
-        expect {
-          post user_subscriptions_path(@user), params: {
-            subscription: FactoryBot.attributes_for(:subscription).merge(user_id: @user.id)
-          }
-        }.to change{ Subscription.count }.by(1)
+        expect { post user_subscriptions_path(@user), params: {
+          subscription: FactoryBot.attributes_for(:subscription).merge(user_id: @user.id)
+        }}.to change { Subscription.count }.by(1)
       end
 
       it 'createアクションのリクエストが成功すると、契約更新レコードが登録される' do
-        expect {
-          post user_subscriptions_path(@user), params: {
-            subscription: FactoryBot.attributes_for(:subscription).merge(user_id: @user.id)
-          }
-        }.to change{ ContractRenewal.count }.by(1)
+        expect { post user_subscriptions_path(@user), params: {
+          subscription: FactoryBot.attributes_for(:subscription).merge(user_id: @user.id)
+        }
+        }.to change { ContractRenewal.count }.by(1)
       end
     end
 
     context '他人のidでcreateアクションにリクエストを送る場合' do
       it 'Subscriptionカウントは変わらず、マイページにリダイレクトする' do
         user = FactoryBot.create(:user)
-        expect {
-          post user_subscriptions_path(user), params: {
-            subscription: FactoryBot.attributes_for(:subscription).merge(user_id: user.id)
-          }
-        }.to change{ ContractRenewal.count }.by(0)
+        expect { post user_subscriptions_path(user), params: {
+          subscription: FactoryBot.attributes_for(:subscription).merge(user_id: user.id)
+        }
+        }.to change { ContractRenewal.count }.by(0)
         expect(response.status).to eq(302)
         expect(response.body).to include("http://www.example.com/users/#{@user.id}")
       end
@@ -253,41 +243,39 @@ RSpec.describe 'Subscriptions', type: :request do
       end
 
       it 'createアクションのリクエストが失敗すると、Subscriptionカウントは変化しない' do
-        expect {
-          post user_subscriptions_path(@user), params: {
-            subscription: FactoryBot.attributes_for(:subscription, price: nil).merge(user_id: @user.id)
-          }
-        }.to change{ Subscription.count }.by(0)
+        expect { post user_subscriptions_path(@user), params: {
+          subscription: FactoryBot.attributes_for(:subscription, price: nil).merge(user_id: @user.id)
+        }
+        }.to change { Subscription.count }.by(0)
       end
 
       it 'createアクションのリクエストが失敗すると、ContractRenewalカウントは変化しない' do
-        expect {
-          post user_subscriptions_path(@user), params: {
-            subscription: FactoryBot.attributes_for(:subscription, price: nil).merge(user_id: @user.id)
-          }
-        }.to change{ ContractRenewal.count }.by(0)
+        expect { post user_subscriptions_path(@user), params: {
+          subscription: FactoryBot.attributes_for(:subscription, price: nil).merge(user_id: @user.id)
+        }
+        }.to change { ContractRenewal.count }.by(0)
       end
 
       it 'createアクションのリクエストが失敗すると、レスポンスにエラーメッセージが含まれる' do
         post user_subscriptions_path(@user), params: {
           subscription: FactoryBot.attributes_for(:subscription, price: nil).merge(user_id: @user.id)
         }
-        expect(response.body).to include("価格を入力してください")
+        expect(response.body).to include('価格を入力してください')
       end
 
       it 'createアクションのリクエストが失敗すると、レスポンスにサブスク登録の文字が存在する' do
         post user_subscriptions_path(@user), params: {
           subscription: FactoryBot.attributes_for(:subscription, price: nil).merge(user_id: @user.id)
         }
-        expect(response.body).to include("サブスク登録")
+        expect(response.body).to include('サブスク登録')
       end
 
       it 'createアクションのリクエストが失敗すると、レスポンスに登録するボタンが存在する' do
         post user_subscriptions_path(@user), params: {
           subscription: FactoryBot.attributes_for(:subscription, price: nil).merge(user_id: @user.id)
         }
-        expect(response.body).to include("登録する")
-      end 
+        expect(response.body).to include('登録する')
+      end
     end
   end
 
@@ -306,7 +294,7 @@ RSpec.describe 'Subscriptions', type: :request do
         post user_subscriptions_path(user), params: {
           subscription: FactoryBot.attributes_for(:subscription).merge(user_id: user.id)
         }
-        expect(response.body).to include("http://www.example.com/users/sign_in")
+        expect(response.body).to include('http://www.example.com/users/sign_in')
       end
     end
   end
@@ -320,23 +308,23 @@ RSpec.describe 'Subscriptions', type: :request do
 
     context 'ログイン状態なら、サブスク編集ページが表示される' do
       it 'editアクションにリクエストすると、正常にレスポンスが返ってくる' do
-        get  edit_user_subscription_path(@user, @subs)
+        get edit_user_subscription_path(@user, @subs)
         expect(response.status).to eq(200)
       end
 
       it 'editアクションにリクエストすると、レスポンスにサブスク編集の文字が存在する' do
         get edit_user_subscription_path(@user, @subs)
-        expect(response.body).to include("サブスク編集")
+        expect(response.body).to include('サブスク編集')
       end
 
       it 'editアクションにリクエストすると、レスポンスに更新するボタンが存在する' do
         get edit_user_subscription_path(@user, @subs)
-        expect(response.body).to include("更新する")
+        expect(response.body).to include('更新する')
       end
 
       it 'editアクションにリクエストすると、＊契約日を変更したいときの文字が存在する' do
         get edit_user_subscription_path(@user, @subs)
-        expect(response.body).to include("＊契約日を変更したいとき")
+        expect(response.body).to include('＊契約日を変更したいとき')
       end
 
       it 'editアクションにリクエストすると、レスポンスにサブスク名が存在する' do
@@ -385,7 +373,7 @@ RSpec.describe 'Subscriptions', type: :request do
         user = FactoryBot.create(:user)
         subs = FactoryBot.create(:subscription, user_id: user.id)
         get edit_user_subscription_path(user, subs)
-        expect(response.body).to include("http://www.example.com/users/sign_in")
+        expect(response.body).to include('http://www.example.com/users/sign_in')
       end
     end
   end
@@ -406,18 +394,17 @@ RSpec.describe 'Subscriptions', type: :request do
       end
 
       it 'updateアクションのリクエストが成功すると、サブスクレコードの値が更新される' do
-        expect {
-          patch user_subscription_path(@user, @subs), params: {
-            subscription: FactoryBot.attributes_for(:subscription, price:12345)
-          }
-        }.to change{ Subscription.find(@subs.id).price }.from(@subs.price).to(12345)
+        expect { patch user_subscription_path(@user, @subs), params: {
+          subscription: FactoryBot.attributes_for(:subscription, price: 123_45)
+        }
+        }.to change { Subscription.find(@subs.id).price }.from(@subs.price).to(123_45)
       end
 
-      it 'updateアクションのリクエストが成功すると、レスポンスでprocess_ngはfalseで返る' do
+      it 'updateアクションのリクエストが成功すると、レスポンスにfalseを含む' do
         patch user_subscription_path(@user, @subs), params: {
           subscription: FactoryBot.attributes_for(:subscription).merge(user_id: @user.id)
         }
-        expect(response.body).to include("{\"process_ng\":false}")
+        expect(response.body).to include('false')
       end
     end
 
@@ -426,7 +413,7 @@ RSpec.describe 'Subscriptions', type: :request do
         user = FactoryBot.create(:user)
         subs = FactoryBot.create(:subscription, user_id: user.id)
         patch user_subscription_path(user, subs), params: {
-          subscription: FactoryBot.attributes_for(:subscription, price:12345)
+          subscription: FactoryBot.attributes_for(:subscription, price: 123_45)
         }
         expect(response.status).to eq(302)
       end
@@ -435,7 +422,7 @@ RSpec.describe 'Subscriptions', type: :request do
         user = FactoryBot.create(:user)
         subs = FactoryBot.create(:subscription, user_id: user.id)
         patch user_subscription_path(user, subs), params: {
-          subscription: FactoryBot.attributes_for(:subscription, price:12345)
+          subscription: FactoryBot.attributes_for(:subscription, price: 123_45)
         }
         expect(response.body).to include("http://www.example.com/users/#{@user.id}")
       end
@@ -450,18 +437,17 @@ RSpec.describe 'Subscriptions', type: :request do
       end
 
       it 'updateアクションのリクエストが失敗すると、サブスクレコードの値は更新されない' do
-        expect {
-          patch user_subscription_path(@user, @subs), params: {
-            subscription: FactoryBot.attributes_for(:subscription, price: -1)
-          }
-        }.to_not change{ Subscription.find(@subs.id).price }
+        expect { patch user_subscription_path(@user, @subs), params: {
+          subscription: FactoryBot.attributes_for(:subscription, price: -1)
+        }
+        }.to_not change { Subscription.find(@subs.id).price }
       end
 
-      it 'updateアクションのリクエストが失敗すると、レスポンスでprocess_ngはtrueで返る' do
+      it 'updateアクションのリクエストが失敗すると、レスポンスにtrueを含む' do
         patch user_subscription_path(@user, @subs), params: {
           subscription: FactoryBot.attributes_for(:subscription, price: -1)
         }
-        expect(response.body).to include("\"process_ng\":true")
+        expect(response.body).to include('true')
       end
 
       it 'updateアクションのリクエストが失敗すると、レスポンスにエラーメッセージが含まれる' do
@@ -479,7 +465,7 @@ RSpec.describe 'Subscriptions', type: :request do
         user = FactoryBot.create(:user)
         subs = FactoryBot.create(:subscription)
         patch user_subscription_path(user, subs), params: {
-          subscription: FactoryBot.attributes_for(:subscription, price: 12345)
+          subscription: FactoryBot.attributes_for(:subscription, price: 123_45)
         }
         expect(response.status).to eq(302)
       end
@@ -488,9 +474,9 @@ RSpec.describe 'Subscriptions', type: :request do
         user = FactoryBot.create(:user)
         subs = FactoryBot.create(:subscription)
         patch user_subscription_path(user, subs), params: {
-          subscription: FactoryBot.attributes_for(:subscription, price: 12345)
+          subscription: FactoryBot.attributes_for(:subscription, price: 123_45)
         }
-        expect(response.body).to include("http://www.example.com/users/sign_in")
+        expect(response.body).to include('http://www.example.com/users/sign_in')
       end
     end
   end
@@ -518,38 +504,28 @@ RSpec.describe 'Subscriptions', type: :request do
       end
 
       it 'destroyアクションのリクエストが成功すると、サブスクレコードのカウントが減少する' do
-        expect {
-          expect(Subscription.all.length).to eq(1)
-          delete user_subscription_path(@user, @subs)
-        }.to change{ Subscription.count }.by(-1)
+        expect(Subscription.all.length).to eq(1)
+        expect { delete user_subscription_path(@user, @subs) }.to change { Subscription.count }.by(-1)
       end
 
       it 'destroyアクションのリクエストが成功すると、紐づく契約更新レコードのカウントが減少する' do
-        expect(ContractRenewal.all.length).to eq(1)
-        expect {
-          delete user_subscription_path(@user, @subs)
-        }.to change{ ContractRenewal.count }.by(-1)
+        expect(ContractCancel.all.length).to eq(1)
+        expect { delete user_subscription_path(@user, @subs) }.to change { ContractRenewal.count }.by(-1)
       end
 
       it 'destroyアクションのリクエストが成功すると、紐づく契約解約レコードのカウントが減少する' do
         expect(ContractCancel.all.length).to eq(1)
-        expect {
-          delete user_subscription_path(@user, @subs)
-        }.to change{ ContractCancel.count }.by(-1)
+        expect { delete user_subscription_path(@user, @subs) }.to change { ContractCancel.count }.by(-1)
       end
 
       it 'destroyアクションのリクエストが成功すると、紐づく契約更新レコードのカウントが減少する' do
         expect(Review.all.length).to eq(1)
-        expect {
-          delete user_subscription_path(@user, @subs)
-        }.to change{ Review.count }.by(-1)
+        expect { delete user_subscription_path(@user, @subs) }.to change { Review.count }.by(-1)
       end
 
       it 'destroyアクションのリクエストが成功すると、紐づく契約更新レコードのカウントが減少する' do
         expect(ActionPlan.all.length).to eq(1)
-        expect {
-          delete user_subscription_path(@user, @subs)
-        }.to change{ ActionPlan.count }.by(-1)
+        expect { delete user_subscription_path(@user, @subs) }.to change { ActionPlan.count }.by(-1)
       end
     end
 
@@ -568,7 +544,7 @@ RSpec.describe 'Subscriptions', type: :request do
         expect(response.body).to include("http://www.example.com/users/#{@user.id}")
       end
     end
-end
+  end
 
   describe 'DELETE #destroy(ログアウト状態)' do
     context 'ログイン状態でない場合、ログインページにリダイレクトする' do
@@ -583,7 +559,7 @@ end
         user = FactoryBot.create(:user)
         subs = FactoryBot.create(:subscription)
         delete user_subscription_path(user, subs)
-        expect(response.body).to include("http://www.example.com/users/sign_in")
+        expect(response.body).to include('http://www.example.com/users/sign_in')
       end
     end
   end
