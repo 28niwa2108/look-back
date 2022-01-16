@@ -495,7 +495,7 @@ RSpec.describe 'Subscriptions', type: :request do
     end
   end
 
-  describe 'DELETE #update(ログイン状態)' do
+  describe 'DELETE #destroy(ログイン状態)' do
     before do
       @user = FactoryBot.create(:user)
       @subs = FactoryBot.create(:subscription, user_id: @user.id)
