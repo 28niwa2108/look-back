@@ -433,7 +433,7 @@ RSpec.describe 'Subscriptions', type: :request do
 
       it 'updateアクションにリクエストを送ると、レスポンスにマイページのURLを含む' do
         user = FactoryBot.create(:user)
-        subs = FactoryBot.create(:subscription)
+        subs = FactoryBot.create(:subscription, user_id: user.id)
         patch user_subscription_path(user, subs), params: {
           subscription: FactoryBot.attributes_for(:subscription, price:12345)
         }
@@ -563,7 +563,7 @@ RSpec.describe 'Subscriptions', type: :request do
 
       it 'destroyアクションにリクエストを送ると、レスポンスにマイページのURLを含む' do
         user = FactoryBot.create(:user)
-        subs = FactoryBot.create(:subscription)
+        subs = FactoryBot.create(:subscription, user_id: user.id)
         delete user_subscription_path(user, subs)
         expect(response.body).to include("http://www.example.com/users/#{@user.id}")
       end
