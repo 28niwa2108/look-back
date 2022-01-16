@@ -393,7 +393,7 @@ RSpec.describe 'Subscriptions', type: :request do
   describe 'PATCH #update(ログイン状態)' do
     before do
       @user = FactoryBot.create(:user)
-      @subs = FactoryBot.create(:subscription)
+      @subs = FactoryBot.create(:subscription, user_id: @user.id)
       sign_in(@user)
     end
 
@@ -484,12 +484,105 @@ RSpec.describe 'Subscriptions', type: :request do
         expect(response.status).to eq(302)
       end
 
-      it 'updateションにリクエストするとレスポンスにサインインページのURLが含まれる' do
+      it 'updateアクションにリクエストするとレスポンスにサインインページのURLが含まれる' do
         user = FactoryBot.create(:user)
         subs = FactoryBot.create(:subscription)
         patch user_subscription_path(user, subs), params: {
           subscription: FactoryBot.attributes_for(:subscription, price: 12345)
         }
+        expect(response.body).to include("http://www.example.com/users/sign_in")
+      end
+    end
+  end
+
+  describe 'DELETE #update(ログイン状態)' do
+    before do
+      @user = FactoryBot.create(:user)
+      @subs = FactoryBot.create(:subscription, user_id: @user.id)
+      @renewal = FactoryBot.create(:contract_renewal, subscription_id: @subs.id)
+      @cancel = FactoryBot.create(:contract_cancel, subscription_id: @subs.id)
+      @review = FactoryBot.create(:review, user_id: @user.id, subscription_id: @subs.id)
+      @action = FactoryBot.create(:action_plan, review_id: @review.id)
+      sign_in(@user)
+    end
+
+    context 'ログイン状態なら、サブスクが削除される' do
+      it 'destroyアクションのリクエストが成功すると、HTTPステータス200が返ってくる' do
+        delete user_subscription_path(@user, @subs)
+        expect(response.status).to eq(200)
+      end
+
+      it 'destroyアクションのリクエストが成功すると、レスポンスでサブスク名が返る' do
+        delete user_subscription_path(@user, @subs)
+        expect(response.body).to include(@subs.name)
+      end
+
+      it 'destroyアクションのリクエストが成功すると、サブスクレコードのカウントが減少する' do
+        expect {
+          expect(Subscription.all.length).to eq(1)
+          delete user_subscription_path(@user, @subs)
+        }.to change{ Subscription.count }.by(-1)
+      end
+
+      it 'destroyアクションのリクエストが成功すると、紐づく契約更新レコードのカウントが減少する' do
+        expect(ContractRenewal.all.length).to eq(1)
+        expect {
+          delete user_subscription_path(@user, @subs)
+        }.to change{ ContractRenewal.count }.by(-1)
+      end
+
+      it 'destroyアクションのリクエストが成功すると、紐づく契約解約レコードのカウントが減少する' do
+        expect(ContractCancel.all.length).to eq(1)
+        expect {
+          delete user_subscription_path(@user, @subs)
+        }.to change{ ContractCancel.count }.by(-1)
+      end
+
+      it 'destroyアクションのリクエストが成功すると、紐づく契約更新レコードのカウントが減少する' do
+        expect(Review.all.length).to eq(1)
+        expect {
+          delete user_subscription_path(@user, @subs)
+        }.to change{ Review.count }.by(-1)
+      end
+
+      it 'destroyアクションのリクエストが成功すると、紐づく契約更新レコードのカウントが減少する' do
+        expect(ActionPlan.all.length).to eq(1)
+        expect {
+          delete user_subscription_path(@user, @subs)
+        }.to change{ ActionPlan.count }.by(-1)
+      end
+    end
+
+    context '他人のidでdestroyアクションにリクエストを送る場合、マイページにリダイレクトする' do
+      it 'destroyアクションにリクエストを送ると、HTTPステータス302が返る' do
+        user = FactoryBot.create(:user)
+        subs = FactoryBot.create(:subscription)
+        delete user_subscription_path(user, subs)
+        expect(response.status).to eq(302)
+      end
+
+      it 'destroyアクションにリクエストを送ると、レスポンスにマイページのURLを含む' do
+        user = FactoryBot.create(:user)
+        subs = FactoryBot.create(:subscription)
+        delete user_subscription_path(user, subs)
+        expect(response.body).to include("http://www.example.com/users/#{@user.id}")
+      end
+    end
+end
+
+  describe 'DELETE #destroy(ログアウト状態)' do
+    context 'ログイン状態でない場合、ログインページにリダイレクトする' do
+      it 'destroyアクションにリクエストするとHTTPステータス302が返ってくる' do
+        user = FactoryBot.create(:user)
+        subs = FactoryBot.create(:subscription)
+        delete user_subscription_path(user, subs)
+        expect(response.status).to eq(302)
+      end
+
+      it 'destroyアクションにリクエストするとレスポンスにサインインページのURLが含まれる' do
+        user = FactoryBot.create(:user)
+        subs = FactoryBot.create(:subscription)
+        delete user_subscription_path(user, subs)
         expect(response.body).to include("http://www.example.com/users/sign_in")
       end
     end
