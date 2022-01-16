@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe 'Users', type: :request do
-
   describe 'GET #show(ログイン状態)' do
     before do
       @user = FactoryBot.create(:user)
@@ -59,7 +58,7 @@ RSpec.describe 'Users', type: :request do
       it 'showアクションにリクエストするとレスポンスにサインインページのURLが含まれる' do
         user = FactoryBot.create(:user)
         get user_path(user)
-        expect(response.body).to include("http://www.example.com/users/sign_in")
+        expect(response.body).to include('http://www.example.com/users/sign_in')
       end
     end
   end
