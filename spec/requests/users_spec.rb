@@ -20,6 +20,12 @@ RSpec.describe 'Users', type: :request do
         expect(response.body).to include(@subs.name)
       end
 
+      it 'indexアクションにリクエストすると、レスポンスに解約済のサブスク名は存在しない' do
+        cancel = FactoryBot.create(:contract_cancel)
+        get user_contract_cancels_path(@user)
+        expect(response.body).not_to include(cancel.subscription.name)
+      end
+
       it 'showアクションにリクエストすると、レスポンスに次回更新日が存在する' do
         get user_path(@user)
         next_update_date = @renewal.next_update_date
