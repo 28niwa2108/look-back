@@ -424,7 +424,7 @@ RSpec.describe 'Subscriptions', type: :request do
     context '他人のidでupdateアクションにリクエストを送る場合、マイページにリダイレクトする' do
       it 'updateアクションにリクエストを送ると、HTTPステータス302が返る' do
         user = FactoryBot.create(:user)
-        subs = FactoryBot.create(:subscription)
+        subs = FactoryBot.create(:subscription, user_id: user.id)
         patch user_subscription_path(user, subs), params: {
           subscription: FactoryBot.attributes_for(:subscription, price:12345)
         }
@@ -556,7 +556,7 @@ RSpec.describe 'Subscriptions', type: :request do
     context '他人のidでdestroyアクションにリクエストを送る場合、マイページにリダイレクトする' do
       it 'destroyアクションにリクエストを送ると、HTTPステータス302が返る' do
         user = FactoryBot.create(:user)
-        subs = FactoryBot.create(:subscription)
+        subs = FactoryBot.create(:subscription, user_id: user.id)
         delete user_subscription_path(user, subs)
         expect(response.status).to eq(302)
       end
