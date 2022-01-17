@@ -98,6 +98,18 @@ RSpec.describe 'ContractCancels', type: :request do
       end
     end
 
+    context '存在しないサブスクidでnewアクションにリクエストすると、マイページにリダイレクトする' do
+      it 'newアクションにリクエストすると、HTTPステータス302が返ってくる' do
+        get new_user_subscription_contract_cancel_path(@user, @subs.id + 1)
+        expect(response.status).to eq(302)
+      end
+
+      it 'newアクションにリクエストすると、レスポンスにマイページのURLを含む' do
+        get new_user_subscription_contract_cancel_path(@user, @subs.id + 1)
+        expect(response.body).to include("http://www.example.com/users/#{@user.id}")
+      end
+    end
+
     context '他人のidでnewアクションにリクエストを送る場合、マイページにリダイレクトする' do
       it 'newアクションにリクエストすると、HTTPステータス302が返ってくる' do
         user = FactoryBot.create(:user)
@@ -160,6 +172,20 @@ RSpec.describe 'ContractCancels', type: :request do
         expect { post user_subscription_contract_cancels_path(@user, @subs), params: {
           contract_cancel: FactoryBot.attributes_for(:contract_cancel) }
         }.to change { ContractCancel.count }.by(1)
+      end
+    end
+
+    context '存在しないサブスクidでcreateアクションにリクエストすると、マイページにリダイレクトする' do
+      it 'createアクションにリクエストすると、HTTPステータス302が返ってくる' do
+        post user_subscription_contract_cancels_path(@user, @subs.id + 1), params: {
+          contract_cancel: FactoryBot.attributes_for(:contract_cancel) }
+        expect(response.status).to eq(302)
+      end
+
+      it 'createアクションにリクエストすると、レスポンスにマイページのURLを含む' do
+        post user_subscription_contract_cancels_path(@user, @subs.id + 1), params: {
+          contract_cancel: FactoryBot.attributes_for(:contract_cancel) }
+        expect(response.body).to include("http://www.example.com/users/#{@user.id}")
       end
     end
 

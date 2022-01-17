@@ -1,6 +1,7 @@
 class ContractCancelsController < ApplicationController
   before_action :authenticate_user!, only: [:index, :new, :create]
   before_action :user_identification, only: [:index, :new, :create]
+  before_action :set_subs, only: [:new, :create]
 
   def index
     set_user
@@ -17,7 +18,6 @@ class ContractCancelsController < ApplicationController
 
   def new
     set_user
-    set_subs
     @contract_cancel = ContractCancel.new
   end
 
@@ -27,7 +27,6 @@ class ContractCancelsController < ApplicationController
       redirect_to user_path(current_user)
     else
       set_user
-      set_subs
       render :new
     end
   end
@@ -50,5 +49,6 @@ class ContractCancelsController < ApplicationController
 
   def set_subs
     @subs = Subscription.find_by(id: params[:subscription_id])
+    redirect_to user_path(current_user) if @subs.nil? 
   end
 end
