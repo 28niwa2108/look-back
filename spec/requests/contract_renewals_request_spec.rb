@@ -47,6 +47,18 @@ RSpec.describe 'ContractRenewals', type: :request do
       end
     end
 
+    context '存在しないサブスクidでupdateアクションにリクエストすると、マイページにリダイレクトする' do
+      it 'updateアクションにリクエストすると、HTTPステータス302が返ってくる' do
+        patch user_subscription_contract_renewal_path(@user, @subs.id + 1, @renewal)
+        expect(response.status).to eq(302)
+      end
+
+      it 'updateアクションにリクエストすると、レスポンスにマイページのURLを含む' do
+        patch user_subscription_contract_renewal_path(@user, @subs.id + 1, @renewal)
+        expect(response.body).to include("http://www.example.com/users/#{@user.id}")
+      end
+    end
+
     context '他人のidでupdateアクションにリクエストを送る場合、マイページにリダイレクトする' do
       it 'updateアクションにリクエストを送ると、HTTPステータス302が返る' do
         user = FactoryBot.create(:user)
