@@ -78,10 +78,8 @@ RSpec.describe 'Subscriptions', type: :request do
         get user_subscription_path(@user, @subs)
         expect(response.body).to include('削除する')
       end
-    end
 
-    context 'ログイン状態で、解約済のサブスクの場合' do
-      it 'showアクションにリクエストすると、レスポンスに解約理由が存在する' do
+      it 'showアクションにリクエストすると、解約済のサブスクなら、レスポンスに解約理由が存在する' do
         cancel = FactoryBot.create(:contract_cancel, subscription_id: @subs.id)
         get user_subscription_path(@user, @subs)
         expect(response.body).to include(cancel.reason.name)
@@ -90,16 +88,14 @@ RSpec.describe 'Subscriptions', type: :request do
 
     context '存在しないサブスクidでshowアクションにリクエストすると、マイページにリダイレクトする' do
       it 'showアクションにリクエストすると、HTTPステータス302が返ってくる' do
-        user = FactoryBot.create(:user)
-        subs = FactoryBot.create(:subscription, user_id: user.id)
-        get user_subscription_path(user, subs)
+        get user_subscription_path(@user, @subs.id + 1)
         expect(response.status).to eq(302)
       end
 
       it 'showアクションにリクエストすると、レスポンスにマイページのURLを含む' do
         user = FactoryBot.create(:user)
         subs = FactoryBot.create(:subscription, user_id: user.id)
-        get user_subscription_path(user, subs)
+        get user_subscription_path(@user, @subs.id + 1)
         expect(response.body).to include("http://www.example.com/users/#{@user.id}")
       end
     end
@@ -343,6 +339,18 @@ RSpec.describe 'Subscriptions', type: :request do
       end
     end
 
+    context '存在しないサブスクidでeditアクションにリクエストすると、マイページにリダイレクトする' do
+      it 'editアクションにリクエストすると、HTTPステータス302が返ってくる' do
+        get edit_user_subscription_path(@user, @subs.id + 1)
+        expect(response.status).to eq(302)
+      end
+
+      it 'editアクションにリクエストすると、レスポンスにマイページのURLを含む' do
+        get edit_user_subscription_path(@user, @subs.id + 1)
+        expect(response.body).to include("http://www.example.com/users/#{@user.id}")
+      end
+    end
+
     context '他人のidでeditアクションにリクエストを送る場合、マイページにリダイレクトする' do
       it 'editアクションにリクエストすると、HTTPステータス302が返ってくる' do
         user = FactoryBot.create(:user)
@@ -405,6 +413,22 @@ RSpec.describe 'Subscriptions', type: :request do
           subscription: FactoryBot.attributes_for(:subscription).merge(user_id: @user.id)
         }
         expect(response.body).to include('false')
+      end
+    end
+
+    context '存在しないサブスクidでupdateアクションにリクエストすると、マイページにリダイレクトする' do
+      it 'updateアクションにリクエストすると、HTTPステータス302が返ってくる' do
+        patch user_subscription_path(@user, @subs.id + 1), params: {
+          subscription: FactoryBot.attributes_for(:subscription)
+        }
+        expect(response.status).to eq(302)
+      end
+
+      it 'updateアクションにリクエストすると、レスポンスにマイページのURLを含む' do
+        patch user_subscription_path(@user, @subs.id + 1), params: {
+          subscription: FactoryBot.attributes_for(:subscription)
+        }
+        expect(response.body).to include("http://www.example.com/users/#{@user.id}")
       end
     end
 
@@ -526,6 +550,18 @@ RSpec.describe 'Subscriptions', type: :request do
       it 'destroyアクションのリクエストが成功すると、紐づく契約更新レコードのカウントが減少する' do
         expect(ActionPlan.all.length).to eq(1)
         expect { delete user_subscription_path(@user, @subs) }.to change { ActionPlan.count }.by(-1)
+      end
+    end
+
+    context '存在しないサブスクidでdestroyアクションにリクエストすると、マイページにリダイレクトする' do
+      it 'destroyアクションにリクエストすると、HTTPステータス302が返ってくる' do
+        delete user_subscription_path(@user, @subs.id + 1)
+        expect(response.status).to eq(302)
+      end
+
+      it 'destroyアクションにリクエストすると、レスポンスにマイページのURLを含む' do
+        delete user_subscription_path(@user, @subs.id + 1)
+        expect(response.body).to include("http://www.example.com/users/#{@user.id}")
       end
     end
 

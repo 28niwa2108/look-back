@@ -1,11 +1,11 @@
 class SubscriptionsController < ApplicationController
   before_action :authenticate_user!, except: [:index]
   before_action :user_identification, except: [:index]
+  before_action :set_subs, only: [:show, :edit, :update, :destroy]
+  before_action :set_renewal, only: [:show]
 
   def show
     set_user
-    set_subs
-    set_renewal
     # サブスク・アクションプラン評価の平均を取得
     reviews = @subs.reviews.includes(:action_plan)
     @review_ave = Review.get_review_rate_ave(reviews)
@@ -39,11 +39,9 @@ class SubscriptionsController < ApplicationController
 
   def edit
     set_user
-    set_subs
   end
 
   def update
-    set_subs
     update_sub = subs_params
     # 更新タイプが「日」なら、更新日タイプをnilにする
     update_sub[:update_day_type_id] = nil if update_sub[:update_type_id] == '1'
@@ -57,7 +55,6 @@ class SubscriptionsController < ApplicationController
   end
 
   def destroy
-    set_subs
     sub_name = @subs.name
     if @subs.destroy
       render json: { subname: sub_name }
