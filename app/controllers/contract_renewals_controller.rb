@@ -1,11 +1,9 @@
 class ContractRenewalsController < ApplicationController
   before_action :authenticate_user!, only: [:update]
   before_action :user_identification, only: [:update]
+  before_action :set_subs_renewal, only: [:update]
 
   def update
-    @subs = Subscription.find_by(id: params[:subscription_id])
-    @renewal = ContractRenewal.find_by(id: params[:id])
-
     update_date = @renewal.next_update_date
     next_update = @renewal.get_update_date(@subs, @renewal.next_update_date)
 
@@ -47,6 +45,12 @@ class ContractRenewalsController < ApplicationController
   # ログインユーザーの確認
   def user_identification
     redirect_to user_path(current_user) if current_user != User.find_by(id: params[:user_id])
+  end
+
+  def set_subs_renewal
+    @subs = Subscription.find_by(id: params[:subscription_id])
+    @renewal = ContractRenewal.find_by(id: params[:id])
+    redirect_to user_path(current_user) if @subs.nil? || @renewal.nil?
   end
 
   def create_review(sub, update_date)
