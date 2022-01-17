@@ -1,6 +1,9 @@
 class ReviewsController < ApplicationController
   before_action :authenticate_user!, only: [:all_index, :index, :show, :edit, :update]
   before_action :user_identification, only: [:all_index, :index, :show, :edit, :update]
+  before_action :set_subs, only: [:index, :show, :edit,]
+  before_action :set_review, only: [:show, :edit]
+  before_action :set_action, only: [:show, :edit]
 
   def all_index
     set_user
@@ -14,22 +17,15 @@ class ReviewsController < ApplicationController
   end
 
   def index
-    set_subs
     @reviews = Review.where(subscription_id: params[:subscription_id]).includes(:action_plan).order('created_at DESC')
   end
 
   def show
     set_user
-    set_subs
-    set_review
-    set_action
   end
 
   def edit
     set_user
-    set_subs
-    set_review
-    set_action
     @review_action = ReviewAction.new(
       review_rate: @review.review_rate,
       review_comment: @review.review_comment,
@@ -81,13 +77,16 @@ class ReviewsController < ApplicationController
   # Subscriptionオブジェクトのセット
   def set_subs
     @subs = Subscription.find_by(id: params[:subscription_id])
+    redirect_to user_path(current_user) if @subs.nil?
   end
 
   def set_review
     @review = Review.find_by(id: params[:id])
+    redirect_to user_path(current_user) if @review.nil?
   end
 
   def set_action
     @action = ActionPlan.find_by(review_id: params[:id])
+    redirect_to user_path(current_user) if @action.nil?
   end
 end
