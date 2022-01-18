@@ -78,11 +78,19 @@ RSpec.describe 'Subscriptions', type: :request do
         get user_subscription_path(@user, @subs)
         expect(response.body).to include('削除する')
       end
+    end
 
-      it 'showアクションにリクエストすると、解約済のサブスクなら、レスポンスに解約理由が存在する' do
+    context 'ログイン状態で、解約済のサブスクを選択した場合' do
+      it 'showアクションにリクエストすると、レスポンスに解約理由が存在する' do
         cancel = FactoryBot.create(:contract_cancel, subscription_id: @subs.id)
         get user_subscription_path(@user, @subs)
         expect(response.body).to include(cancel.reason.name)
+      end
+
+      it 'showアクションにリクエストすると、解約コメントを記入していれば、レスポンスに表示される' do
+        cancel = FactoryBot.create(:contract_cancel, subscription_id: @subs.id)
+        get user_subscription_path(@user, @subs)
+        expect(response.body).to include(cancel.cancel_comment)
       end
     end
 
