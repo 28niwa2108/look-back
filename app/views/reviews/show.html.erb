@@ -20,14 +20,14 @@
             <div class="font-bold">Plan</div>
             <div class="leading-relaxed">
               <%= simple_format(h(@action.action_plan))%>
-              <% if @action.action_plan.empty? %><p class="text-gray-400">レビューが未入力です<br>Editボタンから、評価を入力できます</p><% end %>
+              <% if @action.action_plan.empty? %><p class="text-gray-400">アクションプランが未入力です<br>Editボタンから、評価を入力できます</p><% end %>
             </div>
           </div>
           <div class="mb-6">
             <div class="font-bold">Look Back</div>
             <div class="leading-relaxed">
               <%= simple_format(h(@action.action_review_comment))%>
-              <% if @action.action_review_comment.empty? %><p class="text-gray-400">レビューが未入力です<br>Editボタンから、評価を入力できます</p><% end %>
+              <% if @action.action_review_comment.empty? %><p class="text-gray-400">行動の振り返りが未入力です<br>Editボタンから、評価を入力できます</p><% end %>
             </div>
           </div>
         </div>
