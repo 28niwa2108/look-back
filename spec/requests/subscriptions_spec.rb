@@ -445,7 +445,7 @@ RSpec.describe 'Subscriptions', type: :request do
         user = FactoryBot.create(:user)
         subs = FactoryBot.create(:subscription, user_id: user.id)
         patch user_subscription_path(user, subs), params: {
-          subscription: FactoryBot.attributes_for(:subscription, price: 123_45)
+          subscription: FactoryBot.attributes_for(:subscription)
         }
         expect(response.status).to eq(302)
       end
@@ -454,7 +454,7 @@ RSpec.describe 'Subscriptions', type: :request do
         user = FactoryBot.create(:user)
         subs = FactoryBot.create(:subscription, user_id: user.id)
         patch user_subscription_path(user, subs), params: {
-          subscription: FactoryBot.attributes_for(:subscription, price: 123_45)
+          subscription: FactoryBot.attributes_for(:subscription)
         }
         expect(response.body).to include("http://www.example.com/users/#{@user.id}")
       end
@@ -495,18 +495,18 @@ RSpec.describe 'Subscriptions', type: :request do
     context 'ログイン状態でない場合、ログインページにリダイレクトする' do
       it 'updateアクションにリクエストするとHTTPステータス302が返ってくる' do
         user = FactoryBot.create(:user)
-        subs = FactoryBot.create(:subscription)
+        subs = FactoryBot.create(:subscription, user_id: user.id)
         patch user_subscription_path(user, subs), params: {
-          subscription: FactoryBot.attributes_for(:subscription, price: 123_45)
+          subscription: FactoryBot.attributes_for(:subscription)
         }
         expect(response.status).to eq(302)
       end
 
       it 'updateアクションにリクエストするとレスポンスにサインインページのURLが含まれる' do
         user = FactoryBot.create(:user)
-        subs = FactoryBot.create(:subscription)
+        subs = FactoryBot.create(:subscription, user_id: user.id)
         patch user_subscription_path(user, subs), params: {
-          subscription: FactoryBot.attributes_for(:subscription, price: 123_45)
+          subscription: FactoryBot.attributes_for(:subscription)
         }
         expect(response.body).to include('http://www.example.com/users/sign_in')
       end
