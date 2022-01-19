@@ -89,27 +89,30 @@ RSpec.describe 'ContractRenewals', type: :request do
       end
     end
 
-    # コントローラー内で@renewal.total_price = -99999を実行してテスト
     context 'サブスク更新が失敗する場合' do
       it 'updateアクションのリクエストが失敗すると、HTTPステータスは200が返る' do
-        patch user_subscription_contract_renewal_path(@user, @subs, @renewal)
+        subs = FactoryBot.create(:subscription, user_id: @user.id, contract_date: Date.new(2200, 2, 22))
+        patch user_subscription_contract_renewal_path(@user, subs, @renewal)
         expect(response.status).to eq(200)
       end
 
       it 'updateアクションのリクエストが失敗すると、サブスクレコードの値は更新されない' do
-        expect { patch user_subscription_contract_renewal_path(@user, @subs, @renewal) }.not_to change {
-          ContractRenewal.find(@renewal.id).renewal_count
+        subs = FactoryBot.create(:subscription, user_id: @user.id, contract_date: Date.new(2200, 2, 22))
+        expect { patch user_subscription_contract_renewal_path(@user, subs, @renewal) }.not_to change {
+          ContractRenewal.find(@renewal.id).total_period
         }
       end
 
       it 'updateアクションのリクエストが失敗すると、レレスポンスにtrueを含む' do
-        patch user_subscription_contract_renewal_path(@user, @subs, @renewal)
+        subs = FactoryBot.create(:subscription, user_id: @user.id, contract_date: Date.new(2200, 2, 22))
+        patch user_subscription_contract_renewal_path(@user, subs, @renewal)
         expect(response.body).to include('true')
       end
 
       it 'updateアクションのリクエストが失敗すると、レスポンスにエラーメッセージが含まれる' do
-        patch user_subscription_contract_renewal_path(@user, @subs, @renewal)
-        expect(response.body).to include('Total priceは0以上の値にしてください')
+        subs = FactoryBot.create(:subscription, user_id: @user.id, contract_date: Date.new(2200, 2, 22))
+        patch user_subscription_contract_renewal_path(@user, subs, @renewal)
+        expect(response.body).to include('Total periodは0以上の値にしてください')
       end
     end
   end
