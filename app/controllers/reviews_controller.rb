@@ -4,6 +4,7 @@ class ReviewsController < ApplicationController
   before_action :set_subs, only: [:index, :show, :edit,]
   before_action :set_review, only: [:show, :edit]
   before_action :set_action, only: [:show, :edit]
+  before_action :check_params_ids, only: [:update]
 
   def all_index
     set_user
@@ -88,5 +89,11 @@ class ReviewsController < ApplicationController
   def set_action
     @action = ActionPlan.find_by(review_id: params[:id])
     redirect_to user_path(current_user) if @action.nil?
+  end
+
+  def check_params_ids
+    subs = Subscription.find_by(id: params[:subscription_id])
+    review = Review.find_by(id: params[:id])
+    redirect_to user_path(current_user) if subs.nil? || review.nil?
   end
 end
