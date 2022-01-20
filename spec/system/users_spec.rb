@@ -110,4 +110,33 @@ RSpec.describe 'ユーザー管理機能', type: :system do
       end
     end
   end
+
+  describe 'マイページ確認' do
+    before do
+      @user = FactoryBot.create(:user)
+      @subs = FactoryBot.create(:subscription, user_id: @user.id)
+      @renewal = FactoryBot.create(:contract_renewal, subscription_id: @subs.id)
+    end
+
+    context 'マイページに遷移できるとき' do
+      it 'ログイン状態ならマイページへ遷移できる' do
+        sign_in_support(@user)
+        expect(current_path).to eq(user_path(@user))
+        visit root_path
+        find_link('My page', href: user_path(@user)).click
+        expect(current_path).to eq(user_path(@user))
+        expect(page).to have_content(@subs.name)
+        expect(page).to have_content(@renewal.next_update_date)
+      end
+    end
+
+    context 'マイページに遷移できないとき' do
+      it 'ログアウト状態では、マイページに遷移できず、ログインページに遷移する' do
+        visit user_path(@user)
+        expect(current_path).to eq(new_user_session_path)
+        expect(page).to have_content('マイページログイン')
+        expect(page).to have_content('ログインもしくはアカウント登録してください。')
+      end
+    end
+  end
 end
