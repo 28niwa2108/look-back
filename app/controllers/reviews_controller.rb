@@ -1,7 +1,7 @@
 class ReviewsController < ApplicationController
   before_action :authenticate_user!, only: [:all_index, :index, :show, :edit, :update]
   before_action :user_identification, only: [:all_index, :index, :show, :edit, :update]
-  before_action :set_subs, only: [:index, :show, :edit,]
+  before_action :set_subs, only: [:index, :show, :edit]
   before_action :set_review, only: [:show, :edit]
   before_action :set_action, only: [:show, :edit]
   before_action :check_params_ids, only: [:update]

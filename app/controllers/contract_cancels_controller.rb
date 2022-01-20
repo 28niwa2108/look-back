@@ -49,6 +49,6 @@ class ContractCancelsController < ApplicationController
 
   def set_subs
     @subs = Subscription.find_by(id: params[:subscription_id])
-    redirect_to user_path(current_user) if @subs.nil? 
+    redirect_to user_path(current_user) if @subs.nil?
   end
 end
