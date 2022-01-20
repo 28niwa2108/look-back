@@ -37,6 +37,12 @@
           <p class="leading-relaxed text-base">契約開始：<%= @subs.contract_date %></p>
           <p class="leading-relaxed text-base">次回更新日：<%= @renewal.next_update_date %></p>
           <p class="leading-relaxed text-base">累計<%= @renewal.total_period %>日継続中</p>
+          <p class="leading-relaxed text-base">
+            更新サイクル
+            <%= @subs.update_cycle.to_s%>
+            <%= "ヶ" if @subs.update_type.id == 2 %>
+            <%= @subs.update_type.name %>
+          </p>
         </div>
       </div>
       <div class="p-4 md:w-1/3 flex flex-col text-center items-center">

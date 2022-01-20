@@ -48,6 +48,16 @@ RSpec.describe 'Subscriptions', type: :request do
         expect(response.body).to include(@renewal.total_period.to_s)
       end
 
+      it 'showアクションにリクエストすると、レスポンスに更新サイクルが存在する' do
+        get user_subscription_path(@user, @subs)
+        expect(response.body).to include(@subs.update_cycle.to_s)
+      end
+
+      it 'showアクションにリクエストすると、レスポンスに更新タイプが存在する' do
+        get user_subscription_path(@user, @subs)
+        expect(response.body).to include(@subs.update_type.name)
+      end
+
       it 'showアクションにリクエストすると、レスポンスに次回更新日が存在する' do
         get user_subscription_path(@user, @subs)
         next_update_date = @renewal.next_update_date
