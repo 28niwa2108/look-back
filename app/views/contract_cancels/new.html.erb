@@ -8,9 +8,9 @@
         <h2 class="text-gray-900 text-2xl text-center font-bold title-font my-4"><%= @subs.name%>の解約</h2>
         <div class="flex-col items-center justify-center w-full mb-4">
           <div class="relative p-2 mx-auto">
-             <label for="contract_date" class="block text-gray-600">解約日</label>
+             <label for="cancel_date" class="block text-gray-600">解約日</label>
               <% @contract_cancel.cancel_date = Date.today if @contract_cancel.cancel_date.nil? %>
-              <%= f.date_field :cancel_date, id:"contract_date", value: @contract_cancel.cancel_date, class: "w-full focus:border-gray-400 focus:ring-2 focus:ring-gray-400 bg-gray-100 bg-opacity-50 rounded border border-gray-300 text-base outline-none text-gray-700 py-1 px-3 resize-none transition-colors ease-in-out" %>
+              <%= f.date_field :cancel_date, value: @contract_cancel.cancel_date, class: "w-full focus:border-gray-400 focus:ring-2 focus:ring-gray-400 bg-gray-100 bg-opacity-50 rounded border border-gray-300 text-base outline-none text-gray-700 py-1 px-3 resize-none transition-colors ease-in-out" %>
           </div>
 
           <div class="relative p-2 mx-auto">
