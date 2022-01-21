@@ -18,6 +18,33 @@ RSpec.describe 'Subscriptions', type: :system do
         expect(page).to have_content('Review')
       end
 
+      it 'ログイン状態なら、解約済のサブスク詳細も確認できる' do
+        subs = FactoryBot.create(:subscription, user_id: @user.id)
+        FactoryBot.create(:contract_renewal, subscription_id: subs.id)
+        FactoryBot.create(:contract_cancel, subscription_id: subs.id)
+        sign_in_support(@user)
+        find_link('Cancels', href: user_contract_cancels_path(@user)).click
+        expect(current_path).to eq(user_contract_cancels_path(@user))
+        expect(page).to have_content(subs.name)
+        find_link('', href: user_subscription_path(@user, subs)).click
+        expect(current_path).to eq(user_subscription_path(@user, subs))
+        expect(page).to have_content('：解約済')
+        expect(page).to have_content('解約理由：')
+        expect(page).to have_content('詳細：')
+        expect(page).to have_content('Price')
+        expect(page).to have_content('Period')
+        expect(page).to have_content('Review')
+      end
+    end
+
+    context 'サブスク詳細が確認できないとき' do
+      it '解約済のサブスクは、サブスク一覧には表示されず、サブスク一覧からは確認できない' do
+        subs = FactoryBot.create(:subscription, user_id: @user.id)
+        FactoryBot.create(:contract_cancel, subscription_id: subs.id)
+        sign_in_support(@user)
+        expect(page).to have_no_content(subs.name)
+      end
+
       it 'ログアウト状態では、サブスク詳細ページに遷移できず、ログインページに遷移する' do
         visit user_subscription_path(@user, @subs)
         expect(current_path).to eq(new_user_session_path)
@@ -92,12 +119,13 @@ RSpec.describe 'Subscriptions', type: :system do
         find('.sub-ope-menu').click
         find_link('編集', href: edit_user_subscription_path(@user, @subs)).click
         expect(page).to have_content('サブスク編集')
-        fill_in 'name', with: "#{@subs[0..1]}変更後サブスク名"
+        fill_in 'name', with: ''
+        fill_in 'name', with: "#{@subs.name[0..1]}変更後サブスク名"
         find('input[type="submit"]').click
         expect { click_button 'OK' }.to change { Subscription.count }.by(0)
         click_button 'OK'
         expect(current_path).to eq(user_path(@user))
-        expect(page).to have_content('変更後サブスク名')
+        expect(page).to have_content("#{@subs.name[0..1]}変更後サブスク名")
       end
 
       it '正しい情報を入力すればサブスク編集ができ、マイページに移動する' do
@@ -108,7 +136,8 @@ RSpec.describe 'Subscriptions', type: :system do
         expect(find('#name').value).to eq(@subs.name)
         expect(find('#price').value).to eq(@subs.price.to_s)
         expect(find('#update_cycle').value).to eq(@subs.update_cycle.to_s)
-        fill_in 'name', with: "#{@subs[0..1]}変更後サブスク名"
+        fill_in 'name', with: ''
+        fill_in 'name', with: "#{@subs.name[0..1]}変更後サブスク名"
         fill_in 'price', with: @subs.price * 2
         fill_in 'update_cycle', with: 1
         find('input[value="2"]').click
@@ -119,7 +148,7 @@ RSpec.describe 'Subscriptions', type: :system do
         expect(current_path).to eq(user_path(@user))
         visit user_subscription_path(@user, @subs)
         expect(current_path).to eq(user_subscription_path(@user, @subs))
-        expect(page).to have_content("#{@subs[0..1]}変更後サブスク名")
+        expect(page).to have_content("#{@subs.name[0..1]}変更後サブスク名")
         expect(page).to have_content((@subs.price * 2).to_s)
         expect(page).to have_content('更新サイクル 1 ヶ 月')
       end
@@ -142,7 +171,7 @@ RSpec.describe 'Subscriptions', type: :system do
         expect(current_path).to eq(edit_user_subscription_path(@user, @subs))
       end
 
-      it '確認画面でキャンセルを選択すると、更新されない' do
+      it '確認画面でキャンセルを選択すると、編集されない' do
         sign_in_support(@user)
         find('.sub-ope-menu').click
         find_link('編集', href: edit_user_subscription_path(@user, @subs)).click
@@ -155,6 +184,26 @@ RSpec.describe 'Subscriptions', type: :system do
         expect(current_path).to eq(edit_user_subscription_path(@user, @subs))
         expect(@subs.name).to eq(Subscription.find(@subs.id).name)
         expect(find('input[id="name"]').value).to eq('編集しよう')
+      end
+
+      it '解約済のサブスクは、サブスク一覧には表示されず、編集できない' do
+        subs = FactoryBot.create(:subscription, user_id: @user.id)
+        FactoryBot.create(:contract_cancel, subscription_id: subs.id)
+        sign_in_support(@user)
+        expect(page).to have_no_content(subs.name)
+      end
+
+      it '解約済のサブスクは、サブスク詳細ページで編集ボタンが表示されず、編集できない' do
+        subs = FactoryBot.create(:subscription, user_id: @user.id)
+        FactoryBot.create(:contract_renewal, subscription_id: subs.id)
+        FactoryBot.create(:contract_cancel, subscription_id: subs.id)
+        sign_in_support(@user)
+        visit user_subscription_path(@user, subs)
+        expect(page).to have_content(subs.name)
+        expect(page).to have_content('Price')
+        expect(page).to have_content('Period')
+        expect(page).to have_content('Review')
+        expect(page).to have_no_content('編集する')
       end
 
       it 'ログアウト状態では、サブスク編集ページに遷移できず、ログインページに遷移する' do
@@ -196,6 +245,26 @@ RSpec.describe 'Subscriptions', type: :system do
         click_button 'OK'
         expect(current_path).to eq(user_path(@user))
       end
+
+      it 'ログイン状態なら、解約済のサブスクも、詳細ページから削除できる' do
+        subs = FactoryBot.create(:subscription, user_id: @user.id)
+        FactoryBot.create(:contract_renewal, subscription_id: subs.id)
+        FactoryBot.create(:contract_cancel, subscription_id: subs.id)
+        sign_in_support(@user)
+        find_link('Cancels', href: user_contract_cancels_path(@user)).click
+        expect(current_path).to eq(user_contract_cancels_path(@user))
+        expect(page).to have_content(subs.name)
+        find_link('', href: user_subscription_path(@user, subs)).click
+        expect(current_path).to eq(user_subscription_path(@user, subs))
+        expect(page).to have_content('：解約済')
+        expect(Subscription.count).to eq(2)
+        find('input[value="削除する"]').click
+        click_button 'OK'
+        sleep(0.1)
+        expect(Subscription.count).to eq(1)
+        click_button 'OK'
+        expect(current_path).to eq(user_path(@user))
+      end
     end
 
     context 'サブスク削除ができないとき' do
@@ -215,6 +284,13 @@ RSpec.describe 'Subscriptions', type: :system do
         find_link('サブスクの解約はこちら', href: new_user_subscription_contract_cancel_path(@user, @subs)).click
         expect(current_path).to eq(new_user_subscription_contract_cancel_path(@user, @subs))
         expect(page).to have_content("#{@subs.name}の解約")
+      end
+
+      it '解約済のサブスクは、サブスク一覧には表示されず、サブスク一覧からは削除できない' do
+        subs = FactoryBot.create(:subscription, user_id: @user.id)
+        FactoryBot.create(:contract_cancel, subscription_id: subs.id)
+        sign_in_support(@user)
+        expect(page).to have_no_content(subs.name)
       end
     end
   end

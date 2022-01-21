@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe 'ContractRenewals', type: :system do
-  describe 'サブスク更新ができるとき' do
+  describe 'サブスク更新' do
     before do
       @user = FactoryBot.create(:user)
       @subs = FactoryBot.create(:subscription, user_id: @user.id)
@@ -39,11 +39,14 @@ RSpec.describe 'ContractRenewals', type: :system do
         expect(current_path).to eq(user_path(@user))
         expect(page).to have_content('次回更新日')
         expect(page).to have_selector('.update-notification', visible: false)
+        find_link('Reviews', href: all_index_user_reviews_path(@user)).click
+        expect(current_path).to eq(all_index_user_reviews_path(@user))
+        expect(page).to have_content(@subs.name)
       end
     end
   end
 
-  describe 'サブスク更新ができないとき' do
+  describe 'サブスク更新(失敗)' do
     before do
       @user = FactoryBot.create(:user)
       @subs = FactoryBot.create(:subscription, user_id: @user.id)
@@ -56,6 +59,13 @@ RSpec.describe 'ContractRenewals', type: :system do
         expect(page).to have_content('次回更新日')
         expect(page).to have_no_selector('.m-sub-update-link_tag')
         expect(page).to have_selector('.update-notification', visible: false)
+      end
+
+      it '解約済のサブスクは、サブスク一覧に表示されず、更新ができない' do
+        subs = FactoryBot.create(:subscription, user_id: @user.id)
+        FactoryBot.create(:contract_cancel, subscription_id: subs.id)
+        sign_in_support(@user)
+        expect(page).to have_no_content(subs.name)
       end
     end
   end
