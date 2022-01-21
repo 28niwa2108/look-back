@@ -92,7 +92,7 @@ RSpec.describe 'Subscriptions', type: :system do
         find('.sub-ope-menu').click
         find_link('編集', href: edit_user_subscription_path(@user, @subs)).click
         expect(page).to have_content('サブスク編集')
-        fill_in 'name', with: '変更後サブスク名'
+        fill_in 'name', with: "#{@subs[0..1]}変更後サブスク名"
         find('input[type="submit"]').click
         expect { click_button 'OK' }.to change { Subscription.count }.by(0)
         click_button 'OK'
@@ -105,8 +105,11 @@ RSpec.describe 'Subscriptions', type: :system do
         find_link('', href: user_subscription_path(@user, @subs)).click
         expect(page).to have_content('編集する')
         find_link('編集する', href: edit_user_subscription_path(@user, @subs)).click
-        fill_in 'name', with: '変更後サブスク名'
-        fill_in 'price', with: '11111'
+        expect(find('#name').value).to eq(@subs.name)
+        expect(find('#price').value).to eq(@subs.price.to_s)
+        expect(find('#update_cycle').value).to eq(@subs.update_cycle.to_s)
+        fill_in 'name', with: "#{@subs[0..1]}変更後サブスク名"
+        fill_in 'price', with: @subs.price * 2
         fill_in 'update_cycle', with: 1
         find('input[value="2"]').click
         uncheck 'subscription_update_day_type_id'
@@ -116,8 +119,8 @@ RSpec.describe 'Subscriptions', type: :system do
         expect(current_path).to eq(user_path(@user))
         visit user_subscription_path(@user, @subs)
         expect(current_path).to eq(user_subscription_path(@user, @subs))
-        expect(page).to have_content('変更後サブスク名')
-        expect(page).to have_content('価格：11111')
+        expect(page).to have_content("#{@subs[0..1]}変更後サブスク名")
+        expect(page).to have_content((@subs.price * 2).to_s)
         expect(page).to have_content('更新サイクル 1 ヶ 月')
       end
     end
