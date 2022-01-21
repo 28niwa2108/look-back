@@ -142,6 +142,21 @@ RSpec.describe 'Subscriptions', type: :system do
         expect(current_path).to eq(edit_user_subscription_path(@user, @subs))
       end
 
+      it '確認画面でキャンセルを選択すると、更新されない' do
+        sign_in_support(@user)
+        find('.sub-ope-menu').click
+        find_link('編集', href: edit_user_subscription_path(@user, @subs)).click
+        expect(page).to have_content('サブスク編集')
+        fill_in 'name', with: '編集しよう'
+        fill_in 'price', with: '999999'
+        fill_in 'update_cycle', with: '33'
+        find('input[type="submit"]').click
+        click_button 'Cancel'
+        expect(current_path).to eq(edit_user_subscription_path(@user, @subs))
+        expect(@subs.name).to eq(Subscription.find(@subs.id).name)
+        expect(find('input[id="name"]').value).to eq('編集しよう')
+      end
+
       it 'ログアウト状態では、サブスク編集ページに遷移できず、ログインページに遷移する' do
         visit edit_user_subscription_path(@user, @subs)
         expect(current_path).to eq(new_user_session_path)
@@ -180,6 +195,26 @@ RSpec.describe 'Subscriptions', type: :system do
         expect(Subscription.count).to eq(0)
         click_button 'OK'
         expect(current_path).to eq(user_path(@user))
+      end
+    end
+
+    context 'サブスク削除ができないとき' do
+      it '確認画面でCancelを選択すると削除されず、マイページへ戻る' do
+        sign_in_support(@user)
+        find('.sub-ope-menu').click
+        find('input[value="削除"]').click
+        click_button 'Cancel'
+        expect(current_path).to eq(user_path(@user))
+        expect(page).to have_content(@subs.name)
+      end
+
+      it '確認画面でサブスクの解約はこちらを選択すると削除されず、解約ページへ遷移する' do
+        sign_in_support(@user)
+        find('.sub-ope-menu').click
+        find('input[value="削除"]').click
+        find_link('サブスクの解約はこちら', href: new_user_subscription_contract_cancel_path(@user, @subs)).click
+        expect(current_path).to eq(new_user_subscription_contract_cancel_path(@user, @subs))
+        expect(page).to have_content("#{@subs.name}の解約")
       end
     end
   end
