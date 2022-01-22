@@ -273,6 +273,7 @@ https://look-back-36323.herokuapp.com/<br>
     + プルリクエストでWhat, Whyを記述
     + プルリクエスト前に、単体テスト・RuboCopの実行
     + 要件定義、画面遷移図を作成後実装開始
+    + 単体、結合テスト実装(合計446example)
 <br>
 <br>
 
