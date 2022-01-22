@@ -33,57 +33,65 @@
     </div> 
   </section>
 
-      <section class="text-gray-600 body-font">
-        <div class="container px-5 py-2 mx-auto">
-          <div class="flex flex-wrap -m-2">
-            <% @subs.zip(@renewal) do |sub, renew| %>
-              <div class="relative p-2 xl:w-1/3 lg:w-1/2 md:w-1/2 w-full">
-              <%# メニュー %>
-              <div class="absolute right-1 top-3 mr-4 w-6 h-6 inline-flex items-center justify-center text-yellow-400 font-bold flex-shrink-0">
-                <svg class="sub-ope-menu" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 20 20" fill="currentColor">
-                  <path fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd" />
+   <% if @subs.length == 0 %>
+    <div class="flex justify-center mt-2">
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+      </svg>
+      <p class="text-center text-gray-500">
+        <span class="text-gray-600">Add</span>  から、サブスクを登録してみましょう！
+      </p>
+    </div>
+  <% else %>
+    <section class="text-gray-600 body-font">
+      <div class="container px-5 py-2 mx-auto">
+        <div class="flex flex-wrap -m-2">
+          <% @subs.zip(@renewal) do |sub, renew| %>
+            <div class="relative p-2 xl:w-1/3 lg:w-1/2 md:w-1/2 w-full">
+            <%# メニュー %>
+            <div class="absolute right-1 top-3 mr-4 w-6 h-6 inline-flex items-center justify-center text-yellow-400 font-bold flex-shrink-0">
+              <svg class="sub-ope-menu" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd" />
+              </svg>
+            </div>
+            <ul class="sub-ope-menu-lists hidden">
+              <li class="px-4 py-2 border-r-2 border-gray-200"><%= link_to '編集', edit_user_subscription_path(@user, sub) %></li>
+              <li class="px-4 py-2 border-r-2 border-gray-200">
+                <%= form_with url: user_subscription_path(@user, sub), method: :delete, class: "sub-delete-form", local: true do |f| %>
+                  <%= f.submit '削除', class: "delete_btn bg-gray-100" %>
+                <% end %>
+              </li>
+              <li class="px-4 py-2"><%= link_to '解約', new_user_subscription_contract_cancel_path(@user, sub) %></li>
+            </ul>
+            <%# メニュー %>
+            <%# 通知 %>
+            <div class="update-notification hidden">
+              <span class="absolute left-1.5 top-1.5 rounded-full h-4 w-4 bg-gray-300"></span>
+              <span class="absolute left-1 top-1 animate-ping inline-flex h-5 w-5 rounded-full bg-gray-400 opacity-75"></span>
+            </div>
+            <%# 通知 %>
+            <a href=<%= user_subscription_path(@user, sub) %>>
+              <div class="h-full flex items-center border-yellow-100 border-2 p-4 rounded-lg  hover:border-yellow-400">
+              <div class="mr-4 w-16 h-16 inline-flex items-center justify-center rounded-full bg-gray-100 text-yellow-400 flex-shrink-0">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
                 </svg>
               </div>
-              <ul class="sub-ope-menu-lists hidden">
-                <li class="px-4 py-2 border-r-2 border-gray-200"><%= link_to '編集', edit_user_subscription_path(@user, sub) %></li>
-                <li class="px-4 py-2 border-r-2 border-gray-200">
-                  <%= form_with url: user_subscription_path(@user, sub), method: :delete, class: "sub-delete-form", local: true do |f| %>
-                    <%= f.submit '削除', class: "delete_btn bg-gray-100" %>
-                  <% end %>
-                </li>
-                <li class="px-4 py-2"><%= link_to '解約', new_user_subscription_contract_cancel_path(@user, sub) %></li>
-              </ul>
-              <%# メニュー %>
-              <%# 通知 %>
-              <div class="update-notification hidden">
-                <span class="absolute left-1.5 top-1.5 rounded-full h-4 w-4 bg-gray-300"></span>
-                <span class="absolute left-1 top-1 animate-ping inline-flex h-5 w-5 rounded-full bg-gray-400 opacity-75"></span>
-              </div>
-              <%# 通知 %>
-              <a href=<%= user_subscription_path(@user, sub) %>>
-                <div class="h-full flex items-center border-yellow-100 border-2 p-4 rounded-lg  hover:border-yellow-400">
-                <div class="mr-4 w-16 h-16 inline-flex items-center justify-center rounded-full bg-gray-100 text-yellow-400 flex-shrink-0">
-                  <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
-                  </svg>
-                </div>
-                  <div class="flex-grow">
-                    <h2 class="text-gray-900 title-font font-medium"><%= sub.name %></h2>
-                    <div class="next_update_info">次回更新日：<span class="m-sub-update-date text-gray-500"><%= renew.next_update_date %></span></div>
-                    <div class="m-sub-update-link hidden">
-                      <%= form_with url: user_subscription_contract_renewal_path(@user, sub, renew), method: :PATCH, class: "sub-update-form", local: true do |f| %>
-                        <%= f.submit 'Clickで更新', class: "m-sub-update-link_tag animate-bounce mt-3 text-gray-400 text-lg font-bold bg-white hover:text-gray-700" %>
-                      <% end %>
-                    </div>
+                <div class="flex-grow">
+                  <h2 class="text-gray-900 title-font font-medium"><%= sub.name %></h2>
+                  <div class="next_update_info">次回更新日：<span class="m-sub-update-date text-gray-500"><%= renew.next_update_date %></span></div>
+                  <div class="m-sub-update-link hidden">
+                    <%= form_with url: user_subscription_contract_renewal_path(@user, sub, renew), method: :PATCH, class: "sub-update-form", local: true do |f| %>
+                      <%= f.submit 'Clickで更新', class: "m-sub-update-link_tag animate-bounce mt-5 text-gray-400 text-lg font-bold bg-white bg-opacity-0 hover:text-gray-700" %>
+                    <% end %>
                   </div>
                 </div>
-              </a>
               </div>
-            <% end %>
-          </div>
+            </a>
+            </div>
+          <% end %>
         </div>
-      </section>
-
-    <%# </div> %>
-  <%# </section> %>
+      </div>
+    </section>
+  <% end %>
 </div>
