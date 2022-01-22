@@ -111,8 +111,6 @@ RSpec.describe 'Subscriptions', type: :request do
       end
 
       it 'showアクションにリクエストすると、レスポンスにマイページのURLを含む' do
-        user = FactoryBot.create(:user)
-        subs = FactoryBot.create(:subscription, user_id: user.id)
         get user_subscription_path(@user, @subs.id + 1)
         expect(response.body).to include("http://www.example.com/users/#{@user.id}")
       end
@@ -216,22 +214,25 @@ RSpec.describe 'Subscriptions', type: :request do
     context 'ログイン状態なら、サブスクが登録される' do
       it 'createアクションのリクエストが成功すると、マイページへリダイレクトする' do
         post user_subscriptions_path(@user), params: {
-          subscription: FactoryBot.attributes_for(:subscription).merge(user_id: @user.id)
+          subscription: FactoryBot.attributes_for(:subscription)
         }
         expect(response.status).to eq(302)
         expect(response.body).to include("http://www.example.com/users/#{@user.id}")
       end
 
       it 'createアクションのリクエストが成功すると、サブスクレコードが登録される' do
-        expect { post user_subscriptions_path(@user), params: {
-          subscription: FactoryBot.attributes_for(:subscription).merge(user_id: @user.id)
-        }}.to change { Subscription.count }.by(1)
+        expect {
+          post user_subscriptions_path(@user), params: {
+            subscription: FactoryBot.attributes_for(:subscription)
+          }
+        }.to change { Subscription.count }.by(1)
       end
 
       it 'createアクションのリクエストが成功すると、契約更新レコードが登録される' do
-        expect { post user_subscriptions_path(@user), params: {
-          subscription: FactoryBot.attributes_for(:subscription).merge(user_id: @user.id)
-        }
+        expect {
+          post user_subscriptions_path(@user), params: {
+            subscription: FactoryBot.attributes_for(:subscription)
+          }
         }.to change { ContractRenewal.count }.by(1)
       end
     end
@@ -239,9 +240,10 @@ RSpec.describe 'Subscriptions', type: :request do
     context '他人のidでcreateアクションにリクエストを送る場合' do
       it 'Subscriptionカウントは変わらず、マイページにリダイレクトする' do
         user = FactoryBot.create(:user)
-        expect { post user_subscriptions_path(user), params: {
-          subscription: FactoryBot.attributes_for(:subscription).merge(user_id: user.id)
-        }
+        expect {
+          post user_subscriptions_path(user), params: {
+            subscription: FactoryBot.attributes_for(:subscription)
+          }
         }.to change { ContractRenewal.count }.by(0)
         expect(response.status).to eq(302)
         expect(response.body).to include("http://www.example.com/users/#{@user.id}")
@@ -251,42 +253,44 @@ RSpec.describe 'Subscriptions', type: :request do
     context 'サブスク登録が失敗する場合' do
       it 'createアクションのリクエストが失敗すると、HTTPステータスは200が返る' do
         post user_subscriptions_path(@user), params: {
-          subscription: FactoryBot.attributes_for(:subscription, price: nil).merge(user_id: @user.id)
+          subscription: FactoryBot.attributes_for(:subscription, price: nil)
         }
         expect(response.status).to eq(200)
       end
 
       it 'createアクションのリクエストが失敗すると、Subscriptionカウントは変化しない' do
-        expect { post user_subscriptions_path(@user), params: {
-          subscription: FactoryBot.attributes_for(:subscription, price: nil).merge(user_id: @user.id)
-        }
+        expect {
+          post user_subscriptions_path(@user), params: {
+            subscription: FactoryBot.attributes_for(:subscription, price: nil)
+          }
         }.to change { Subscription.count }.by(0)
       end
 
       it 'createアクションのリクエストが失敗すると、ContractRenewalカウントは変化しない' do
-        expect { post user_subscriptions_path(@user), params: {
-          subscription: FactoryBot.attributes_for(:subscription, price: nil).merge(user_id: @user.id)
-        }
+        expect {
+          post user_subscriptions_path(@user), params: {
+            subscription: FactoryBot.attributes_for(:subscription, price: nil)
+          }
         }.to change { ContractRenewal.count }.by(0)
       end
 
       it 'createアクションのリクエストが失敗すると、レスポンスにエラーメッセージが含まれる' do
         post user_subscriptions_path(@user), params: {
-          subscription: FactoryBot.attributes_for(:subscription, price: nil).merge(user_id: @user.id)
+          subscription: FactoryBot.attributes_for(:subscription, price: nil)
         }
         expect(response.body).to include('価格を入力してください')
       end
 
       it 'createアクションのリクエストが失敗すると、レスポンスにサブスク登録の文字が存在する' do
         post user_subscriptions_path(@user), params: {
-          subscription: FactoryBot.attributes_for(:subscription, price: nil).merge(user_id: @user.id)
+          subscription: FactoryBot.attributes_for(:subscription, price: nil)
         }
         expect(response.body).to include('サブスク登録')
       end
 
       it 'createアクションのリクエストが失敗すると、レスポンスに登録するボタンが存在する' do
         post user_subscriptions_path(@user), params: {
-          subscription: FactoryBot.attributes_for(:subscription, price: nil).merge(user_id: @user.id)
+          subscription: FactoryBot.attributes_for(:subscription, price: nil)
         }
         expect(response.body).to include('登録する')
       end
@@ -298,7 +302,7 @@ RSpec.describe 'Subscriptions', type: :request do
       it 'createアクションにリクエストするとHTTPステータス302が返ってくる' do
         user = FactoryBot.create(:user)
         post user_subscriptions_path(user), params: {
-          subscription: FactoryBot.attributes_for(:subscription).merge(user_id: user.id)
+          subscription: FactoryBot.attributes_for(:subscription)
         }
         expect(response.status).to eq(302)
       end
@@ -306,7 +310,7 @@ RSpec.describe 'Subscriptions', type: :request do
       it 'createアクションにリクエストするとレスポンスにサインインページのURLが含まれる' do
         user = FactoryBot.create(:user)
         post user_subscriptions_path(user), params: {
-          subscription: FactoryBot.attributes_for(:subscription).merge(user_id: user.id)
+          subscription: FactoryBot.attributes_for(:subscription)
         }
         expect(response.body).to include('http://www.example.com/users/sign_in')
       end
@@ -420,15 +424,16 @@ RSpec.describe 'Subscriptions', type: :request do
       end
 
       it 'updateアクションのリクエストが成功すると、サブスクレコードの値が更新される' do
-        expect { patch user_subscription_path(@user, @subs), params: {
-          subscription: FactoryBot.attributes_for(:subscription, price: 123_45)
-        }
+        expect {
+          patch user_subscription_path(@user, @subs), params: {
+            subscription: FactoryBot.attributes_for(:subscription, price: 123_45)
+          }
         }.to change { Subscription.find(@subs.id).price }.from(@subs.price).to(123_45)
       end
 
       it 'updateアクションのリクエストが成功すると、レスポンスにfalseを含む' do
         patch user_subscription_path(@user, @subs), params: {
-          subscription: FactoryBot.attributes_for(:subscription).merge(user_id: @user.id)
+          subscription: FactoryBot.attributes_for(:subscription)
         }
         expect(response.body).to include('false')
       end
@@ -479,10 +484,11 @@ RSpec.describe 'Subscriptions', type: :request do
       end
 
       it 'updateアクションのリクエストが失敗すると、サブスクレコードの値は更新されない' do
-        expect { patch user_subscription_path(@user, @subs), params: {
-          subscription: FactoryBot.attributes_for(:subscription, price: -1)
-        }
-        }.to_not change { Subscription.find(@subs.id).price }
+        expect {
+          patch user_subscription_path(@user, @subs), params: {
+            subscription: FactoryBot.attributes_for(:subscription, price: -1)
+          }
+        }.to_not change { Subscription.find(@subs.id).price }.from(@subs.price)
       end
 
       it 'updateアクションのリクエストが失敗すると、レスポンスにtrueを含む' do

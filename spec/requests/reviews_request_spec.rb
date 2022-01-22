@@ -92,7 +92,7 @@ RSpec.describe 'Reviews', type: :request do
       @user = FactoryBot.create(:user)
       @subs = FactoryBot.create(:subscription, user_id: @user.id)
       @review = FactoryBot.create(:review, user_id: @user.id, subscription_id: @subs.id, later_check_id: 1)
-      @action = FactoryBot.create(:action_plan, review_id: @review.id, action_plan: "a" * 25 + "bb" + "c" * 10)
+      @action = FactoryBot.create(:action_plan, review_id: @review.id, action_plan: "#{'a' * 25}bb#{'c' * 10}")
       sign_in(@user)
     end
 
@@ -109,7 +109,7 @@ RSpec.describe 'Reviews', type: :request do
 
       it 'indexアクションにリクエストすると、レスポンスにAction Planの文字が存在する' do
         get user_subscription_reviews_path(@user, @subs)
-        expect(response.body).to include("Action Plan")
+        expect(response.body).to include('Action Plan')
       end
 
       it 'indexアクションにリクエストすると、各レビューの対象評価期間(開始)が存在する' do
@@ -136,13 +136,13 @@ RSpec.describe 'Reviews', type: :request do
 
       it 'indexアクションにリクエストすると、評価済のレビューでは、アクションプランが「...」を含め30文字表示される' do
         get user_subscription_reviews_path(@user, @subs)
-        action_plan = @action.action_plan[0, 27] + "..."
+        action_plan = "#{@action.action_plan[0, 27]}..."
         expect(response.body).to include(action_plan)
       end
 
       it '上記において、アクションプランが丁度30文字の場合は、全表示される' do
         review = FactoryBot.create(:review, user_id: @user.id, subscription_id: @subs.id, later_check_id: 1)
-        action = FactoryBot.create(:action_plan, review_id: review.id, action_plan: "a" * 29 + "b")
+        action = FactoryBot.create(:action_plan, review_id: review.id, action_plan: "#{'a' * 29}b")
         get user_subscription_reviews_path(@user, @subs)
         expect(response.body).to include(action.action_plan)
       end
@@ -259,7 +259,7 @@ RSpec.describe 'Reviews', type: :request do
 
       it 'showアクションにリクエストすると、アクションプランが未記入なら、未記入〜の文字が表示される' do
         review = FactoryBot.create(:review, user_id: @user.id, subscription_id: @subs.id, later_check_id: 2)
-        action = FactoryBot.create(:action_plan, review_id: review.id, action_plan: '')
+        FactoryBot.create(:action_plan, review_id: review.id, action_plan: '')
         get user_subscription_review_path(@user, @subs, review)
         expect(response.body).to include('アクションプランが未入力です')
       end
@@ -271,7 +271,7 @@ RSpec.describe 'Reviews', type: :request do
 
       it 'showアクションにリクエストすると、アクションレビューコメントが未記入なら、未記入〜の文字が表示される' do
         review = FactoryBot.create(:review, user_id: @user.id, subscription_id: @subs.id, later_check_id: 2)
-        action = FactoryBot.create(:action_plan, review_id: review.id, action_review_comment: '')
+        FactoryBot.create(:action_plan, review_id: review.id, action_review_comment: '')
         get user_subscription_review_path(@user, @subs, review)
         expect(response.body).to include('行動の振り返りが未入力です')
       end
@@ -283,7 +283,7 @@ RSpec.describe 'Reviews', type: :request do
 
       it 'showアクションにリクエストすると、サブスクレビューが未記入なら、未記入〜の文字が表示される' do
         review = FactoryBot.create(:review, user_id: @user.id, subscription_id: @subs.id, later_check_id: 2, review_comment: '')
-        action = FactoryBot.create(:action_plan, review_id: review.id)
+        FactoryBot.create(:action_plan, review_id: review.id)
         get user_subscription_review_path(@user, @subs, review)
         expect(response.body).to include('レビューが未入力です')
       end
@@ -426,7 +426,7 @@ RSpec.describe 'Reviews', type: :request do
 
       it 'editアクションにリクエストすると、あと300文字の文字が存在する' do
         get edit_user_subscription_review_path(@user, @subs, @review)
-        expect(response.body).to include("あと", "300", "文字")
+        expect(response.body).to include('あと', '300', '文字')
       end
 
       it 'editアクションにリクエストすると、レビューボタンの文字が存在する' do
@@ -441,9 +441,9 @@ RSpec.describe 'Reviews', type: :request do
 
       it 'editアクションにリクエストすると、アクションプランが未記入なら、placeholderの文字が表示される' do
         review = FactoryBot.create(:review, user_id: @user.id, subscription_id: @subs.id, later_check_id: 2)
-        action = FactoryBot.create(:action_plan, review_id: review.id, action_plan: '')
+        FactoryBot.create(:action_plan, review_id: review.id, action_plan: '')
         get edit_user_subscription_review_path(@user, @subs, review)
-        expect(response.body).to include("次回更新日までのアクションプランを設定しましょう！")
+        expect(response.body).to include('次回更新日までのアクションプランを設定しましょう！')
       end
 
       it 'editアクションにリクエストすると、アクションレビューコメントが入力されていたら、アクションレビューコメントが表示される' do
@@ -453,7 +453,7 @@ RSpec.describe 'Reviews', type: :request do
 
       it 'editアクションにリクエストすると、アクションレビューコメントが未記入なら、placeholderの文字が表示される' do
         review = FactoryBot.create(:review, user_id: @user.id, subscription_id: @subs.id, later_check_id: 2)
-        action = FactoryBot.create(:action_plan, review_id: review.id, action_review_comment: '')
+        FactoryBot.create(:action_plan, review_id: review.id, action_review_comment: '')
         get edit_user_subscription_review_path(@user, @subs, review)
         expect(response.body).to include("実践したアクションプランを振り返ってみましょう！\n何に活用できたか、どんな行動ができたか、思い出してみましょう。")
       end
@@ -465,7 +465,7 @@ RSpec.describe 'Reviews', type: :request do
 
       it 'editアクションにリクエストすると、サブスクレビューが未記入なら、placeholderの文字が表示される' do
         review = FactoryBot.create(:review, user_id: @user.id, subscription_id: @subs.id, later_check_id: 2, review_comment: '')
-        action = FactoryBot.create(:action_plan, review_id: review.id)
+        FactoryBot.create(:action_plan, review_id: review.id)
         get edit_user_subscription_review_path(@user, @subs, review)
         expect(response.body).to include("今回のサブスクコンテンツは、いかがでしたか？\n感じたことを書き出して見ましょう！")
       end
@@ -500,7 +500,7 @@ RSpec.describe 'Reviews', type: :request do
         user = FactoryBot.create(:user)
         subs = FactoryBot.create(:subscription, user_id: user.id)
         review = FactoryBot.create(:review, user_id: user.id, subscription_id: subs.id)
-        action = FactoryBot.create(:action_plan, review_id: review.id)
+        FactoryBot.create(:action_plan, review_id: review.id)
         get edit_user_subscription_review_path(user, subs, review)
         expect(response.status).to eq(302)
       end
@@ -509,7 +509,7 @@ RSpec.describe 'Reviews', type: :request do
         user = FactoryBot.create(:user)
         subs = FactoryBot.create(:subscription, user_id: user.id)
         review = FactoryBot.create(:review, user_id: user.id, subscription_id: subs.id)
-        action = FactoryBot.create(:action_plan, review_id: review.id)
+        FactoryBot.create(:action_plan, review_id: review.id)
         get edit_user_subscription_review_path(user, subs, review)
         expect(response.body).to include("http://www.example.com/users/#{@user.id}")
       end
@@ -522,7 +522,7 @@ RSpec.describe 'Reviews', type: :request do
         user = FactoryBot.create(:user)
         subs = FactoryBot.create(:subscription, user_id: user.id)
         review = FactoryBot.create(:review, user_id: user.id, subscription_id: subs.id)
-        action = FactoryBot.create(:action_plan, review_id: review.id)
+        FactoryBot.create(:action_plan, review_id: review.id)
         get edit_user_subscription_review_path(user, subs, review)
         expect(response.status).to eq(302)
       end
@@ -531,7 +531,7 @@ RSpec.describe 'Reviews', type: :request do
         user = FactoryBot.create(:user)
         subs = FactoryBot.create(:subscription, user_id: user.id)
         review = FactoryBot.create(:review, user_id: user.id, subscription_id: subs.id)
-        action = FactoryBot.create(:action_plan, review_id: review.id)
+        FactoryBot.create(:action_plan, review_id: review.id)
         get edit_user_subscription_review_path(user, subs, review)
         expect(response.body).to include('http://www.example.com/users/sign_in')
       end
@@ -556,9 +556,10 @@ RSpec.describe 'Reviews', type: :request do
       end
 
       it 'updateアクションのリクエストが成功すると、レビューレコードの値が更新される' do
-        expect { patch user_subscription_review_path(@user, @subs, @review), params: {
-          review_action: FactoryBot.attributes_for(:review_action, review_comment: 'コメントを更新しました')
-        }
+        expect {
+          patch user_subscription_review_path(@user, @subs, @review), params: {
+            review_action: FactoryBot.attributes_for(:review_action, review_comment: 'コメントを更新しました')
+          }
         }.to change { Review.find(@review.id).review_comment }.from(@review.review_comment).to('コメントを更新しました')
       end
 
@@ -575,7 +576,7 @@ RSpec.describe 'Reviews', type: :request do
         user = FactoryBot.create(:user)
         subs = FactoryBot.create(:subscription, user_id: user.id)
         review = FactoryBot.create(:review, user_id: user.id, subscription_id: subs.id, later_check_id: 1)
-        action = FactoryBot.create(:action_plan, review_id: review.id)
+        FactoryBot.create(:action_plan, review_id: review.id)
         patch user_subscription_review_path(user, subs, review), params: {
           review_action: FactoryBot.attributes_for(:review_action)
         }
@@ -634,17 +635,19 @@ RSpec.describe 'Reviews', type: :request do
       end
 
       it 'updateアクションのリクエストが失敗すると、レビューレコードの値は更新されない' do
-        expect { patch user_subscription_review_path(@user, @subs, @review), params: {
-          review_action: FactoryBot.attributes_for(:review_action, review_rate: '', later_check_id: 1)
-        }
-        }.to_not change { Review.find(@review.id).review_rate }
+        expect {
+          patch user_subscription_review_path(@user, @subs, @review), params: {
+            review_action: FactoryBot.attributes_for(:review_action, review_rate: '', later_check_id: 1)
+          }
+        }.to_not change { Review.find(@review.id).review_rate }.from(@review.review_rate)
       end
 
       it 'updateアクションのリクエストが失敗すると、アクションプランレコードの値は更新されない' do
-        expect { patch user_subscription_review_path(@user, @subs, @review), params: {
-          review_action: FactoryBot.attributes_for(:review_action, action_plan: '', later_check_id: 1)
-        }
-        }.to_not change { ActionPlan.find(@action.id).action_plan }
+        expect {
+          patch user_subscription_review_path(@user, @subs, @review), params: {
+            review_action: FactoryBot.attributes_for(:review_action, action_plan: '', later_check_id: 1)
+          }
+        }.to_not change { ActionPlan.find(@action.id).action_plan }.from(@action.action_plan)
       end
 
       it 'updateアクションのリクエストが失敗すると、レスポンスにエラーメッセージが含まれる' do
@@ -703,7 +706,7 @@ RSpec.describe 'Reviews', type: :request do
 
       it 'editアクションにリクエストすると、あと300文字の文字が存在する' do
         get edit_user_subscription_review_path(@user, @subs, @review)
-        expect(response.body).to include("あと", "300", "文字")
+        expect(response.body).to include('あと', '300', '文字')
       end
 
       it 'editアクションにリクエストすると、レビューボタンの文字が存在する' do
@@ -718,9 +721,9 @@ RSpec.describe 'Reviews', type: :request do
 
       it 'editアクションにリクエストすると、アクションプランが未記入なら、placeholderの文字が表示される' do
         review = FactoryBot.create(:review, user_id: @user.id, subscription_id: @subs.id, later_check_id: 2)
-        action = FactoryBot.create(:action_plan, review_id: review.id, action_plan: '')
+        FactoryBot.create(:action_plan, review_id: review.id, action_plan: '')
         get edit_user_subscription_review_path(@user, @subs, review)
-        expect(response.body).to include("次回更新日までのアクションプランを設定しましょう！")
+        expect(response.body).to include('次回更新日までのアクションプランを設定しましょう！')
       end
 
       it 'editアクションにリクエストすると、アクションレビューコメントが入力されていたら、アクションレビューコメントが表示される' do
@@ -730,7 +733,7 @@ RSpec.describe 'Reviews', type: :request do
 
       it 'editアクションにリクエストすると、アクションレビューコメントが未記入なら、placeholderの文字が表示される' do
         review = FactoryBot.create(:review, user_id: @user.id, subscription_id: @subs.id, later_check_id: 2)
-        action = FactoryBot.create(:action_plan, review_id: review.id, action_review_comment: '')
+        FactoryBot.create(:action_plan, review_id: review.id, action_review_comment: '')
         get edit_user_subscription_review_path(@user, @subs, review)
         expect(response.body).to include("実践したアクションプランを振り返ってみましょう！\n何に活用できたか、どんな行動ができたか、思い出してみましょう。")
       end
@@ -742,7 +745,7 @@ RSpec.describe 'Reviews', type: :request do
 
       it 'editアクションにリクエストすると、サブスクレビューが未記入なら、placeholderの文字が表示される' do
         review = FactoryBot.create(:review, user_id: @user.id, subscription_id: @subs.id, later_check_id: 2, review_comment: '')
-        action = FactoryBot.create(:action_plan, review_id: review.id)
+        FactoryBot.create(:action_plan, review_id: review.id)
         get edit_user_subscription_review_path(@user, @subs, review)
         expect(response.body).to include("今回のサブスクコンテンツは、いかがでしたか？\n感じたことを書き出して見ましょう！")
       end
@@ -755,7 +758,7 @@ RSpec.describe 'Reviews', type: :request do
         user = FactoryBot.create(:user)
         subs = FactoryBot.create(:subscription, user_id: user.id)
         review = FactoryBot.create(:review, user_id: user.id, subscription_id: subs.id, later_check_id: 1)
-        action = FactoryBot.create(:action_plan, review_id: review.id)
+        FactoryBot.create(:action_plan, review_id: review.id)
         patch user_subscription_review_path(user, subs, review), params: {
           review_action: FactoryBot.attributes_for(:review_action)
         }
@@ -766,7 +769,7 @@ RSpec.describe 'Reviews', type: :request do
         user = FactoryBot.create(:user)
         subs = FactoryBot.create(:subscription, user_id: user.id)
         review = FactoryBot.create(:review, user_id: user.id, subscription_id: subs.id, later_check_id: 1)
-        action = FactoryBot.create(:action_plan, review_id: review.id)
+        FactoryBot.create(:action_plan, review_id: review.id)
         patch user_subscription_review_path(user, subs, review), params: {
           review_action: FactoryBot.attributes_for(:review_action)
         }

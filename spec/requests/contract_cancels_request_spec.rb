@@ -169,8 +169,10 @@ RSpec.describe 'ContractCancels', type: :request do
       end
 
       it 'createアクションのリクエストが成功すると、契約解除レコードが登録される' do
-        expect { post user_subscription_contract_cancels_path(@user, @subs), params: {
-          contract_cancel: FactoryBot.attributes_for(:contract_cancel) }
+        expect {
+          post user_subscription_contract_cancels_path(@user, @subs), params: {
+            contract_cancel: FactoryBot.attributes_for(:contract_cancel)
+          }
         }.to change { ContractCancel.count }.by(1)
       end
     end
@@ -178,13 +180,15 @@ RSpec.describe 'ContractCancels', type: :request do
     context '存在しないサブスクidでcreateアクションにリクエストすると、マイページにリダイレクトする' do
       it 'createアクションにリクエストすると、HTTPステータス302が返ってくる' do
         post user_subscription_contract_cancels_path(@user, @subs.id + 1), params: {
-          contract_cancel: FactoryBot.attributes_for(:contract_cancel) }
+          contract_cancel: FactoryBot.attributes_for(:contract_cancel)
+        }
         expect(response.status).to eq(302)
       end
 
       it 'createアクションにリクエストすると、レスポンスにマイページのURLを含む' do
         post user_subscription_contract_cancels_path(@user, @subs.id + 1), params: {
-          contract_cancel: FactoryBot.attributes_for(:contract_cancel) }
+          contract_cancel: FactoryBot.attributes_for(:contract_cancel)
+        }
         expect(response.body).to include("http://www.example.com/users/#{@user.id}")
       end
     end
@@ -193,8 +197,10 @@ RSpec.describe 'ContractCancels', type: :request do
       it '契約解除レコードのカウントは変わらず、マイページにリダイレクトする' do
         user = FactoryBot.create(:user)
         subs = FactoryBot.create(:subscription, user_id: user.id)
-        expect { post user_subscription_contract_cancels_path(user, @subs), params: {
-          contract_cancel: FactoryBot.attributes_for(:contract_cancel) }
+        expect {
+          post user_subscription_contract_cancels_path(user, subs), params: {
+            contract_cancel: FactoryBot.attributes_for(:contract_cancel)
+          }
         }.to change { ContractCancel.count }.by(0)
         expect(response.status).to eq(302)
         expect(response.body).to include("http://www.example.com/users/#{@user.id}")
@@ -210,8 +216,10 @@ RSpec.describe 'ContractCancels', type: :request do
       end
 
       it 'createアクションのリクエストが失敗すると、契約解除レコードのカウントは変化しない' do
-        expect { post user_subscription_contract_cancels_path(@user, @subs), params: {
-          contract_cancel: FactoryBot.attributes_for(:contract_cancel, reason_id: 0) }
+        expect {
+          post user_subscription_contract_cancels_path(@user, @subs), params: {
+            contract_cancel: FactoryBot.attributes_for(:contract_cancel, reason_id: 0)
+          }
         }.to change { ContractCancel.count }.by(0)
       end
 

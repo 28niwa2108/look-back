@@ -98,9 +98,11 @@ RSpec.describe 'ContractRenewals', type: :request do
 
       it 'updateアクションのリクエストが失敗すると、サブスクレコードの値は更新されない' do
         subs = FactoryBot.create(:subscription, user_id: @user.id, contract_date: Date.new(2200, 2, 22))
-        expect { patch user_subscription_contract_renewal_path(@user, subs, @renewal) }.not_to change {
+        expect {
+          patch user_subscription_contract_renewal_path(@user, subs, @renewal)
+        }.not_to change {
           ContractRenewal.find(@renewal.id).total_period
-        }
+        }.from(@renewal.total_period)
       end
 
       it 'updateアクションのリクエストが失敗すると、レレスポンスにtrueを含む' do

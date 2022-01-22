@@ -126,7 +126,7 @@ RSpec.describe 'ユーザー管理機能', type: :system do
         find_link('My page', href: user_path(@user)).click
         expect(current_path).to eq(user_path(@user))
         expect(page).to have_content(@subs.name)
-        expect(page).to have_content(@renewal.next_update_date)
+        expect(page).to have_content("次回更新日：#{@renewal.next_update_date}")
       end
     end
 
