@@ -50,5 +50,6 @@ test:
 production:
   <<: *default
   database: look_back_production
-  username: look_back
-  password: <%= ENV['LOOK_BACK_DATABASE_PASSWORD'] %>
+  username: root
+  password: <%= ENV['DATABASE_PASSWORD'] %>
+  socket: /var/lib/mysql/mysql.sock
