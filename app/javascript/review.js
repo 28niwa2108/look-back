@@ -2,9 +2,9 @@ $(function () {
   // サブスク評価のraty
   $('#review_rate').raty({
     size     : 38,
-    starOff:  '/star-off.png',
-    starOn : '/star-on.png',
-    starHalf: '/star-half.png',
+    starOff:  '/assets/star-off.png',
+    starOn : '/assets/star-on.png',
+    starHalf: '/assets/star-half.png',
     scoreName: 'review_action[review_rate]',
     half:  false,
   });
