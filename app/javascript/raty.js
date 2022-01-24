@@ -572,7 +572,7 @@
 
       // TODO: model spec
       _setIcon: function(star, icon) {
-        star[this.opt.starType === 'img' ? 'src' : 'className'] = icon;
+        star[this.opt.starType === 'img' ? 'src' : 'className'] = this.opt.path + icon;
       },
 
       _setPath: function() {
