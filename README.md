@@ -304,8 +304,8 @@ https://subscription-lookback.com/<br>
 ## 実装予定機能
 + 上記課題の解消
 + ~~インフラをAWSに変更~~ 完了
-  - ドメイン取得
-  - SSL化も対応
+  - ~~ドメイン取得~~
+  - ~~SSL化~~
 + ビューレイアウトの改善
   - ユーザー名をマイページに表示する
   - ~~サブスク登録数が0の時のマイページレイアウトを変更~~ 完了
@@ -331,10 +331,14 @@ https://subscription-lookback.com/<br>
   - HTML, CSS, tailwindcss, JavaScript, JQuery, Ajax
 
 + データベース
-  - MySQL, Sequel Pro
+  - MySQL 
+  - Sequel Pro
 
 + 本番環境
-  - Heroku
+  - AWS(EC2, Route53, ACM)
+  - Webサーバー Nginx
+  - アプリケーションサーバー Unicorn
+  - データベース MariaDB
 
 + ソース管理
   - GitHub, GitHub Desktop
