@@ -33,7 +33,7 @@ require "capistrano/rbenv"
 # require "capistrano/chruby"
 
 require "capistrano/bundler"
-require "capistrans/assets"
+require "capistrans/rails/assets"
 # require "capistrano/railmigrations"
 require 'capistrano/rails/migrations'
 require 'capistrano3/unicorn'
