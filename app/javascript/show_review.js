@@ -3,9 +3,9 @@ $(function () {
   // サブスク評価のraty
   $('#review_rate_read_only').raty({
     size     : 38,
-    starOff:  '/assets/star-off.png',
-    starOn : '/assets/star-on.png',
-    starHalf: '/assets/star-half.png',
+    starOff:  '/star-off.png',
+    starOn : '/star-on.png',
+    starHalf: '/star-half.png',
     readOnly: true,
     half:  false,
   });
@@ -13,9 +13,9 @@ $(function () {
   // アクションプラン評価のraty
   $('#action_rate_read_only').raty({
     size     : 38,
-    starOff:  '/assets/star-off.png',
-    starOn : '/assets/star-on.png',
-    starHalf: '/assets/star-half.png',
+    starOff:  '/star-off.png',
+    starOn : '/star-on.png',
+    starHalf: '/star-half.png',
     readOnly: true,
     half:  false,
   });

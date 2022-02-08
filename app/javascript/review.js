@@ -12,9 +12,9 @@ $(function () {
   // アクションプラン評価のraty
   $('#action_rate').raty({
     size     : 38,
-    starOff:  '/assets/star-off.png',
-    starOn : '/assets/star-on.png',
-    starHalf: '/assets/star-half.png',
+    starOff:  '/star-off.png',
+    starOn : '/star-on.png',
+    starHalf: '/star-half.png',
     scoreName: 'review_action[action_rate]',
     half:  false,
   });
