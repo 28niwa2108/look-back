@@ -40,7 +40,14 @@
       </div>
 
       <%= f.submit "更新する", class: "block text-white bg-black border-0 mt-2 py-2 px-8 focus:outline-none hover:bg-gray-200 hover:text-black rounded text-lg" %>
-    </div>
-  <% end %>
+    <% end %>
 
+    <%= form_with url: "#", id: "test", class: "flex justify-center mt-4", local: true do |f| %>
+      <%= f.submit '退会', class: "text-base text-blue-400 bg-white bg-opacity-0 hover:text-blue-600" %>
+    <% end %>
+
+    <%= form_with url: registration_path(@user), method: :delete, id: "user_delete_form", class: "hidden flex justify-center mt-4", local: true do |f| %>
+      <%= f.submit '退会はこちらから', id: "user_delete_btn", class: "text-base text-blue-400 bg-white bg-opacity-0 hover:text-blue-600" %>
+    <% end %>
+  </div>
 </div>
