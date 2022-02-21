@@ -20,6 +20,7 @@ class UsersController < ApplicationController
   end
 
   def thanks
+    redirect_to user_path(current_user) if user_signed_in?
   end
 
   private
