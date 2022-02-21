@@ -20,7 +20,7 @@ class ApplicationController < ActionController::Base
   end
 
   def after_sign_out_path_for(resource)
-    if params[:commit] == nil
+    if params[:commit].nil?
       root_path
     else
       thanks_users_path

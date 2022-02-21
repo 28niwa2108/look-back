@@ -129,8 +129,6 @@ RSpec.describe 'Users', type: :request do
     end
   end
 
-
-
   describe 'GET #thanks(退会後ログアウト状態)' do
     context 'thanksアクションにリクエストを送ると、退会完了画面が表示される' do
       it 'thanksアクションにリクエストすると、正常にレスポンスが返ってくる' do
