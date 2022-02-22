@@ -192,4 +192,39 @@ RSpec.describe 'ユーザー管理機能', type: :system do
       end
     end
   end
+
+  describe 'ユーザー削除機能' do
+    before do
+      @user = FactoryBot.create(:user)
+    end
+
+    context 'ユーザー削除ができるとき' do
+      it 'ログイン状態ではユーザー削除ができ、退会完了ページに移動する' do
+        sign_in_support(@user)
+        visit edit_user_path(@user)
+        expect(page).to have_content('退会処理')
+        expect { find('input[type="submit"]').click }.to change { User.count }.by(-1)
+        expect(current_path).to eq(thanks_users_path)
+        expect(page).to have_content('退会完了')
+      end
+    end
+
+    context 'ユーザー削除ができないとき' do
+      it '他のユーザー削除ページには遷移できず、マイページにレンダーで戻る' do
+        user = FactoryBot.create(:user)
+        sign_in_support(@user)
+        visit edit_user_path(user)
+        expect(current_path).to eq(user_path(@user))
+        expect(page).to have_content('Subscription List')
+        expect(page).to have_no_content('退会処理')
+      end
+
+      it 'ログアウト状態では、ユーザー削除ページに遷移できず、ログインページに遷移する' do
+        visit edit_user_path(@user)
+        expect(current_path).to eq(new_user_session_path)
+        expect(page).to have_content('マイページログイン')
+        expect(page).to have_content('ログインもしくはアカウント登録してください。')
+      end
+    end
+  end
 end
