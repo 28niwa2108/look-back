@@ -72,9 +72,9 @@ https://subscription-lookback.com/<br>
 + ユーザー管理機能
   - ユーザーごとにサブスク情報を管理するため
 + ユーザー編集機能
-  - ユーザー情報を修正するため(未実装)
+  - ユーザー情報を修正するため
 + ユーザー削除機能
-  - ユーザー登録を削除するため(未実装)
+  - ユーザー登録を削除するため
 + サブスク登録機能
   - 管理するサブスクを登録するため
 + サブスク一覧表示機能
@@ -117,11 +117,11 @@ https://subscription-lookback.com/<br>
 <br>
 
 # 実装した機能・利用方法
-[![Image from Gyazo](https://i.gyazo.com/f6eb5101c47756a302ff576dfd88ace2.png)](https://gyazo.com/f6eb5101c47756a302ff576dfd88ace2)
+[![Image from Gyazo](https://i.gyazo.com/af01cbd8840f2a95e26a5d9b8dcc9b0b.png)](https://gyazo.com/af01cbd8840f2a95e26a5d9b8dcc9b0b)
 <br>
 
 ## 画面遷移図
-[![Image from Gyazo](https://i.gyazo.com/0527c12b6682c96b83e21cb3b174446c.png)](https://gyazo.com/0527c12b6682c96b83e21cb3b174446c)
+[![Image from Gyazo](https://i.gyazo.com/9d686a286054fef9abbaa3f39d8b831c.png)](https://gyazo.com/9d686a286054fef9abbaa3f39d8b831c)
 <br>
 
 ## ユーザー登録機能
@@ -137,6 +137,20 @@ https://subscription-lookback.com/<br>
 
 ## ログアウト機能
 + ヘッダーのLogoutをクリック
+<br>
+
+## ユーザー編集機能
+[![Image from Gyazo](https://i.gyazo.com/6e2ee34df37020a270082d4e631b057e.gif)](https://gyazo.com/6e2ee34df37020a270082d4e631b057e)
++ マイページで、Settingをクリック
++ 編集したい項目を修正し、現在のパスワードを入力
++ 更新するをクリック
+<br>
+
+## ユーザー削除機能
+[![Image from Gyazo](https://i.gyazo.com/543964c2222214ecc8401a8addedb190.gif)](https://gyazo.com/543964c2222214ecc8401a8addedb190)
++ マイページで、Settingをクリック
++ 退会はこちらからをクリック
++ 退会しますをクリック
 <br>
 
 ## サブスク登録機能
@@ -278,6 +292,8 @@ https://subscription-lookback.com/<br>
     + プルリクエスト前に、単体テスト・RuboCopの実行
     + 要件定義、画面遷移図を作成後実装開始
     + 単体、結合テスト実装(合計446example)
++ ユーザーニーズを知るため、フィードバックを受けれるようにした
+    + [googleフォーム](https://forms.gle/CCViuSznVTG7o5cN8)リンクを追加
 <br>
 <br>
 
@@ -316,8 +332,8 @@ https://subscription-lookback.com/<br>
   - 評価一覧に、未評価一覧へのリンクを追加
   - マイページに、サブスク評価一覧へのリンクを追加
   - レビューに←→移動ボタンを追加
-+ ユーザー編集機能
-+ ユーザー削除機能
++ ~~ユーザー編集機能~~ 完了
++ ~~ユーザー削除機能~~ 完了
 + サブスク登録時に、Javascriptで説明を表示する
 + サブスク評価入力時に、前回の評価をJavascriptで表示する
 <br>

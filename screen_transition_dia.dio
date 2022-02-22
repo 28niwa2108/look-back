@@ -1,6 +1,6 @@
 <mxfile host="65bd71144e">
     <diagram id="J6ci4ZyoHDidFsTACrlb" name="ページ1">
-        <mxGraphModel dx="7273" dy="14560" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="1169" pageHeight="827" background="none" math="0" shadow="0">
+        <mxGraphModel dx="7904" dy="14170" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="1169" pageHeight="827" background="none" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
@@ -167,15 +167,14 @@
                 <mxCell id="274" value="" style="strokeWidth=1;html=1;shape=mxgraph.flowchart.annotation_2;align=left;labelPosition=right;pointerEvents=1;rotation=-180;" parent="1" vertex="1">
                     <mxGeometry x="-3800" y="-11790" width="50" height="180" as="geometry"/>
                 </mxCell>
-                <mxCell id="275" value="" style="endArrow=classic;html=1;rounded=0;exitX=0;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;" parent="1" edge="1" source="274">
+                <mxCell id="275" value="" style="endArrow=classic;html=1;rounded=0;exitX=0;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;" parent="1" source="274" edge="1">
                     <mxGeometry width="50" height="50" relative="1" as="geometry">
                         <mxPoint x="-3637" y="-11700" as="sourcePoint"/>
-                        <mxPoint x="-4811" y="-12680" as="targetPoint"/>
+                        <mxPoint x="-4750" y="-12800" as="targetPoint"/>
                         <Array as="points">
-                            <mxPoint x="-3571" y="-11700"/>
-                            <mxPoint x="-3571" y="-11400"/>
-                            <mxPoint x="-4381" y="-11400"/>
-                            <mxPoint x="-4811" y="-11400"/>
+                            <mxPoint x="-2890" y="-11710"/>
+                            <mxPoint x="-2890" y="-12950"/>
+                            <mxPoint x="-4750" y="-12930"/>
                         </Array>
                     </mxGeometry>
                 </mxCell>
@@ -210,37 +209,64 @@
                         </Array>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="287" value="" style="endArrow=none;html=1;" edge="1" parent="1">
+                <mxCell id="287" value="" style="endArrow=none;html=1;" parent="1" edge="1">
                     <mxGeometry width="50" height="50" relative="1" as="geometry">
                         <mxPoint x="-5488" y="-12670" as="sourcePoint"/>
                         <mxPoint x="-5488" y="-12801" as="targetPoint"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="288" value="" style="endArrow=classic;html=1;" edge="1" parent="1">
+                <mxCell id="288" value="" style="endArrow=classic;html=1;" parent="1" edge="1">
                     <mxGeometry width="50" height="50" relative="1" as="geometry">
                         <mxPoint x="-5490" y="-12670" as="sourcePoint"/>
                         <mxPoint x="-5344" y="-12670" as="targetPoint"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="290" value="" style="endArrow=classic;html=1;" edge="1" parent="1">
+                <mxCell id="290" value="" style="endArrow=classic;html=1;" parent="1" edge="1">
                     <mxGeometry width="50" height="50" relative="1" as="geometry">
                         <mxPoint x="-4172" y="-12261.67" as="sourcePoint"/>
                         <mxPoint x="-4025.9999999999995" y="-12261.67" as="targetPoint"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="291" value="&lt;font style=&quot;font-size: 20px&quot;&gt;サブスク&lt;br&gt;詳細ページ&lt;br&gt;&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                <mxCell id="291" value="&lt;font style=&quot;font-size: 20px&quot;&gt;サブスク&lt;br&gt;詳細ページ&lt;br&gt;&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
                     <mxGeometry x="-4021" y="-12300" width="210" height="60" as="geometry"/>
                 </mxCell>
-                <mxCell id="296" value="" style="strokeWidth=1;html=1;shape=mxgraph.flowchart.annotation_2;align=left;labelPosition=right;pointerEvents=1;rotation=-180;" vertex="1" parent="1">
+                <mxCell id="296" value="" style="strokeWidth=1;html=1;shape=mxgraph.flowchart.annotation_2;align=left;labelPosition=right;pointerEvents=1;rotation=-180;" parent="1" vertex="1">
                     <mxGeometry x="-4177" y="-12149" width="50" height="143" as="geometry"/>
                 </mxCell>
-                <mxCell id="297" value="" style="endArrow=classic;html=1;rounded=0;" edge="1" parent="1">
+                <mxCell id="297" value="" style="endArrow=classic;html=1;rounded=0;" parent="1" edge="1">
                     <mxGeometry width="50" height="50" relative="1" as="geometry">
                         <mxPoint x="-3930" y="-12320" as="sourcePoint"/>
                         <mxPoint x="-4160" y="-12500" as="targetPoint"/>
                         <Array as="points">
                             <mxPoint x="-3930" y="-12500"/>
                         </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="299" value="" style="endArrow=classic;html=1;" edge="1" parent="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="-4796" y="-12376" as="sourcePoint"/>
+                        <mxPoint x="-4796" y="-12306" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="300" value="&lt;font style=&quot;font-size: 20px&quot;&gt;ユーザー&lt;br&gt;編集ページ&lt;br&gt;&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="-4899" y="-12597" width="210" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="302" value="" style="endArrow=classic;html=1;" edge="1" parent="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="-4795" y="-12526" as="sourcePoint"/>
+                        <mxPoint x="-4795" y="-12456" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="303" value="&lt;font style=&quot;font-size: 20px&quot;&gt;ユーザー&lt;br&gt;退会確認ページ&lt;br&gt;&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="-4899" y="-12446" width="210" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="304" value="&lt;font style=&quot;font-size: 20px&quot;&gt;ユーザー&lt;br&gt;退会完了ページ&lt;br&gt;&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="-4899" y="-12294" width="210" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="305" value="" style="endArrow=classic;startArrow=classic;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;" edge="1" parent="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="-4794" y="-12610" as="sourcePoint"/>
+                        <mxPoint x="-4794" y="-12687" as="targetPoint"/>
                     </mxGeometry>
                 </mxCell>
             </root>
