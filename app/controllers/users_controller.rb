@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
-  before_action :authenticate_user!, only: [:show]
-  before_action :user_identification, only: [:show]
+  before_action :authenticate_user!, only: [:show, :edit]
+  before_action :user_identification, only: [:show, :edit]
 
   def show
     @user = User.find_by(id: params[:id])
@@ -13,6 +13,14 @@ class UsersController < ApplicationController
         @renewal << sub.contract_renewal
       end
     end
+  end
+
+  def edit
+    @user = User.find_by(id: params[:id])
+  end
+
+  def thanks
+    redirect_to user_path(current_user) if user_signed_in?
   end
 
   private
