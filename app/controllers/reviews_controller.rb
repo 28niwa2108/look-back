@@ -1,13 +1,13 @@
 class ReviewsController < ApplicationController
   before_action :authenticate_user!, only: [:all_index, :index, :show, :edit, :update]
   before_action :user_identification, only: [:all_index, :index, :show, :edit, :update]
+  before_action :set_user, only: [:all_index, :index, :show, :edit]
   before_action :set_subs, only: [:index, :show, :edit]
   before_action :set_review, only: [:show, :edit]
   before_action :set_action, only: [:show, :edit]
   before_action :check_params_ids, only: [:update]
 
   def all_index
-    set_user
     @subs = Subscription.where(user_id: @user.id)
     all_reviews = Review.where(user_id: @user.id).includes(:action_plan).order('created_at DESC')
 
@@ -22,11 +22,9 @@ class ReviewsController < ApplicationController
   end
 
   def show
-    set_user
   end
 
   def edit
-    set_user
     @review_action = ReviewAction.new(
       review_rate: @review.review_rate,
       review_comment: @review.review_comment,
