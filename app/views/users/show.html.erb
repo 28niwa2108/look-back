@@ -55,6 +55,7 @@
               </svg>
             </div>
             <ul class="sub-ope-menu-lists hidden">
+              <li class="px-4 py-2 border-r-2 border-gray-200"><%= link_to 'レビュー', user_subscription_reviews_path(@user, sub) %></li>
               <li class="px-4 py-2 border-r-2 border-gray-200"><%= link_to '編集', edit_user_subscription_path(@user, sub) %></li>
               <li class="px-4 py-2 border-r-2 border-gray-200">
                 <%= form_with url: user_subscription_path(@user, sub), method: :delete, class: "sub-delete-form", local: true do |f| %>
