@@ -6,16 +6,20 @@
         <div>
           <%= link_to @subs.name, user_subscription_path(@user, @subs), class: "sm:text-3xl text-2xl text-gray-600 hover:bg-gray-400 hover:bg-opacity-20" %>
         </div>
-        <div class="animate-bounce ml-6">
-        <div class="bubble_index hidden" id="bubble_message">
-          <span class="bubble_word w-32 rounded-lg text-sm">レビュー待ち</span>
-        </div>
-          <a href=<%= all_index_user_reviews_path(@user) %> id="un_reviews_link" class="sm:px-4 pt-3 pb-3 sm:w-auto justify-center sm:justify-start title-font font-medium inline-flex items-center hover:bg-gray-400 hover:bg-opacity-20 text-pink-400 rounded-xl">
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
-            </svg>
-          </a>
-        </div>
+        <%# 未レビューサブスクがあれば、未レビュー一覧へのリンクを表示する %>
+        <% if @un_reviews %>
+          <div class="animate-bounce ml-6">
+            <div class="bubble_index hidden" id="bubble_message">
+              <span class="bubble_word w-32 rounded-lg text-sm">レビュー待ち</span>
+            </div>
+            <a href=<%= all_index_user_reviews_path(@user) %> id="un_reviews_link" class="sm:px-4 pt-3 pb-3 sm:w-auto justify-center sm:justify-start title-font font-medium inline-flex items-center hover:bg-gray-400 hover:bg-opacity-20 text-pink-400 rounded-xl">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+              </svg>
+            </a>
+          </div>
+        <% end %>
+        <%# 未レビューサブスクがあれば、未レビュー一覧へのリンクを表示する %>
       </div>
     </div>
     <div class="flex flex-wrap -m-4">
