@@ -17,6 +17,7 @@ require("../show_review.js")
 require("../average_rate.js")
 require("../sub_cancel.js")
 require("../sub_ope_menu.js")
+require("../reviews_link.js")
 
 
 // Uncomment to copy all static images under ../images to the output folder and reference

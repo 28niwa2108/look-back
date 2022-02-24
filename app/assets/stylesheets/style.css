@@ -41,7 +41,7 @@ background-color: rgba(0,0,0,0.05);
   background-color: #ff0000;
 }
 
-/* 吹き出し */
+/* レビュー画面(revirews/edit)吹き出し */
 .bubble:before {
   content: "";
   position: absolute;
@@ -50,4 +50,26 @@ background-color: rgba(0,0,0,0.05);
   margin-left: -15px;
   border: 15px solid transparent;
   border-top: 15px solid #e0edff;
+}
+
+/* レビュー一覧画面(revirews/index)吹き出し▼ */
+.bubble_index:before {
+  content: "";
+  position: absolute;
+  top: -35%;
+  left: 50%;
+  margin-left: -15px;
+  border: 15px solid transparent;
+  border-top: 15px solid #eeeded;
+}
+
+/* レビュー一覧画面(revirews/edit)吹き出しコメント */
+.bubble_word {
+  content: "";
+  position: absolute;
+  bottom: 130%;
+  left: -50%;
+  margin-left: -15px;
+  border: 15px solid transparent;
+  background-color: #eeeded;
 }
