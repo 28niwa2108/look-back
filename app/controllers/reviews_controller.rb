@@ -19,15 +19,7 @@ class ReviewsController < ApplicationController
 
   def index
     @reviews = Review.where(subscription_id: params[:subscription_id]).includes(:action_plan).order('created_at DESC')
-
-    all_reviews = Review.where(user_id: @user.id)
-    @un_reviews = false
-    all_reviews.each do |review|
-      if review.later_check_id == 2
-        @un_reviews = true
-        break
-      end
-    end
+    @un_reviews = Review.un_review_exit(@user)
   end
 
   def show

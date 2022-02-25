@@ -7,6 +7,7 @@ class Review < ApplicationRecord
   extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to :later_check
 
+  # バリデーション
   with_options presence: true do
     validates :start_date
     validates :end_date
@@ -24,6 +25,7 @@ class Review < ApplicationRecord
     less_than_or_equal_to: 5
   }, unless: :type_is_later
 
+  # メソッド
   def type_is_later
     later_check_id == 2
   end
@@ -39,5 +41,13 @@ class Review < ApplicationRecord
       end
     end
     (review_sum / review_count).round if review_count != 0
+  end
+
+  def self.un_review_exit(user)
+    user_reviews = Review.where(user_id: user.id)
+    user_reviews.each do |review|
+      return true if review.later_check_id == 2
+    end
+    false
   end
 end
