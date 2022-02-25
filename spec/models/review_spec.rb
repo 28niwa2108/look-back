@@ -2,9 +2,9 @@ require 'rails_helper'
 
 RSpec.describe Review, type: :model do
   before do
-    user = FactoryBot.create(:user)
+    @user = FactoryBot.create(:user)
     subscription = FactoryBot.create(:subscription)
-    @review = FactoryBot.build(:review, user_id: user.id, subscription_id: subscription.id)
+    @review = FactoryBot.build(:review, user_id: @user.id, subscription_id: subscription.id)
   end
 
   # 正常系テスト ------------------------------------
@@ -93,6 +93,19 @@ RSpec.describe Review, type: :model do
       reviews << FactoryBot.create(:review, later_check_id: 2, review_rate: '')
       review_ave = Review.get_review_rate_ave(reviews)
       expect(review_ave).to eq(nil)
+    end
+  end
+
+  context 'un_review_exitメソッドが成功するとき' do
+    it 'later_check_idが2のレコードがあるとtrueが戻る' do
+      FactoryBot.create(:review, user_id: @user.id, later_check_id: 1)
+      FactoryBot.create(:review, user_id: @user.id, later_check_id: 2)
+      expect(Review.un_review_exit(@user)).to eq(true)
+    end
+
+    it '全レコードのlater_check_idが1の場合はfalseが戻る' do
+      FactoryBot.create(:review, user_id: @user.id, later_check_id: 1)
+      expect(Review.un_review_exit(@user)).to eq(false)
     end
   end
 
