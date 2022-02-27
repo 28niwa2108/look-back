@@ -38,7 +38,7 @@ $(function () {
   checkbox.addEventListener("change", function() {
     if (checkbox.checked) {
       later_hidden_parts.setAttribute("class", "hidden")
-      later_check_warning.setAttribute("class", "ml-3 text-gray-700 font-medium")
+      later_check_warning.setAttribute("class", "ml-3 text-center text-gray-700 font-medium")
     } else {
       later_hidden_parts.setAttribute("class", "py-6")
       later_check_warning.setAttribute("class", "hidden")
