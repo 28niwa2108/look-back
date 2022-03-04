@@ -66,7 +66,7 @@ window.addEventListener('load', () => {
               icon: 'error',
               title: '更新失敗',
               confirmButtonColor: '#cc3333',
-              html: '大変お手数ですが、<a href="#" class="text-blue-400 hover:bg-gray-200">こちら</a>から<br>不具合のご報告をお願い申し上げます。'
+              html: '大変お手数ですが、<a href="https://forms.gle/FwRDjMCqmdw4XaPW7" class="text-blue-400 hover:bg-gray-200">こちら</a>から<br>不具合のご報告をお願い申し上げます。'
             });
             return null;
           };

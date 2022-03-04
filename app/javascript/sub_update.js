@@ -45,7 +45,7 @@ window.addEventListener('load', () => {
             icon: 'error',
             title: '更新失敗',
             confirmButtonColor: '#cc3333',
-            html:`大変お手数ですが、<a href= "#" class="text-blue-400 hover:bg-gray-200">こちら</a>から<br>エラーのご報告をお願い申し上げます。(仮)<br>エラー：<span class="text-red-600">${request.response.error[0]}</span>`
+            html:`大変お手数ですが、<a href= "https://forms.gle/FwRDjMCqmdw4XaPW7" class="text-blue-400 hover:bg-gray-200">こちら</a>から<br>エラーのご報告をお願い申し上げます。<br>エラー：<span class="text-red-600">${request.response.error[0]}</span>`
           });
           return null;
         };
