@@ -12,7 +12,7 @@
 
 # 動作環境
 ## URL
-https://subscription-lookback.com/<br>
+https://subscription-lookback.com/(閉鎖)<br>
 + 追加機能実装によるデプロイ等で、接続できないタイミングがございます。
 + 同時に複数の方がログインしている場合、ログインできない可能性があります。<br>
 少し置いてからのアクセスをお願いします。
